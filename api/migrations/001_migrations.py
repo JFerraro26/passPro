@@ -30,6 +30,7 @@ steps = [
             tickets_max INT,
             tickets_price DECIMAL(10,2),
             promoted BOOLEAN DEFAULT false,
+            created_by VARCHAR(100) REFERENCES accounts(id),
             venue VARCHAR(100),
             city VARCHAR(100)
         );
@@ -41,4 +42,3 @@ steps = [
     ],
 ]
 # state
-# created_by
