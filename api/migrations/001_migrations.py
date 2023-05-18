@@ -13,10 +13,6 @@ steps = [
         """
         DROP TABLE accounts;
         """,
-    ]
-]
-steps = [
-    [
         ##Create events table
         """
         CREATE TABLE events (
@@ -36,7 +32,7 @@ steps = [
             city VARCHAR(100)
         );
         """,
-        ##Drop the table
+        ##Drop the events table
         """
         DROP TABLE events;
         """,
