@@ -9,8 +9,9 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=passpro
-      - POSTGRES_PASSWORD=passpro
+      - POSTGRES_MULTIPLE_DATABASES= passpro
+      - POSTGRES_PASSWORD= password
+      - POSTGRES_USER= passpro
     ports:
       - 15432:5432
 
