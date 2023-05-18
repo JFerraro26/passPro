@@ -13,6 +13,8 @@ steps = [
         """
         DROP TABLE accounts;
         """,
+    ],
+    [
         ##Create events table
         """
         CREATE TABLE events (
@@ -36,7 +38,7 @@ steps = [
         """
         DROP TABLE events;
         """,
-    ]
+    ],
 ]
 # state
 # created_by
