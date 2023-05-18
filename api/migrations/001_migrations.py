@@ -4,9 +4,7 @@ steps = [
         """
         CREATE TABLE sales (
             id SERIAL PRIMARY KEY NOT NULL,
-            event VARCHAR(100) references events(event_id) NOT NULL,
-            quanity INT NOT NULL,
-            sold_to VARCHAR(50) references account(username) NOT NULL
+            quanity INT NOT NULL
         );
         """,
         # "Down" SQL statement
@@ -25,6 +23,8 @@ steps = [
         """
         DROP TABLE state;
         """
+    ],
+    [
         """
         CREATE TABLE accounts (
             id SERIAL PRIMARY KEY NOT NULL,
@@ -40,3 +40,5 @@ steps = [
         """,
     ]
 ]
+# sold_to VARCHAR(50) references account(username) NOT NULL
+# event VARCHAR(100) references events(event_id) NOT NULL,
