@@ -10,7 +10,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_MULTIPLE_DATABASES= passpro
-      - POSTGRES_PASSWORD= passpro
+      - POSTGRES_PASSWORD= password
       - POSTGRES_USER= passpro
     ports:
       - 15432:5432
@@ -22,6 +22,9 @@ services:
       - 8000:8000
     volumes:
       - ./api:/app
+    environment:
+      DATABASE_URL: postgresql://passpro:password@postgres:5432/passpro
+      WAIT_HOST: postgres:5432
 
   ghi:
     image: node:lts-bullseye
