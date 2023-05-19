@@ -11,7 +11,7 @@ steps = [
         # "Up" SQL statement
         """
         CREATE TABLE sales (
-            id SERIAL PRIMARY KEY NOT NULL,
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
             quanity INT NOT NULL
         );
         """,
@@ -51,7 +51,7 @@ steps = [
         ##Create events table
         """
         CREATE TABLE events (
-            id SERIAL PRIMARY KEY NOT NULL,
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
             event_name VARCHAR(100) NOT NULL,
             event_image TEXT,
             event_type VARCHAR(100) NOT NULL,
