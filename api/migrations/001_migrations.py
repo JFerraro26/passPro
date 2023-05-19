@@ -55,11 +55,8 @@ steps = [
             tickets_max INT,
             tickets_price DECIMAL(10,2),
             promoted BOOLEAN DEFAULT false,
-
             venue VARCHAR(100),
-            city VARCHAR(100),
-
-
+            city VARCHAR(100)
         );
         """,
         ##Drop the events table
