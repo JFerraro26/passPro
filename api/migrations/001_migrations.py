@@ -14,14 +14,14 @@ steps = [
     ],
     [
         """
-        CREATE TABLE state (
+        CREATE TABLE states (
             id SERIAL PRIMARY KEY NOT NULL,
             state_name VARCHAR(100) NOT NULL
         );
         """,
         # "Down" SQL statement
         """
-        DROP TABLE state;
+        DROP TABLE states;
         """,
     ],
     [
