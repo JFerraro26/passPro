@@ -10,7 +10,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE sales;
-        """
+        """,
     ],
     [
         """
@@ -22,7 +22,7 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE state;
-        """
+        """,
     ],
     [
         """
@@ -55,9 +55,11 @@ steps = [
             tickets_max INT,
             tickets_price DECIMAL(10,2),
             promoted BOOLEAN DEFAULT false,
-            created_by VARCHAR(100) REFERENCES accounts(id),
+
             venue VARCHAR(100),
-            city VARCHAR(100)
+            city VARCHAR(100),
+
+
         );
         """,
         ##Drop the events table
@@ -66,6 +68,5 @@ steps = [
         """,
     ],
 ]
-# sold_to VARCHAR(50) references account(username) NOT NULL
-# event VARCHAR(100) references events(event_id) NOT NULL,
-# state
+#  created_by VARCHAR(100) REFERENCES accounts(username),
+# state VARCHAR(100) REFERENCES state(state_name)
