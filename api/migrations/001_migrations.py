@@ -27,21 +27,6 @@ steps = [
         """,
     ],
     [
-        # "Up" SQL statement
-        """
-        CREATE TABLE sales (
-            sale_id SERIAL PRIMARY KEY NOT NULL,
-            event INT REFERENCES events(event_id)
-            quanity INT NOT NULL,
-            sold_to INT REFERENCES accounts(account_id)
-        );
-        """,
-        # "Down" SQL statement
-        """
-        DROP TABLE sales;
-        """,
-    ],
-    [
         ##Create events table
         """
         CREATE TABLE events (
@@ -67,6 +52,21 @@ steps = [
         ##Drop the events table
         """
         DROP TABLE events;
+        """,
+    ],
+    [
+        # "Up" SQL statement
+        """
+        CREATE TABLE sales (
+            sale_id SERIAL PRIMARY KEY NOT NULL,
+            event INT REFERENCES events(event_id),
+            quanity INT NOT NULL,
+            sold_to INT REFERENCES accounts(account_id)
+        );
+        """,
+        # "Down" SQL statement
+        """
+        DROP TABLE sales;
         """,
     ],
 ]
