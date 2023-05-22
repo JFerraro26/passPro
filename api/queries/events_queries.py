@@ -24,7 +24,7 @@ class EventIn(BaseModel):
 
 
 class EventOut(BaseModel):
-    id: int
+    id: UUID
     event_name: str
     event_image: AnyUrl
     event_type: str
