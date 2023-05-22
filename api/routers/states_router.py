@@ -1,5 +1,5 @@
-from fastAPI import APIRouter
-from queries.states import StatesIn
+from fastapi import APIRouter
+from queries.states_queries import StatesIn
 
 
 router = APIRouter()
