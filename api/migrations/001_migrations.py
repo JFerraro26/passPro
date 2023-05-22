@@ -8,22 +8,9 @@ steps = [
         """,
     ],
     [
-        # "Up" SQL statement
         """
-        CREATE TABLE sales (
-            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
-            quanity INT NOT NULL
-        );
-        """,
-        # "Down" SQL statement
-        """
-        DROP TABLE sales;
-        """,
-    ],
-    [
-        """
-        CREATE TABLE state (
-            id SERIAL PRIMARY KEY NOT NULL,
+        CREATE TABLE states (
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
             state_name VARCHAR(100) NOT NULL
         );
         """,
@@ -40,7 +27,7 @@ steps = [
             password VARCHAR(255) NOT NULL,
             avatar_img VARCHAR(254),
             email VARCHAR(254) NOT NULL UNIQUE,
-            event_manager BOOLEAN
+            event_manager BOOLEAN DEFAULT false
         );
         """,
         """
@@ -64,7 +51,10 @@ steps = [
             tickets_price DECIMAL(10,2),
             promoted BOOLEAN DEFAULT false,
             venue VARCHAR(100),
-            city VARCHAR(100)
+            city VARCHAR(100),
+            state_id UUID REFERENCES states(id),
+            created_by UUID REFERENCES accounts(id)
+
         );
         """,
         ##Drop the events table
@@ -72,8 +62,19 @@ steps = [
         DROP TABLE events;
         """,
     ],
+    [
+        # "Up" SQL statement
+        """
+        CREATE TABLE sales (
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
+            event UUID REFERENCES events(id),
+            quanity INT NOT NULL,
+            sold_to UUID REFERENCES accounts(id)
+        );
+        """,
+        # "Down" SQL statement
+        """
+        DROP TABLE sales;
+        """,
+    ],
 ]
-# sold_to VARCHAR(50) references account(username) NOT NULL
-# event VARCHAR(100) references events(event_id) NOT NULL,
-# state
-# created_by

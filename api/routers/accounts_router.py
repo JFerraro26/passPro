@@ -9,7 +9,7 @@ from fastapi import (
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from typing import Union, List, Optional
-from queries.accounts import (
+from queries.accounts_queries import (
     AccountIn,
     Accountsrepository,
     AccountOut,
@@ -23,23 +23,6 @@ from pydantic import BaseModel
 router = APIRouter()
 
 
-# @router.post("/accounts", response_model=Union[AccountOut, Error])
-# def create_accounts(
-#     account: AccountIn,
-#     response: Response,
-#     repo: Accountsrepository = Depends(),
-# ):
-#     response.status_code = 400
-#     return repo.create(account)
-
-
-# @router.get("/accounts", response_model=Union[List[AccountOut], Error])
-# def get_all(
-#     repo: Accountsrepository = Depends(),
-# ):
-#     return repo.get_all()
-
-
 # @router.put("/accounts/{account_id}", response_model=Union[AccountOut, Error])
 # def update_account(
 #     account_id: uuid.UUID,
@@ -47,22 +30,6 @@ router = APIRouter()
 #     repo: Accountsrepository = Depends(),
 # ) -> Union[AccountOut, Error]:
 #     return repo.update(account_id, account)
-
-
-# @router.delete("/accounts/{account_id}", response_model=bool)
-# def delete_account(
-#     account_id: uuid.UUID,
-#     repo: Accountsrepository = Depends(),
-# ) -> bool:
-#     return repo.delete(account_id)
-
-
-# @router.get("/accounts/{username}", response_model=Optional[AccountOut])
-# def get_account(
-#     username: str,
-#     repo: Accountsrepository = Depends(),
-# ) -> bool:
-#     return repo.get(username)
 
 
 class AccountForm(BaseModel):
