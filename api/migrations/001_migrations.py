@@ -1,16 +1,24 @@
 steps = [
     [
+        """
+        CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+        """,
+        """
+        Extension should not be removed;
+        """,
+    ],
+    [
         # "Up" SQL statement
         """
         CREATE TABLE sales (
-            id SERIAL PRIMARY KEY NOT NULL,
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
             quanity INT NOT NULL
         );
         """,
         # "Down" SQL statement
         """
         DROP TABLE sales;
-        """
+        """,
     ],
     [
         """
@@ -22,12 +30,12 @@ steps = [
         # "Down" SQL statement
         """
         DROP TABLE state;
-        """
+        """,
     ],
     [
         """
         CREATE TABLE accounts (
-            id SERIAL PRIMARY KEY NOT NULL,
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
             username VARCHAR(50) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
             avatar_img VARCHAR(254),
@@ -43,7 +51,7 @@ steps = [
         ##Create events table
         """
         CREATE TABLE events (
-            id SERIAL PRIMARY KEY NOT NULL,
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
             event_name VARCHAR(100) NOT NULL,
             event_image TEXT,
             event_type VARCHAR(100) NOT NULL,
