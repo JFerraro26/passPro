@@ -8,22 +8,9 @@ steps = [
         """,
     ],
     [
-        # "Up" SQL statement
-        """
-        CREATE TABLE sales (
-            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
-            quanity INT NOT NULL
-        );
-        """,
-        # "Down" SQL statement
-        """
-        DROP TABLE sales;
-        """,
-    ],
-    [
         """
         CREATE TABLE states (
-            id SERIAL PRIMARY KEY NOT NULL,
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
             state_name VARCHAR(100) NOT NULL
         );
         """,
@@ -65,8 +52,8 @@ steps = [
             promoted BOOLEAN DEFAULT false,
             venue VARCHAR(100),
             city VARCHAR(100),
-            state_id INT REFERENCES states(state_id),
-            created_by INT REFERENCES accounts(account_id)
+            state_id UUID REFERENCES states(id),
+            created_by UUID REFERENCES accounts(id)
 
         );
         """,
@@ -79,10 +66,10 @@ steps = [
         # "Up" SQL statement
         """
         CREATE TABLE sales (
-            sale_id SERIAL PRIMARY KEY NOT NULL,
-            event INT REFERENCES events(event_id),
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
+            event UUID REFERENCES events(id),
             quanity INT NOT NULL,
-            sold_to INT REFERENCES accounts(account_id)
+            sold_to UUID REFERENCES accounts(id)
         );
         """,
         # "Down" SQL statement

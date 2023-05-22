@@ -2,6 +2,7 @@ from pydantic import BaseModel, AnyUrl
 from datetime import date, time
 from decimal import Decimal
 from queries.pool import pool
+from uuid import UUID
 
 
 class EventIn(BaseModel):
@@ -18,8 +19,8 @@ class EventIn(BaseModel):
     promoted: bool
     venue: str
     city: str
-    state_id: int
-    created_by: int
+    state_id: UUID
+    created_by: UUID
 
 
 class EventOut(BaseModel):
@@ -37,8 +38,8 @@ class EventOut(BaseModel):
     promoted: bool
     venue: str
     city: str
-    state_id: int
-    created_by: int
+    state_id: UUID
+    created_by: UUID
 
 
 class EventRepository:
@@ -67,7 +68,7 @@ class EventRepository:
                         )
                     VALUES
                         (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-                    RETURNING event_id;
+                    RETURNING id;
                     """,
                     [
                         event.event_name,
