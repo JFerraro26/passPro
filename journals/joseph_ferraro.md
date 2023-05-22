@@ -21,3 +21,11 @@ Today, I worked on:
 - set up a migration table for events
 
 The team figured out setting up the compose file
+
+## 5/22/23
+
+Today, I worked on:
+
+- worked on events api
+
+The team worked on our git workflow and on/off on the backend
