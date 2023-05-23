@@ -26,7 +26,7 @@ services:
     environment:
       DATABASE_URL: postgresql://passpro:password@postgres:5432/passpro
       WAIT_HOSTS: postgres:5432
-      SIGNING_KEY: eyJhbGciOiJIUzI1NiJ9eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4NDcxNzgxNiwiaWF0IjoxNjg0NzE3ODE2fQik6vYGIZh2DG3lqJwnfYvDi0TnLpSbTq4rPayQplNZ8
+      SIGNING_KEY: 7da8b48fd9452fd24a812915812de86bf3c88683001ed934bed33f253387cbad
 
   ghi:
     image: node:lts-bullseye
@@ -41,4 +41,4 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_API_HOST: ${REACT_APP_API_HOST}
+      REACT_APP_API_HOST: http://localhost:8000

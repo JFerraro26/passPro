@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List, Union
 from queries.pool import pool
+from uuid import UUID
 
 
 class DuplicateAccountError(ValueError):
@@ -49,12 +50,12 @@ class Accountsrepository:
                         WHERE id = %s
                         """,
                         [
+                            account_id,
                             account.username,
                             account.password,
                             account.avatar_img,
                             account.email,
                             account.event_manager,
-                            account_id,
                         ],
                     )
                     return self.account_in_to_out(account_id, account)
@@ -96,7 +97,6 @@ class Accountsrepository:
         with pool.connection() as conn:
             # get cursor(something to run sql with)
             with conn.cursor() as db:
-                # run our insert statement
                 result = db.execute(
                     """
                     INSERT INTO accounts
@@ -114,7 +114,6 @@ class Accountsrepository:
                     ],
                 )
                 id = str(result.fetchone()[0])
-                # return new data
 
                 return AccountOutWithPassword(
                     id=id,
