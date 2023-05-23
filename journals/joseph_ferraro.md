@@ -29,3 +29,11 @@ Today, I worked on:
 - worked on events api
 
 The team worked on our git workflow and on/off on the backend
+
+## 5/23/23
+
+Today, I worked on:
+
+- finished error handleing for events api
+
+The team worked on finishing api's and researched redux and on/off
