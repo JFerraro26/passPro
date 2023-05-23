@@ -77,7 +77,6 @@ class EventRepository:
                         [event_id],
                     )
                     record = result.fetchone()
-                    print(record)
                     if record is None:
                         return None
                     return self.record_to_event_out(record)
