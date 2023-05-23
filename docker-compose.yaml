@@ -27,6 +27,7 @@ services:
       DATABASE_URL: postgresql://passpro:password@postgres:5432/passpro
       WAIT_HOSTS: postgres:5432
       WAIT_TIMEOUT: 240
+      SIGNING_KEY: eyJhbGciOiJIUzI1NiJ9eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY4NDcxNzgxNiwiaWF0IjoxNjg0NzE3ODE2fQik6vYGIZh2DG3lqJwnfYvDi0TnLpSbTq4rPayQplNZ8
 
   ghi:
     image: node:lts-bullseye
