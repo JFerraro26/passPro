@@ -17,13 +17,13 @@ class SalesIn(BaseModel):
 
 class SalesOut(BaseModel):
     id: UUID
-    event: list
+    event: UUID
     quantity: int
     sold_to: UUID
 
 
 class SaleRepository:
-    def list(self) -> Union[List[SalesOut], Error]:
+    def list_sales(self) -> Union[List[SalesOut], Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

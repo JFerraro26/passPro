@@ -10,13 +10,19 @@ router = APIRouter()
 def create_sale(
     sale: SalesIn, response: Response, repo: SaleRepository = Depends()
 ):
-    response.status_code = 400
-    return repo.create(sale)
+    if response:
+        return repo.create(sale)
+    else:
+        response.status_code = 400
+        return {"Message": "Could not complete request"}
 
 
-@router.get("/api/sales", Union[List[SalesOut], Error])
+@router.get("/api/sales", response_model=Union[List[SalesOut], Error])
 def list_sales(
     response: Response, repo: SaleRepository = Depends(),
 ):
-    response.status_code = 400
-    return repo.list_sales()
+    if response:
+        return repo.list_sales()
+    else:
+        response.status_code = 400
+        return {"Message": "Could not complete request"}
