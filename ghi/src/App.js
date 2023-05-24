@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./MainPage";
 import Nav from "./nav/Nav";
 import EventForm from "./events/EventForm";
-import EventList from "./events/EventList";
+import EventManager from "./events/EventManager";
 
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/events">
-            <Route path="" element={<EventList />} />
-            <Route path="new" element={<EventForm />} />
+            <Route path="" element={<EventManager />} />
+            <Route path="form" element={<EventForm />} />
           </Route>
         </Routes>
       </div>
