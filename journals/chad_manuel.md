@@ -1,4 +1,5 @@
 Chad Manuel
+
 # 5/15/23
 
 ## Topics
@@ -23,7 +24,9 @@ Features/issues:
 ## Additional Thoughts/Idea
 
 - I need to do some more research on sql tables to get a better understanding
-___
+
+---
+
 # 5/16/23
 
 ## Topics
@@ -49,7 +52,8 @@ ___
 ## Additional Thoughts/Idea
 
 - Need more practice with Fastapi but glad to start getting to coding again
-___
+
+---
 
 # 5/17/23
 
@@ -79,23 +83,72 @@ ___
 
 - Figure out git workflow Merge request in particular
 
-___
+---
+
 # 5/17/23
-# Topics
+
+## Topics
 
 PostGreSQL
 
 Docker-Compose
 
-# What was worked on?
+## What was worked on?
 
 - Today we worked setting up our database and finishing up our tables.
 - We were successful in setting up the database after dealing with a few errors.
 - We learned how to set up a delay where a service only starts when a certain service is done getting setup
 
-# To-Do
+## To-Do
 
 - We need to do some more research on UUID and how to implement that as our id for our tables
 - Need to get started on auth during the weekend and hopefully finish by the end of the week.
 
-# Additional Thoughts/Idea
+## Additional Thoughts/Idea
+
+---
+
+# 5/22/23
+
+## Topics
+
+Redux
+Auth
+FastAPI
+
+## What was worked on?
+
+- Today we were able to finish the authentication for the back end.
+- I also ended up getting openssl up and running today to create our signing keys
+- I got started with the front-end authentication but is currently not working.
+- We also did some of our user stories
+
+## To-Do
+
+- Figure out how to implement frontend authentication
+- Learn more on styling utilizing tailwind
+
+## Additional Thoughts/Idea
+
+---
+
+# 5/23/23
+
+## Topics
+
+Redux
+Auth
+FastAPI
+
+## What was worked on?
+
+- Today I focused on learning more about redux and figuring out on how to use it alongside with authentication, I'm still in the process of rewatching and coding along the learn videos and am hoping to finish this by tonight or the latest tomorrow night.
+- As a team we were successfully able to merge a decent sized branch thanks to Joe and Michael
+- Last night after the exploration I was able to dabble a little bit into tailwind and I'm excited on how it will look eventually
+
+## To-Do
+
+- Finish front end auth including registration, logging in, and logging out in redux
+- We still need to continue on finishing out the user stories we've had.
+
+## Additional Thoughts/Idea
