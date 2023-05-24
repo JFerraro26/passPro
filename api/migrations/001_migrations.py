@@ -68,7 +68,7 @@ steps = [
         CREATE TABLE sales (
             id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
             event UUID REFERENCES events(id),
-            quanity INT NOT NULL,
+            quantity INT NOT NULL,
             sold_to UUID REFERENCES accounts(id)
         );
         """,
