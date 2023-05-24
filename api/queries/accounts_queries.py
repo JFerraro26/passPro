@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List, Union
 from queries.pool import pool
-from uuid import UUID
+
 
 
 class DuplicateAccountError(ValueError):

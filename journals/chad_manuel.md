@@ -129,3 +129,26 @@ FastAPI
 - Learn more on styling utilizing tailwind
 
 ## Additional Thoughts/Idea
+
+---
+
+# 5/23/23
+
+## Topics
+
+Redux
+Auth
+FastAPI
+
+## What was worked on?
+
+- Today I focused on learning more about redux and figuring out on how to use it alongside with authentication, I'm still in the process of rewatching and coding along the learn videos and am hoping to finish this by tonight or the latest tomorrow night.
+- As a team we were successfully able to merge a decent sized branch thanks to Joe and Michael
+- Last night after the exploration I was able to dabble a little bit into tailwind and I'm excited on how it will look eventually
+
+## To-Do
+
+- Finish front end auth including registration, logging in, and logging out in redux
+- We still need to continue on finishing out the user stories we've had.
+
+## Additional Thoughts/Idea
