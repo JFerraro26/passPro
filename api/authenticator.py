@@ -24,11 +24,11 @@ class PassProAuthenticator(Authenticator):
     def get_hashed_password(self, account: AccountOut):
         return account["password"]
 
-    # def get_account_data_for_cookie(self, account: AccountOutWithPassword):
-    #     # Return the username and the data for the cookie.
-    #     # You must return TWO values from this method.
-    #     print("account data", account)
-    #     return account["username"], AccountOutWithPassword(**account)
+    def get_account_data_for_cookie(self, account: AccountOut):
+        # Return the username and the data for the cookie.
+        # You must return TWO values from this method.
+        print("account data", account)
+        return account["username"], AccountOut(**account)
 
 
 authenticator = PassProAuthenticator(os.environ["SIGNING_KEY"])
