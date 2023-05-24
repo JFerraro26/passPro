@@ -67,14 +67,26 @@ function EventForm() {
     data.city = city;
     data.state_id = stateId;
     data.created_by = createdBy;
-    const eventUrl = "http://localhost:8000/api/events";
-    const eventFetchConfig = {
-      method: "post",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    if (state === null) {
+      var eventUrl = "http://localhost:8000/api/events";
+      var eventFetchConfig = {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+    } else {
+      const eventId = state.event.id;
+      var eventUrl = `http://localhost:8000/api/events/${eventId}`;
+      var eventFetchConfig = {
+        method: "put",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+    }
     const response = await fetch(eventUrl, eventFetchConfig);
     if (response.ok) {
       console.log("created");

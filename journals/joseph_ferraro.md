@@ -34,6 +34,14 @@ The team worked on our git workflow and on/off on the backend
 
 Today, I worked on:
 
-- finished error handleing for events api
+- finished error handleing for events api, and created a event manager page and event form
 
 The team worked on finishing api's and researched redux and on/off
+
+## 5/24/23
+
+Today, I worked on:
+
+- started an event detail page
+
+The team worked on individual front end goals

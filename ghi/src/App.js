@@ -3,6 +3,7 @@ import MainPage from "./MainPage";
 import Nav from "./nav/Nav";
 import EventForm from "./events/EventForm";
 import EventManager from "./events/EventManager";
+import EventDetail from "./events/EventDetail";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/events">
             <Route path="" element={<EventManager />} />
             <Route path="form" element={<EventForm />} />
+            <Route path="detail" element={<EventDetail />} />
           </Route>
         </Routes>
       </div>
