@@ -4,8 +4,50 @@ import React, { useEffect, useState } from "react";
 function Cart() {
 
     const [event, setEvent] = useState("");
+    const handleEventChange = (e) => {
+        const value = e.target.value;
+        setEvent(value);
+    }
+
     const [quantity, setQuantity] = useState(0);
+    const handleQuantityChange = (e) => {
+        const value = e.target.value;
+        setQuantity(value);
+    }
+
     const [soldTo, setSoldTo] = useState("");
+    const handleSoldTo = (e) => {
+        const value = e.target.value;
+        setSoldTo(value);
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const data = {};
+
+        data.event = event;
+        data.quantity = quantity;
+        data.sold_to = soldTo;
+
+        const saleUrl = "http://localhost8000/api/sales";
+        const FetchConfig = {
+            method: "post",
+            body: JSON.stringify(data),
+            header: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        const response = await fetch(saleUrl, FetchConfig);
+        if (response.ok) {
+            const newSale = await response.json();
+
+            setEvent("");
+            setQuantity("");
+            setSoldTo("");
+        }
+    }
 
 
 
