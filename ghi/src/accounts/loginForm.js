@@ -1,7 +1,7 @@
 import { useState } from "react";
-import useToken, { useAuthContext } from "@galvanize-inc/jwtdown-for-react";
-import { useLoginMutation } from "../store/accountsApi";
+import { useGetTokenQuery, useLoginMutation } from "../store/accountsApi";
 // import { useNavigate } from "react-router-dom";
+import { store } from "../store/store";
 
 const LoginForm = () => {
   // const navigate = useNavigate();

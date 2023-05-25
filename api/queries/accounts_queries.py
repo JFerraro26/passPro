@@ -3,7 +3,6 @@ from typing import Optional, List, Union
 from queries.pool import pool
 
 
-
 class DuplicateAccountError(ValueError):
     pass
 
@@ -50,15 +49,18 @@ class Accountsrepository:
                         WHERE id = %s
                         """,
                         [
-                            account_id,
                             account.username,
                             account.password,
                             account.avatar_img,
                             account.email,
                             account.event_manager,
+                            account_id,
                         ],
                     )
-                    return self.account_in_to_out(account_id, account)
+                    if db.rowcount > 0:
+                        return self.get(account.username)
+                    else:
+                        return Error(message="Account not found")
         except Exception as e:
             print(e)
             return {"message": "could not update account"}
@@ -81,7 +83,6 @@ class Accountsrepository:
                         [username],
                     )
                     record = result.fetchone()
-                    print("record", record)
                     if record:
                         return self.record_to_account_out(record)
                     else:

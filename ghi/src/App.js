@@ -3,35 +3,33 @@ import MainPage from "./MainPage";
 import Nav from "./nav/Nav";
 import EventForm from "./events/EventForm";
 import EventManager from "./events/EventManager";
-import { useEffect, useState } from "react";
-import ErrorNotification from "./ErrorNotification";
-import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
-import LoginForm from "./accounts/login.js";
+import LoginForm from "./accounts/loginForm";
+import SignUpForm from "./accounts/signUpForm.js";
+import EventDetail from "./events/EventDetail";
 import Cart from "./sales/cart";
 import MyTickets from "./sales/MyTickets";
 
-
 function App() {
   return (
-    <AuthProvider baseUrl={process.env.REACT_APP_API_HOST}>
-      <BrowserRouter>
-        <Nav />
-        <div>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/events">
-              <Route path="" element={<EventManager />} />
-              <Route path="form" element={<EventForm />} />
-            </Route>
-            <Route path="/sales">
-              <Route path="my-tickets" element={<MyTickets />} />
-              <Route path="cart" element={<Cart />} />
-            </Route>
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </AuthProvider>
+    <BrowserRouter>
+      <Nav />
+      <div>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/events">
+            <Route path="" element={<EventManager />} />
+            <Route path="form" element={<EventForm />} />
+            <Route path="detail" element={<EventDetail />} />
+          </Route>
+          <Route path="/sales">
+            <Route path="my-tickets" element={<MyTickets />} />
+            <Route path="cart" element={<Cart />} />
+          </Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
