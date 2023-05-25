@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 function EventDetail() {
   const { state } = useLocation();
   const event = state.event;
+  console.log(event);
 
   return (
     <div className="grid grid-cols-5 grid-rows-4">
@@ -13,6 +14,16 @@ function EventDetail() {
           alt={event.event_name}
         />
         <h1>{event.event_name}</h1>
+      </div>
+      <div className="flex col-start-1 col-span-3 row-start-2 row-span-2">
+        <p>{event.description}</p>
+      </div>
+      <div className="flex flex-col col-start-4 col-span-2 row-start-2 row-span-2">
+        <p>Add to Cart Widget</p>
+        <p>{event.date}</p>
+        <p>
+          {event.start_time} to {event.end_time}
+        </p>
       </div>
     </div>
   );

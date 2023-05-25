@@ -3,8 +3,9 @@ import MainPage from "./MainPage";
 import Nav from "./nav/Nav";
 import EventForm from "./events/EventForm";
 import EventManager from "./events/EventManager";
-import LoginForm from "./accounts/login.js";
+import LoginForm from "./accounts/loginForm";
 import SignUpForm from "./accounts/signUpForm.js";
+import EventDetail from "./events/EventDetail";
 
 function App() {
   return (

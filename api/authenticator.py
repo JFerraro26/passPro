@@ -27,7 +27,6 @@ class PassProAuthenticator(Authenticator):
     def get_account_data_for_cookie(self, account: AccountOut):
         # Return the username and the data for the cookie.
         # You must return TWO values from this method.
-        print("account data", account)
         return account["username"], AccountOut(**account)
 
 

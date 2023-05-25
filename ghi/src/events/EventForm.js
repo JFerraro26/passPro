@@ -15,6 +15,7 @@ function EventForm() {
   const [ticketsPrice, setTicketsPrice] = useState("");
   const [venue, setVenue] = useState("");
   const [city, setCity] = useState("");
+  const [states, setStates] = useState([]);
   const [stateId, setStateId] = useState("");
   const { data, isLoading } = useGetTokenQuery();
 
@@ -47,6 +48,21 @@ function EventForm() {
       setStateId(state.event.state_id);
     }
   }, [state]);
+
+  useEffect(() => {
+    async function fetchStateData() {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/states`
+      );
+      if (response.ok) {
+        const stateData = await response.json();
+        setStates(stateData);
+      } else {
+        console.error(response);
+      }
+    }
+    fetchStateData();
+  }, []);
 
   if (isLoading) {
     return <p>loading</p>;
@@ -247,16 +263,23 @@ function EventForm() {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="state">State insert UUID here</label>
-            <input
+            <label htmlFor="state">State</label>
+            <select
               value={stateId}
               onChange={(e) => setStateId(e.target.value)}
               className="border"
-              type="text"
-              id="state"
               name="state"
-              placeholder="Need the state api done in order to create a dropdown here"
-            />
+              id="state"
+            >
+              <option value="">Please Choose an State ...</option>
+              {states?.map((state) => {
+                return (
+                  <option value={state.id} key={state.id}>
+                    {state.state_name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <button className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full">
             Submit
