@@ -152,3 +152,30 @@ FastAPI
 - We still need to continue on finishing out the user stories we've had.
 
 ## Additional Thoughts/Idea
+
+---
+
+# 5/24/23
+
+## Topics
+
+Redux
+Auth
+FastAPI
+Front-End
+Tailwind
+
+
+
+## What was worked on?
+
+- Today I worked on finishing up the front end auth and learning more about how redux actually works. We learned on how to access the state that is stored in the store. I was able to figure out how to also attach the headers automatically thanks to some guidance from learn.
+
+## To-Do
+
+- Get started on the profile page front end and start having all the components ready for it.
+
+
+## Additional Thoughts/Idea
+
+- I definitely need to read more on accessing states inside of stores for redux.
