@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import ErrorNotification from "./ErrorNotification";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import LoginForm from "./accounts/login.js";
+import Cart from "./sales/cart";
+import MyTickets from "./sales/MyTickets";
+
 
 function App() {
   return (
@@ -20,6 +23,10 @@ function App() {
             <Route path="/events">
               <Route path="" element={<EventManager />} />
               <Route path="form" element={<EventForm />} />
+            </Route>
+            <Route path="/sales">
+              <Route path="my-tickets" element={<MyTickets />} />
+              <Route path="cart" element={<Cart />} />
             </Route>
           </Routes>
         </div>
