@@ -6,6 +6,8 @@ import EventManager from "./events/EventManager";
 import LoginForm from "./accounts/loginForm";
 import SignUpForm from "./accounts/signUpForm.js";
 import EventDetail from "./events/EventDetail";
+import Cart from "./sales/cart";
+import MyTickets from "./sales/MyTickets";
 
 function App() {
   return (
@@ -20,6 +22,10 @@ function App() {
             <Route path="" element={<EventManager />} />
             <Route path="form" element={<EventForm />} />
             <Route path="detail" element={<EventDetail />} />
+          </Route>
+          <Route path="/sales">
+            <Route path="my-tickets" element={<MyTickets />} />
+            <Route path="cart" element={<Cart />} />
           </Route>
         </Routes>
       </div>
