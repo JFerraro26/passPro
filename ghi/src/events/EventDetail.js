@@ -6,8 +6,13 @@ function EventDetail() {
 
   return (
     <div className="grid grid-cols-5 grid-rows-4">
-      <div className="flex col-start-1 col-end-5 row-start-1 row-span-1">
-        <img className="w-full" src={event.event_image} />
+      <div className="flex flex-col items-center col-start-1 col-span-5 row-start-1 row-span-1">
+        <img
+          className="min-w-fit"
+          src={event.event_image}
+          alt={event.event_name}
+        />
+        <h1>{event.event_name}</h1>
       </div>
     </div>
   );
