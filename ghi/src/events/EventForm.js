@@ -1,6 +1,54 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function EventForm() {
+  const { state } = useLocation();
+  const [typeEvent, setTypeEvent] = useState("");
+  const [nameEvent, setNameEvent] = useState("");
+  const [imageEvent, setImageEvent] = useState("");
+  const [date, setDate] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [description, setDescription] = useState("");
+  const [ticketsMax, setTicketsMax] = useState("");
+  const [ticketsPrice, setTicketsPrice] = useState("");
+  const [venue, setVenue] = useState("");
+  const [city, setCity] = useState("");
+  const [stateId, setStateId] = useState("");
+  const [createdBy, setCreatedBy] = useState("");
+
+  useEffect(() => {
+    if (state == null) {
+      setTypeEvent("");
+      setNameEvent("");
+      setImageEvent("");
+      setDate("");
+      setStartTime("");
+      setEndTime("");
+      setDescription("");
+      setTicketsMax("");
+      setTicketsPrice("");
+      setVenue("");
+      setCity("");
+      setStateId("");
+      setCreatedBy("");
+    } else {
+      setTypeEvent(state.event.event_type);
+      setNameEvent(state.event.event_name);
+      setImageEvent(state.event.event_image);
+      setDate(state.event.date);
+      setStartTime(state.event.start_time);
+      setEndTime(state.event.end_time);
+      setDescription(state.event.description);
+      setTicketsMax(state.event.tickets_max);
+      setTicketsPrice(state.event.tickets_price);
+      setVenue(state.event.venue);
+      setCity(state.event.city);
+      setStateId(state.event.state_id);
+      setCreatedBy(state.event.created_by);
+    }
+  }, [state]);
+
   const EventSubmitCreate = async (event) => {
     event.preventDefault();
     const data = {};
@@ -35,24 +83,10 @@ function EventForm() {
     }
   };
 
-  const [typeEvent, setTypeEvent] = useState("");
-  const [nameEvent, setNameEvent] = useState("");
-  const [imageEvent, setImageEvent] = useState("");
-  const [date, setDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [description, setDescription] = useState("");
-  const [ticketsMax, setTicketsMax] = useState("");
-  const [ticketsPrice, setTicketsPrice] = useState("");
-  const [venue, setVenue] = useState("");
-  const [city, setCity] = useState("");
-  const [stateId, setStateId] = useState("");
-  const [createdBy, setCreatedBy] = useState("");
-
   return (
     <div className="grid grid-cols-5">
       <div className="flex flex-col col-start-2 col-span-3 items-center">
-        <h1>Create New Event</h1>
+        <h1>EventForm</h1>
         <form
           onSubmit={EventSubmitCreate}
           className="flex flex-col w-full gap-2"

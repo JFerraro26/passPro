@@ -10,7 +10,7 @@ steps = [
     [
         """
         CREATE TABLE states (
-            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY UNIQUE,
             state_name VARCHAR(100) NOT NULL
         );
         """,
@@ -22,7 +22,7 @@ steps = [
     [
         """
         CREATE TABLE accounts (
-            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY UNIQUE,
             username VARCHAR(50) NOT NULL UNIQUE,
             password VARCHAR(255) NOT NULL,
             avatar_img VARCHAR(254),
@@ -38,7 +38,7 @@ steps = [
         ##Create events table
         """
         CREATE TABLE events (
-            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY UNIQUE,
             event_name VARCHAR(100) NOT NULL,
             event_image TEXT,
             event_type VARCHAR(100) NOT NULL,
@@ -66,9 +66,9 @@ steps = [
         # "Up" SQL statement
         """
         CREATE TABLE sales (
-            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY ,
+            id UUID DEFAULT uuid_generate_v4() PRIMARY KEY UNIQUE,
             event UUID REFERENCES events(id),
-            quanity INT NOT NULL,
+            quantity INT NOT NULL,
             sold_to UUID REFERENCES accounts(id)
         );
         """,

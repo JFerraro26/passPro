@@ -29,12 +29,13 @@ function EventDropdown() {
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white hover:rounded-lg"
             to="/events"
           >
-            Events
+            Event Manager
           </NavLink>
           <NavLink
             onClick={handleOpen}
             className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white hover:rounded-lg"
-            to="/events/new"
+            to="/events/form"
+            state={null}
           >
             New Event
           </NavLink>
