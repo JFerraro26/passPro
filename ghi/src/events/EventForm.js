@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useGetTokenQuery } from "../store/accountsApi";
 
 function EventForm() {
   const { state } = useLocation();
@@ -14,8 +15,9 @@ function EventForm() {
   const [ticketsPrice, setTicketsPrice] = useState("");
   const [venue, setVenue] = useState("");
   const [city, setCity] = useState("");
+  const [states, setStates] = useState([]);
   const [stateId, setStateId] = useState("");
-  const [createdBy, setCreatedBy] = useState("");
+  const { data, isLoading } = useGetTokenQuery();
 
   useEffect(() => {
     if (state == null) {
@@ -31,7 +33,6 @@ function EventForm() {
       setVenue("");
       setCity("");
       setStateId("");
-      setCreatedBy("");
     } else {
       setTypeEvent(state.event.event_type);
       setNameEvent(state.event.event_name);
@@ -45,36 +46,68 @@ function EventForm() {
       setVenue(state.event.venue);
       setCity(state.event.city);
       setStateId(state.event.state_id);
-      setCreatedBy(state.event.created_by);
     }
   }, [state]);
 
+  useEffect(() => {
+    async function fetchStateData() {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/states`
+      );
+      if (response.ok) {
+        const stateData = await response.json();
+        setStates(stateData);
+      } else {
+        console.error(response);
+      }
+    }
+    fetchStateData();
+  }, []);
+
+  if (isLoading) {
+    return <p>loading</p>;
+  }
+
   const EventSubmitCreate = async (event) => {
     event.preventDefault();
-    const data = {};
-    data.event_type = typeEvent;
-    data.event_name = nameEvent;
-    data.event_image = imageEvent;
-    data.date = date;
-    data.start_time = startTime;
-    data.end_time = endTime;
-    data.description = description;
-    data.tickets_sold = 0;
-    data.tickets_max = ticketsMax;
-    data.tickets_price = ticketsPrice;
-    data.promoted = false;
-    data.venue = venue;
-    data.city = city;
-    data.state_id = stateId;
-    data.created_by = createdBy;
-    const eventUrl = "http://localhost:8000/api/events";
-    const eventFetchConfig = {
-      method: "post",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    const accountId = data.account.id;
+    console.log(accountId);
+    const formData = {};
+    formData.event_type = typeEvent;
+    formData.event_name = nameEvent;
+    formData.event_image = imageEvent;
+    formData.date = date;
+    formData.start_time = startTime;
+    formData.end_time = endTime;
+    formData.description = description;
+    formData.tickets_sold = 0;
+    formData.tickets_max = ticketsMax;
+    formData.tickets_price = ticketsPrice;
+    formData.promoted = false;
+    formData.venue = venue;
+    formData.city = city;
+    formData.state_id = stateId;
+    formData.created_by = accountId;
+    if (state === null) {
+      var eventUrl = "http://localhost:8000/api/events";
+      var eventFetchConfig = {
+        method: "post",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+    } else {
+      const eventId = state.event.id;
+      var eventUrl = `http://localhost:8000/api/events/${eventId}`;
+      var eventFetchConfig = {
+        method: "put",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+    }
     const response = await fetch(eventUrl, eventFetchConfig);
     if (response.ok) {
       console.log("created");
@@ -230,28 +263,23 @@ function EventForm() {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="state">State insert UUID here</label>
-            <input
+            <label htmlFor="state">State</label>
+            <select
               value={stateId}
               onChange={(e) => setStateId(e.target.value)}
               className="border"
-              type="text"
-              id="state"
               name="state"
-              placeholder="Need the state api done in order to create a dropdown here"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="created-by">Account UUID here</label>
-            <input
-              value={createdBy}
-              onChange={(e) => setCreatedBy(e.target.value)}
-              className="border"
-              type="text"
-              id="created-by"
-              name="created-by"
-              placeholder="This will be handled automatically when on/off is implemented with account"
-            />
+              id="state"
+            >
+              <option value="">Please Choose an State ...</option>
+              {states?.map((state) => {
+                return (
+                  <option value={state.id} key={state.id}>
+                    {state.state_name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <button className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full">
             Submit
