@@ -19,6 +19,21 @@ class AccountIn(BaseModel):
     event_manager: bool
 
 
+class EditAccountIn(BaseModel):
+    username: str
+    avatar_img: Optional[str]
+    email: str
+    event_manager: bool
+
+
+class EditAccountOut(BaseModel):
+    id = str
+    username: str
+    avatar_img: Optional[str]
+    email: str
+    event_manager: bool
+
+
 class AccountOut(BaseModel):
     id: str
     username: str
@@ -32,8 +47,8 @@ class AccountOutWithPassword(AccountOut):
 
 
 class Accountsrepository:
-    def update(
-        self, account_id: str, account: AccountIn
+    def update_account_info(
+        self, account_id: str, account: EditAccountIn
     ) -> Union[AccountOut, Error]:
         try:
             with pool.connection() as conn:
@@ -42,7 +57,6 @@ class Accountsrepository:
                         """
                         UPDATE accounts
                         SET username = %s
-                            , password = %s
                             , avatar_img = %s
                             , email = %s
                             , event_manager = %s
@@ -50,7 +64,6 @@ class Accountsrepository:
                         """,
                         [
                             account.username,
-                            account.password,
                             account.avatar_img,
                             account.email,
                             account.event_manager,
@@ -58,12 +71,18 @@ class Accountsrepository:
                         ],
                     )
                     if db.rowcount > 0:
-                        return self.get(account.username)
+                        return EditAccountOut(
+                            username=account.username,
+                            avatar_img=account.avatar_img,
+                            email=account.email,
+                            event_manager=account.event_manager,
+                            account_id=account_id,
+                        )
                     else:
                         return Error(message="Account not found")
         except Exception as e:
             print(e)
-            return {"message": "could not update account"}
+            return Error(message="Could not update account")
 
     def get(self, username: str) -> AccountOutWithPassword:
         try:

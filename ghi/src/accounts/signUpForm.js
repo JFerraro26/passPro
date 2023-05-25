@@ -6,7 +6,9 @@ const SignUpForm = () => {
   const [signUp, result] = useSignUpMutation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [avatarImg, setAvatarImg] = useState("");
+  const [avatarImg, setAvatarImg] = useState(
+    "https://cdn.vox-cdn.com/thumbor/nCVu8PPQ1lSUhv8uCGcmsJbf0-A=/1400x1050/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/9140061/Screen_Shot_2017_08_29_at_4.27.44_PM.png"
+  );
   const [email, setEmail] = useState("");
   const [eventManager, setEventManager] = useState(false);
   const [error, setError] = useState("");
@@ -72,6 +74,7 @@ const SignUpForm = () => {
             <input
               name="avatarimg"
               type="url"
+              placeholder="fry"
               className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
               onChange={(e) => setAvatarImg(e.target.value)}
             />

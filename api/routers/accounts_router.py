@@ -15,20 +15,13 @@ from queries.accounts_queries import (
     AccountOut,
     Error,
     DuplicateAccountError,
+    EditAccountIn,
+    EditAccountOut,
 )
 from pydantic import BaseModel
 
 
 router = APIRouter()
-
-
-# @router.put("/accounts/{account_id}", response_model=Union[AccountOut, Error])
-# def update_account(
-#     account_id: uuid.UUID,
-#     account: AccountIn,
-#     repo: Accountsrepository = Depends(),
-# ) -> Union[AccountOut, Error]:
-#     return repo.update(account_id, account)
 
 
 class AccountForm(BaseModel):
@@ -45,6 +38,17 @@ class HttpError(BaseModel):
 
 
 router = APIRouter()
+
+
+@router.put(
+    "/api/accounts/{account_id}", response_model=Union[EditAccountOut, Error]
+)
+def update_account(
+    account_id: str,
+    account: EditAccountIn,
+    repo: Accountsrepository = Depends(),
+) -> Union[EditAccountOut, Error]:
+    return repo.update_account_info(account_id, account)
 
 
 @router.get("/token", response_model=AccountToken | None)
