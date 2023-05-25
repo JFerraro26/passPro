@@ -25,6 +25,9 @@ function EventDetail() {
           {event.start_time} to {event.end_time}
         </p>
       </div>
+      <div className="flex items-center justify-center col-start-1 col-span-5 row-start-4 row-span-1">
+        <p>list of like events</p>
+      </div>
     </div>
   );
 }
