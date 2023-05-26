@@ -9,7 +9,13 @@ function Nav() {
           Home
         </NavLink>
         <EventDropdown />
-        <div className="flex md:flex md:flex-grow flex-row justify-end space-x-1">
+        <NavLink className="text-2xl font-semibold hover:text-red-500" to="/sales/my-tickets">
+          My Tickets
+        </NavLink>
+        <div className="flex md:flex md:flex-grow flex-row justify-end space-x-4">
+        <NavLink className="text-2xl font-semibold hover:text-red-500" to="/sales/cart">
+          Cart
+        </NavLink>
           <NavLink
             className="text-2xl font-semibold hover:text-red-500"
             to="/login"
