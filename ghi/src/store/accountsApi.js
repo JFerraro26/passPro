@@ -1,5 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+
+
+
 export const accountsApi = createApi({
   reducerPath: "authentication",
   tagTypes: ["Token"],
@@ -90,9 +93,13 @@ export const accountsApi = createApi({
   }),
 });
 
+
+
 export const {
   useGetTokenQuery,
   useLoginMutation,
   useSignUpMutation,
   useUpdateMutation,
 } = accountsApi;
+
+
