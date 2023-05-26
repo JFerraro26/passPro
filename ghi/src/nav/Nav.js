@@ -12,7 +12,7 @@ function Nav() {
         <div className="flex md:flex md:flex-grow flex-row justify-end space-x-1">
           <NavLink
             className="text-2xl font-semibold hover:text-red-500"
-            to="/login"
+            to="/accounts/login"
           >
             Login
           </NavLink>
