@@ -65,8 +65,42 @@ export const accountsApi = createApi({
         };
       },
     }),
+
+    update: builder.mutation({
+      query: ({ accountId, updatedAccount }) => {
+        const { username, avatar_img, email, event_manager } = updatedAccount;
+        console.log(accountId);
+        const body = JSON.stringify({
+          username,
+          avatar_img,
+          email,
+          event_manager,
+        });
+
+        return {
+          url: `/api/accounts/${accountId}`,
+          method: "put",
+          body,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/token",
+        method: "delete",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useGetTokenQuery, useLoginMutation, useSignUpMutation } =
-  accountsApi;
+export const {
+  useGetTokenQuery,
+  useLoginMutation,
+  useSignUpMutation,
+  useUpdateMutation,
+  useLogoutMutation,
+} = accountsApi;
