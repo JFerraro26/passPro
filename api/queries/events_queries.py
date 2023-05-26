@@ -234,6 +234,44 @@ class EventRepository:
             print(e)
             return {"message": "Could not create Event"}
 
+    def get_event_from_account(
+        self, account_id: str
+    ) -> Union[List[EventOut], Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT
+                            id
+                            , event_name
+                            , event_image
+                            , event_type
+                            , date
+                            , start_time
+                            , end_time
+                            , description
+                            , tickets_sold
+                            , tickets_max
+                            , tickets_price
+                            , promoted
+                            , venue
+                            , city
+                            , state_id
+                            , created_by
+                        FROM events
+                        WHERE created_by = %s
+                        ORDER BY date;
+                        """,
+                        [account_id],
+                    )
+                    return [
+                        self.record_to_event_out(record) for record in result
+                    ]
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all events"}
+
     def event_in_to_out(self, id: UUID, event: EventIn):
         old_data = event.dict()
         return EventOut(id=id, **old_data)

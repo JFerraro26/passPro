@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List, Union
 from queries.pool import pool
+from uuid import UUID
 
 
 class DuplicateAccountError(ValueError):
@@ -129,7 +130,7 @@ class Accountsrepository:
         old_data = account.dict()
         return AccountOut(id=id, **old_data)
 
-    def delete(self, account_id: str) -> bool:
+    def delete(self, account_id: UUID) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:

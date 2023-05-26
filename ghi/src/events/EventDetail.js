@@ -1,9 +1,29 @@
 import { useLocation } from "react-router-dom";
+import { useGetTokenQuery } from "../store/accountsApi";
+import React, { useEffect, useState } from "react";
 
 function EventDetail() {
+  const { data, isLoading } = useGetTokenQuery();
+  const [account, setAccount] = useState();
+  console.log(account);
+  useEffect(() => {
+    async function fetchAccountData() {
+      const accountId = data.account.id;
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/accounts/${accountId}`
+      );
+      if (response.ok) {
+        const accoutData = await response.json();
+        setAccount(accoutData);
+      } else {
+        console.error(response);
+      }
+    }
+    fetchAccountData();
+  }, []);
+
   const { state } = useLocation();
   const event = state.event;
-  console.log(event);
 
   return (
     <div className="grid grid-cols-5 grid-rows-4">

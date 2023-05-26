@@ -45,3 +45,11 @@ Today, I worked on:
 - started an event detail page
 
 The team worked on individual front end goals
+
+## 5/25/2023
+
+Today, I worked on:
+
+- got the event detail page framed out, and started creating an api to grab all the events and sales associated with an account
+
+The team worked on redux and indivdual front end goals

@@ -59,7 +59,7 @@ class SaleRepository:
                             (%s, %s, %s)
                         RETURNING id;
                         """,
-                        [sale.event, sale.quantity, sale.sold_to]
+                        [sale.event, sale.quantity, sale.sold_to],
                     )
 
                     id = result.fetchone()[0]
@@ -68,3 +68,31 @@ class SaleRepository:
         except Exception as e:
             print(e)
             return {"Message": "Could not complete request"}
+
+    def get_sale_from_account(
+        self, account_id: str
+    ) -> Union[List[SalesOut], Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        SELECT id, event, quantity, sold_to
+                        FROM sales
+                        WHERE sold_to = %s
+                        ORDER BY id;
+                        """,
+                        [account_id],
+                    )
+                    result = []
+                    for record in db:
+                        sale = SalesOut(
+                            id=record[0],
+                            event=record[1],
+                            quantity=record[2],
+                            sold_to=record[3],
+                        )
+                        result.append(sale)
+                    return result
+        except Exception:
+            return {"Mssage": "Could not get sales list"}
