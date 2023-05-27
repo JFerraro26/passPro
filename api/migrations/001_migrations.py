@@ -52,7 +52,7 @@ steps = [
             promoted BOOLEAN DEFAULT false,
             venue VARCHAR(100),
             city VARCHAR(100),
-            state_id UUID REFERENCES states(id),
+            state_id VARCHAR(4),
             created_by UUID REFERENCES accounts(id)
 
         );

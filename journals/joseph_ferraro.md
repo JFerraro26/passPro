@@ -45,3 +45,19 @@ Today, I worked on:
 - started an event detail page
 
 The team worked on individual front end goals
+
+## 5/25/23
+
+Today, I worked on:
+
+- got the event detail page framed out, and started creating an api to grab all the events and sales associated with an account
+
+The team worked on redux and individual front end goals
+
+## 5/26/23
+
+Today, I worked on:
+
+- an account api that grabs the events and sales associated with an account
+
+The team worked on a redux token issue and the front end for the sales cart
