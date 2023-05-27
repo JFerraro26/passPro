@@ -1,6 +1,27 @@
 import { useLocation } from "react-router-dom";
+import { useGetTokenQuery } from "../store/accountsApi";
+import React, { useEffect, useState } from "react";
 
 function EventDetail() {
+  const { data, isLoading } = useGetTokenQuery();
+  const [account, setAccount] = useState([]);
+  console.log("account info", account);
+  useEffect(() => {
+    async function fetchAccountData() {
+      const accountId = "4b1a5ec8-703c-4fca-95ec-697d8c21b2c2";
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/accounts/${accountId}`
+      );
+      if (response.ok) {
+        const accoutData = await response.json();
+        setAccount(accoutData);
+      } else {
+        console.error(response);
+      }
+    }
+    fetchAccountData();
+  }, []);
+
   const { state } = useLocation();
   const event = state.event;
   console.log(event);
