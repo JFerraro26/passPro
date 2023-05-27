@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 
 function EventDetail() {
   const { data, isLoading } = useGetTokenQuery();
-  const [account, setAccount] = useState();
-  console.log(account);
+  const [account, setAccount] = useState([]);
+  console.log("account info", account);
   useEffect(() => {
     async function fetchAccountData() {
-      const accountId = data.account.id;
+      const accountId = "4b1a5ec8-703c-4fca-95ec-697d8c21b2c2";
       const response = await fetch(
         `${process.env.REACT_APP_API_HOST}/api/accounts/${accountId}`
       );

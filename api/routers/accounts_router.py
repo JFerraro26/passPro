@@ -17,9 +17,8 @@ from queries.accounts_queries import (
     DuplicateAccountError,
 )
 from queries.events_queries import EventOut, EventRepository
-from pydantic import BaseModel
-from uuid import UUID
-from queries.sales_queries import SalesOut, SaleRepository
+from pydantic import BaseModel, UUID4
+from queries.sales_queries import SaleTiedToEventOut, SaleRepository
 
 
 router = APIRouter()
@@ -87,10 +86,10 @@ async def create_account(
 
 @router.get(
     "/api/accounts/{account_id}",
-    response_model=Dict[str, List[Union[EventOut, SalesOut]]],
+    response_model=Dict[str, List[Union[EventOut, SaleTiedToEventOut]]],
 )
 def get_event_and_sale_from_account(
-    account_id: UUID,
+    account_id: UUID4,
     response: Response,
     event_repo: EventRepository = Depends(),
     sales_repo: SaleRepository = Depends(),
@@ -101,9 +100,9 @@ def get_event_and_sale_from_account(
         if sales and events:
             return {"events": events, "sales": sales}
         elif sales:
-            return sales
+            return {"sales": sales}
         else:
-            return events
+            return {"events": events}
     else:
         response.status_code = 400
         return {"Message": "Something went wrong"}

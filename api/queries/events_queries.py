@@ -1,8 +1,7 @@
-from pydantic import BaseModel, AnyUrl
+from pydantic import BaseModel, AnyUrl, UUID4
 from datetime import date, time
 from decimal import Decimal
 from queries.pool import pool
-from uuid import UUID
 from typing import List, Union
 
 
@@ -24,12 +23,12 @@ class EventIn(BaseModel):
     promoted: bool
     venue: str
     city: str
-    state_id: UUID
-    created_by: UUID
+    state_id: str
+    created_by: UUID4
 
 
 class EventOut(BaseModel):
-    id: UUID
+    id: UUID4
     event_name: str
     event_image: AnyUrl
     event_type: str
@@ -43,12 +42,12 @@ class EventOut(BaseModel):
     promoted: bool
     venue: str
     city: str
-    state_id: UUID
-    created_by: UUID
+    state_id: str
+    created_by: UUID4
 
 
 class EventRepository:
-    def get_one(self, event_id: UUID) -> Union[EventOut, Error]:
+    def get_one(self, event_id: UUID4) -> Union[EventOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -84,7 +83,7 @@ class EventRepository:
             print(e)
             return {"message": "Could not get that event"}
 
-    def delete(self, event_id: UUID) -> bool:
+    def delete(self, event_id: UUID4) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -100,7 +99,9 @@ class EventRepository:
             print(e)
             return False
 
-    def update(self, event_id: UUID, event: EventIn) -> Union[EventOut, Error]:
+    def update(
+        self, event_id: UUID4, event: EventIn
+    ) -> Union[EventOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -235,7 +236,7 @@ class EventRepository:
             return {"message": "Could not create Event"}
 
     def get_event_from_account(
-        self, account_id: str
+        self, account_id: UUID4
     ) -> Union[List[EventOut], Error]:
         try:
             with pool.connection() as conn:
@@ -272,7 +273,7 @@ class EventRepository:
             print(e)
             return {"message": "Could not get all events"}
 
-    def event_in_to_out(self, id: UUID, event: EventIn):
+    def event_in_to_out(self, id: UUID4, event: EventIn):
         old_data = event.dict()
         return EventOut(id=id, **old_data)
 
