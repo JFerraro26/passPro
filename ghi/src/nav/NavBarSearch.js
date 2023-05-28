@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 function NavBarSearch() {
   const [open, setOpen] = useState(false);
   const [events, setEvents] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     async function fetchEventData() {
@@ -21,31 +22,67 @@ function NavBarSearch() {
     fetchEventData();
   }, []);
 
+  const openDropdown = () => {
+    setOpen(true);
+  };
+
+  const handleQueryChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const closeDropdown = () => {
+    setOpen(false);
+  };
+
+  const filteredEvents = events.filter((event) => {
+    const { city, event_name, state_id, venue } = event;
+    const lowerCaseQuery = query.toLowerCase();
+
+    return (
+      city.toLowerCase().includes(lowerCaseQuery) ||
+      event_name.toLowerCase().includes(lowerCaseQuery) ||
+      state_id.toLowerCase().includes(lowerCaseQuery) ||
+      venue.toLowerCase().includes(lowerCaseQuery)
+    );
+  });
+
   return (
     <div className="relative">
       <input
-        onChange={() => setOpen(true)}
+        type="search"
+        value={query}
+        onChange={(e) => {
+          openDropdown();
+          handleQueryChange(e);
+        }}
         className="relative z-10 border w-80"
         id="search-bar"
         name="search-bar"
-        placeholder="Find an Event..."
+        placeholder="Enter Event, City, State, or Venue"
       />
 
       {open ? (
         <div className="">
           <button
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              closeDropdown();
+              setQuery("");
+            }}
             className="fixed inset-0 h-full w-full cursor-default"
           ></button>
           <div className="border flex flex-col w-80 absolute top-auto">
-            <h1 className="text-2xl font-semibold">Events:</h1>
-            {events?.map((event) => {
+            <h1 className="bg-white text-2xl font-semibold">Events:</h1>
+            {filteredEvents?.map((event) => {
               return (
                 <Link
                   className="hover:bg-blue-400 bg-white"
                   state={{ event: event }}
                   to="/events/detail"
                   key={event.id}
+                  onClick={() => {
+                    closeDropdown();
+                    handleQueryChange("");
+                  }}
                 >
                   <button className="border w-80">
                     <div className="grid grid-cols-4 grid-rows-2">
