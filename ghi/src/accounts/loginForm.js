@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useGetTokenQuery, useLoginMutation } from "../store/accountsApi";
+import store from "../store/store";
 // import { useNavigate } from "react-router-dom";
-import { persistStore } from "redux-persist";
-import { store } from "../store/store";
 
 const LoginForm = () => {
   // const navigate = useNavigate();
@@ -11,11 +10,13 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login({ username, password });
       if (result.isSuccess) {
+
         // navigate("/"); this will redirect to whatever url we put after logging in
       } else if (result.isError) {
         setError(result.error);

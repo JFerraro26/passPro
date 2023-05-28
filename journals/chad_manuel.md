@@ -165,8 +165,6 @@ FastAPI
 Front-End
 Tailwind
 
-
-
 ## What was worked on?
 
 - Today I worked on finishing up the front end auth and learning more about how redux actually works. We learned on how to access the state that is stored in the store. I was able to figure out how to also attach the headers automatically thanks to some guidance from learn.
@@ -175,7 +173,51 @@ Tailwind
 
 - Get started on the profile page front end and start having all the components ready for it.
 
-
 ## Additional Thoughts/Idea
 
 - I definitely need to read more on accessing states inside of stores for redux.
+
+# 5/25/23
+
+## Topics
+
+Redux
+Auth
+FastAPI
+Front-End
+Tailwind
+
+## What was worked on?
+
+- Today I worked on implementing an edit portion for the accounts. I had to try and figure out how to put a variable and pass the account_id through the function in order to populate the account_id portion inside the url
+
+## To-Do
+
+- Get started on the profile page
+
+---
+
+## Additional Thoughts/Idea
+
+- Figure out how to finish the front end redux portion
+
+# 5/26/23
+
+## Topics
+
+Redux
+Auth
+FastAPI
+Front-End
+
+## What was worked on?
+
+- Today I worked on one single bug, I can't seem to fix the issue where it holds the previous token even though I've tried to sign in and log out. I added a logout feature onto the front end too to be able to log out of the account
+
+## To-Do
+
+- Figure out whats going on with the state management and see why its showing the old information in there
+
+## Additional Thoughts/Idea
+
+-

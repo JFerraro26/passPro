@@ -6,11 +6,6 @@ import { useSelector } from "react-redux";
 import store from "../store/store";
 
 function Nav() {
-  const { data: token } = useGetTokenQuery(store);
-  console.log(
-    "token",
-    useSelector((state) => state.authentication.getToken)
-  );
 
   return (
     <nav>

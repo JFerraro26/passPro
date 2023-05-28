@@ -1,26 +1,31 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { persistStore } from "redux-persist";
-import { store } from "../store/store";
+import React, { useEffect } from "react";
 import { useGetTokenQuery, useLogoutMutation } from "../store/accountsApi";
-import { resetStore } from "../store/store";
+import { useDispatch } from "react-redux";
+import { clearStore } from "../store/clearStore";
+import store from "../store/store";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const LogoutButton = () => {
-  const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
-  const { data } = useGetTokenQuery(store);
-  console.log("Logout token", data);
+  const dispatch = useDispatch();
+  const { refetch } = useGetTokenQuery(store, { staleTime: 0 });
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await logout();
-      store.dispatch(resetStore());
-      dispatch(resetStore());
-      localStorage.removeItem("accessToken");
+      dispatch(clearStore());
+      navigate("/login");
     } catch (error) {
       console.error("logout error:", error);
     }
   };
+
+  useEffect(() => {
+    if (refetch) {
+      refetch();
+    }
+  }, [refetch]);
 
   return <button onClick={handleLogout}>Logout</button>;
 };

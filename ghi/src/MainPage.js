@@ -1,4 +1,8 @@
+import { useGetTokenQuery } from "./store/accountsApi";
+import store from "./store/store";
+
 function MainPage() {
+  console.log(useGetTokenQuery(store));
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <h1 className="text-7xl font-bold text-center">PassPro</h1>
