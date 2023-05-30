@@ -13,7 +13,7 @@ const LogoutButton = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      dispatch(clearStore());
+      // dispatch(clearStore());
       navigate("/accounts/login");
     } catch (error) {
       console.log("error", error);

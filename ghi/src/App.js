@@ -8,8 +8,8 @@ import SignUpForm from "./accounts/signUpForm.js";
 import EventDetail from "./events/EventDetail";
 import Cart from "./sales/cart";
 import MyTickets from "./sales/MyTickets";
-import EditAccountForm from "./accounts/editAccountForm";
 import EditAccountFormContainer from "./accounts/editAccountForm";
+import MyProfile from "./accounts/myProfile";
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
             <Route path="" element={<EditAccountFormContainer />} />
             <Route path="login" element={<LoginForm />} />
             <Route path="signup" element={<SignUpForm />} />
+            <Route path="profile" element={<MyProfile />} />
           </Route>
           <Route path="/events">
             <Route path="" element={<EventManager />} />
