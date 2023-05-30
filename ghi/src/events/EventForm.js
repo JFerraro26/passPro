@@ -5,6 +5,7 @@ import StateList from "../state_list/StateList";
 
 function EventForm() {
   const { state } = useLocation();
+  const { data: accountData, isLoading, error } = useGetTokenQuery();
   const [typeEvent, setTypeEvent] = useState("");
   const [nameEvent, setNameEvent] = useState("");
   const [imageEvent, setImageEvent] = useState("");
@@ -17,7 +18,8 @@ function EventForm() {
   const [venue, setVenue] = useState("");
   const [city, setCity] = useState("");
   const [stateId, setStateId] = useState("");
-  const { data, isLoading } = useGetTokenQuery();
+
+  console.log(accountData);
 
   useEffect(() => {
     if (state == null) {
@@ -49,9 +51,14 @@ function EventForm() {
     }
   }, [state]);
 
+  if (isLoading) {
+    return <p>Loading....</p>;
+  } else {
+    var accountId = accountData.account.id;
+  }
+
   const EventSubmitCreate = async (event) => {
     event.preventDefault();
-    const accountId = "5324ad5d-8fae-4ee9-9277-2c7dd86373bc";
     const formData = {};
     formData.event_type = typeEvent;
     formData.event_name = nameEvent;
