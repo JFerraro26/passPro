@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useGetTokenQuery } from "../redux/store/accountsApi";
 import StateList from "../state_list/StateList";
 
 function EventForm() {
@@ -17,7 +16,6 @@ function EventForm() {
   const [venue, setVenue] = useState("");
   const [city, setCity] = useState("");
   const [stateId, setStateId] = useState("");
-  const { data, isLoading } = useGetTokenQuery();
 
   useEffect(() => {
     if (state == null) {

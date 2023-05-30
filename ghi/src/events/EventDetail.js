@@ -1,7 +1,27 @@
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 function EventDetail() {
   const event = useSelector((state) => state.eventGrab.globalEvent);
+
+  const [account, setAccount] = useState({});
+  console.log(account);
+
+  useEffect(() => {
+    async function fetchAccountData() {
+      const accountId = "9c78fbde-d01c-4853-86f4-7bb722751003";
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/accounts/${accountId}`
+      );
+      if (response.ok) {
+        const accountData = await response.json();
+        setAccount(accountData);
+      } else {
+        console.error(response);
+      }
+    }
+    fetchAccountData();
+  }, []);
 
   if (event == null) {
     return (
@@ -10,7 +30,6 @@ function EventDetail() {
       </>
     );
   }
-  console.log(event);
 
   return (
     <>
