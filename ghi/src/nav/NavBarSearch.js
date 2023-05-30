@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
+import { useDispatch } from "react-redux";
+import { setEvent } from "../redux/slices/eventSlice";
 
 function NavBarSearch() {
   const [open, setOpen] = useState(false);
   const [events, setEvents] = useState([]);
   const [query, setQuery] = useState("");
+  const dispatchEvent = useDispatch();
 
   useEffect(() => {
     async function fetchEventData() {
@@ -34,8 +37,8 @@ function NavBarSearch() {
     setOpen(false);
   };
 
-  const filteredEvents = events.filter((event) => {
-    const { city, event_name, state_id, venue } = event;
+  const filteredEvents = events.filter((e) => {
+    const { city, event_name, state_id, venue } = e;
     const lowerCaseQuery = query.toLowerCase();
 
     return (
@@ -75,31 +78,29 @@ function NavBarSearch() {
             {filteredEvents?.map((event) => {
               return (
                 <Link
-                  className="hover:bg-blue-400 bg-white"
-                  state={{ event: event }}
+                  className="border w-80 hover:bg-blue-400 bg-white"
                   to="/events/detail"
                   key={event.id}
                   onClick={() => {
                     closeDropdown();
-                    handleQueryChange("");
+                    setQuery("");
+                    dispatchEvent(setEvent(event));
                   }}
                 >
-                  <button className="border w-80">
-                    <div className="grid grid-cols-4 grid-rows-2">
-                      <div className="flex flex-col w-12 h-12 col-start-1 col-span-1 row-start-1 row-span-2">
-                        <h1>{dayjs(event.date).format("MMM")}</h1>
-                        <h1>{dayjs(event.date).format("DD")}</h1>
-                      </div>
-                      <div className="text-left w-68 col-start-2 col-span-3 row-start-1 row-span-1">
-                        <h1>{event.event_name}</h1>
-                      </div>
-                      <div className="text-left w-68 col-start-2 col-span-3 row-start-2 row-span-1">
-                        <h1>
-                          {event.city}, {event.state_id}
-                        </h1>
-                      </div>
+                  <div className="grid grid-cols-4 grid-rows-2">
+                    <div className="flex flex-col w-12 h-12 col-start-1 col-span-1 row-start-1 row-span-2">
+                      <h1>{dayjs(event.date).format("MMM")}</h1>
+                      <h1>{dayjs(event.date).format("DD")}</h1>
                     </div>
-                  </button>
+                    <div className="text-left w-68 col-start-2 col-span-3 row-start-1 row-span-1">
+                      <h1>{event.event_name}</h1>
+                    </div>
+                    <div className="text-left w-68 col-start-2 col-span-3 row-start-2 row-span-1">
+                      <h1>
+                        {event.city}, {event.state_id}
+                      </h1>
+                    </div>
+                  </div>
                 </Link>
               );
             })}

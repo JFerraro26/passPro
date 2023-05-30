@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setEvent } from "../redux/slices/eventSlice";
 
 function EventManager() {
   const [events, setEvents] = useState([]);
+  const dispatchEvent = useDispatch();
 
   useEffect(() => {
     async function fetchEventData() {
@@ -74,7 +77,7 @@ function EventManager() {
                 <td className="whitespace-nowrap px-6 py-4">
                   <Link
                     className="hover:text-blue-400"
-                    state={{ event: event }}
+                    onClick={() => dispatchEvent(setEvent(event))}
                     to="/events/detail"
                   >
                     {event.event_name}
