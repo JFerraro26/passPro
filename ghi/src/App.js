@@ -15,25 +15,23 @@ function App() {
   return (
     <BrowserRouter>
       <Nav />
-      <div>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/accounts">
-            <Route path="" element={<EditAccountFormContainer />} />
-            <Route path="login" element={<LoginForm />} />
-            <Route path="signup" element={<SignUpForm />} />
-          </Route>
-          <Route path="/events">
-            <Route path="" element={<EventManager />} />
-            <Route path="form" element={<EventForm />} />
-            <Route path="detail" element={<EventDetail />} />
-          </Route>
-          <Route path="/sales">
-            <Route path="my-tickets" element={<MyTickets />} />
-            <Route path="cart" element={<Cart />} />
-          </Route>
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/accounts">
+          <Route path="" element={<EditAccountFormContainer />} />
+          <Route path="login" element={<LoginForm />} />
+          <Route path="signup" element={<SignUpForm />} />
+        </Route>
+        <Route path="/events">
+          <Route path="" element={<EventManager />} />
+          <Route path="form" element={<EventForm />} />
+          <Route path="detail" element={<EventDetail />} />
+        </Route>
+        <Route path="/sales">
+          <Route path="my-tickets" element={<MyTickets />} />
+          <Route path="cart" element={<Cart />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

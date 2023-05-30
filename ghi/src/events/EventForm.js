@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useGetTokenQuery } from "../store/accountsApi";
+import { useGetTokenQuery } from "../redux/store/accountsApi";
 import StateList from "../state_list/StateList";
 
 function EventForm() {
@@ -51,7 +51,7 @@ function EventForm() {
 
   const EventSubmitCreate = async (event) => {
     event.preventDefault();
-    const accountId = "8d378322-a3a2-432f-9923-ac5de8462e23";
+    const accountId = "5324ad5d-8fae-4ee9-9277-2c7dd86373bc";
     const formData = {};
     formData.event_type = typeEvent;
     formData.event_name = nameEvent;
@@ -82,7 +82,7 @@ function EventForm() {
       var eventUrl = `${process.env.REACT_APP_API_HOST}/api/events/${eventId}`;
       var eventFetchConfig = {
         method: "put",
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
         headers: {
           "Content-Type": "application/json",
         },
