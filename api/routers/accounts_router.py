@@ -8,7 +8,7 @@ from fastapi import (
 )
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
-from typing import Union, List, Optional
+from typing import Union, List, Optional, Dict
 from queries.accounts_queries import (
     AccountIn,
     Accountsrepository,
@@ -18,7 +18,9 @@ from queries.accounts_queries import (
     EditAccountIn,
     EditAccountOut,
 )
-from pydantic import BaseModel
+from queries.events_queries import EventOut, EventRepository
+from pydantic import BaseModel, UUID4
+from queries.sales_queries import SaleTiedToEventOut, SaleRepository
 
 
 router = APIRouter()
@@ -84,3 +86,27 @@ async def create_account(
     form = AccountForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
+
+
+@router.get(
+    "/api/accounts/{account_id}",
+    response_model=Dict[str, List[Union[EventOut, SaleTiedToEventOut]]],
+)
+def get_event_and_sale_from_account(
+    account_id: UUID4,
+    response: Response,
+    event_repo: EventRepository = Depends(),
+    sales_repo: SaleRepository = Depends(),
+):
+    if response:
+        events = event_repo.get_event_from_account(account_id)
+        sales = sales_repo.get_sale_from_account(account_id)
+        if sales and events:
+            return {"events": events, "sales": sales}
+        elif sales:
+            return {"sales": sales}
+        else:
+            return {"events": events}
+    else:
+        response.status_code = 400
+        return {"Message": "Something went wrong"}

@@ -4,6 +4,7 @@ import LogoutButton from "../accounts/logoutButton";
 import { useGetTokenQuery } from "../store/accountsApi";
 import { useState } from "react";
 import { useEffect } from "react";
+import NavBarSearch from "./NavBarSearch";
 
 function Nav() {
   const getTokenQuery = useGetTokenQuery();
@@ -33,7 +34,14 @@ function Nav() {
         >
           My Tickets
         </NavLink>
+        <NavBarSearch />
         <div className="flex md:flex md:flex-grow flex-row justify-end space-x-4">
+          <NavLink
+            className="text-2xl font-semibold hover:text-red-500"
+            to="/sales/cart"
+          >
+            Cart
+          </NavLink>
           <NavLink
             className="text-2xl font-semibold hover:text-red-500"
             to="/sales/cart"
