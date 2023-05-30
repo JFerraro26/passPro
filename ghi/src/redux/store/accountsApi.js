@@ -13,7 +13,7 @@ export const accountsApi = createApi({
           headers.set("Authorization", `Bearer ${token}`);
         }
       } catch (error) {
-        console.error("User is logged out");
+        console.error(error);
       }
 
       return headers;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetTokenQuery } from "../store/accountsApi";
+import { useGetTokenQuery } from "../redux/store/accountsApi";
 
 const MyProfile = () => {
   const accountData = useGetTokenQuery();

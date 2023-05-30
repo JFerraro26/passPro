@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useGetTokenQuery, useUpdateMutation } from "../store/accountsApi";
+import {
+  useGetTokenQuery,
+  useUpdateMutation,
+} from "../redux/store/accountsApi";
 
 const EditAccountForm = () => {
   const { data: accountData, isLoading, error } = useGetTokenQuery();

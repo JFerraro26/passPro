@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import { useGetTokenQuery, useLogoutMutation } from "../store/accountsApi";
+import {
+  useGetTokenQuery,
+  useLogoutMutation,
+} from "../redux/store/accountsApi";
 import { useDispatch } from "react-redux";
-import { clearStore } from "../store/clearStore";
-import store from "../store/store";
+import { clearStore } from "../redux/store/clearStore";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const LogoutButton = () => {

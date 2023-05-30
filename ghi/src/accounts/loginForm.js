@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useGetTokenQuery, useLoginMutation } from "../store/accountsApi";
-import store from "../store/store";
+import { useGetTokenQuery, useLoginMutation } from "../redux/store/accountsApi";
 // import { useNavigate } from "react-router-dom";
+import { store } from "../redux/store/store";
 
 const LoginForm = () => {
   // const navigate = useNavigate();

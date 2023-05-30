@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import EventDropdown from "./EventDropdown";
 import LogoutButton from "../accounts/logoutButton";
-import { useGetTokenQuery } from "../store/accountsApi";
+import { useGetTokenQuery } from "../redux/store/accountsApi";
 import { useState } from "react";
 import { useEffect } from "react";
 import NavBarSearch from "./NavBarSearch";
