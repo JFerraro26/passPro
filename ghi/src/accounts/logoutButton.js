@@ -8,7 +8,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 const LogoutButton = () => {
   const [logout] = useLogoutMutation();
   const dispatch = useDispatch();
-  const { refetch } = useGetTokenQuery(store, { staleTime: 0 });
+  // const { refetch } = useGetTokenQuery(store, { staleTime: 0 });
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -17,15 +17,15 @@ const LogoutButton = () => {
       dispatch(clearStore());
       navigate("/login");
     } catch (error) {
-      console.error("logout error:", error);
+      console.log("error", error);
     }
   };
 
-  useEffect(() => {
-    if (refetch) {
-      refetch();
-    }
-  }, [refetch]);
+  // useEffect(() => {
+  //   if (refetch) {
+  //     refetch();
+  //   }
+  // }, [refetch]);
 
   return <button onClick={handleLogout}>Logout</button>;
 };

@@ -6,10 +6,14 @@ export const accountsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_API_HOST,
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().authentication.token;
+      try {
+        const token = getState().authentication.token;
 
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+        if (token) {
+          headers.set("Authorization", `Bearer ${token}`);
+        }
+      } catch (error) {
+        console.error("User is logged out");
       }
 
       return headers;
@@ -34,7 +38,8 @@ export const accountsApi = createApi({
         };
       },
       invalidatesTags: (result) => {
-        return (result && ["Account"]) || [];
+        console.log("This is the result", result);
+        return (result && ["Token"]) || [];
       },
     }),
     getToken: builder.query({
@@ -43,6 +48,11 @@ export const accountsApi = createApi({
         credentials: "include",
       }),
       providesTags: ["Token"],
+      onError: (error) => {
+        if (error.status === 401) {
+          console.error("Unauthorized error:", error);
+        }
+      },
     }),
     signUp: builder.mutation({
       query: (info) => {
@@ -93,6 +103,7 @@ export const accountsApi = createApi({
         method: "delete",
         credentials: "include",
       }),
+      invalidatesTags: ["Token"],
     }),
   }),
 });
