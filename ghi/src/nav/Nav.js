@@ -42,18 +42,12 @@ function Nav() {
           >
             Cart
           </NavLink>
-          <NavLink
-            className="text-2xl font-semibold hover:text-red-500"
-            to="/sales/cart"
-          >
-            Cart
-          </NavLink>
           {isLoggedIn ? (
             <LogoutButton />
           ) : (
             <NavLink
               className="text-2xl font-semibold hover:text-red-500"
-              to="/login"
+              to="/accounts/login"
             >
               Login
             </NavLink>

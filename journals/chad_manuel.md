@@ -177,29 +177,30 @@ Tailwind
 
 - I definitely need to read more on accessing states inside of stores for redux.
 
+---
+
 # 5/25/23
 
 ## Topics
 
 Redux
+Redux Tool Kit
 Auth
 FastAPI
 Front-End
-Tailwind
 
 ## What was worked on?
 
-- Today I worked on implementing an edit portion for the accounts. I had to try and figure out how to put a variable and pass the account_id through the function in order to populate the account_id portion inside the url
+- Today I worked on finalizing the edit portion of the account in the back end and got started with the front end today. Unfortunately for the front end, I started to get some errors because the state was not loaded yet but the page tries to load first. I finally figured out how to wrap the whole thing into an async method with await as well. I am still trying to figure out how I can pass through the ID to redux to populate the api call for a put request.
 
 ## To-Do
 
-- Get started on the profile page
-
----
+- I still need to finish the edit portion of the front end
+- Get started on the profile page hopefully.
 
 ## Additional Thoughts/Idea
 
-- Figure out how to finish the front end redux portion
+---
 
 # 5/26/23
 
