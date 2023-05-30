@@ -19,8 +19,6 @@ function EventForm() {
   const [city, setCity] = useState("");
   const [stateId, setStateId] = useState("");
 
-  console.log(accountData);
-
   useEffect(() => {
     if (state == null) {
       setTypeEvent("");
@@ -258,7 +256,10 @@ function EventForm() {
               placeholder="Venue..."
             />
           </div>
-          <button className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full">
+          <button
+            disabled={isLoading}
+            className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full"
+          >
             Submit
           </button>
         </form>
