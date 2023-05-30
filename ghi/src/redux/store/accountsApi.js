@@ -6,10 +6,14 @@ export const accountsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_API_HOST,
     prepareHeaders: (headers, { getState }) => {
-      const token = getState().authentication.token;
+      try {
+        const token = getState().authentication.token;
 
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+        if (token) {
+          headers.set("Authorization", `Bearer ${token}`);
+        }
+      } catch (error) {
+        console.error(error);
       }
 
       return headers;
@@ -34,7 +38,7 @@ export const accountsApi = createApi({
         };
       },
       invalidatesTags: (result) => {
-        return (result && ["Account"]) || [];
+        return (result && ["Token"]) || [];
       },
     }),
     getToken: builder.query({
@@ -43,6 +47,11 @@ export const accountsApi = createApi({
         credentials: "include",
       }),
       providesTags: ["Token"],
+      onError: (error) => {
+        if (error.status === 401) {
+          console.error("Unauthorized error:", error);
+        }
+      },
     }),
     signUp: builder.mutation({
       query: (info) => {
@@ -65,8 +74,43 @@ export const accountsApi = createApi({
         };
       },
     }),
+
+    update: builder.mutation({
+      query: ({ accountId, updatedAccount }) => {
+        const { username, avatar_img, email, event_manager } = updatedAccount;
+        console.log(accountId);
+        const body = JSON.stringify({
+          username,
+          avatar_img,
+          email,
+          event_manager,
+        });
+
+        return {
+          url: `/api/accounts/${accountId}`,
+          method: "put",
+          body,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+      },
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/token",
+        method: "delete",
+        credentials: "include",
+      }),
+      invalidatesTags: ["Token"],
+    }),
   }),
 });
 
-export const { useGetTokenQuery, useLoginMutation, useSignUpMutation } =
-  accountsApi;
+export const {
+  useGetTokenQuery,
+  useLoginMutation,
+  useSignUpMutation,
+  useUpdateMutation,
+  useLogoutMutation,
+} = accountsApi;
