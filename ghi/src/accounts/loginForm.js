@@ -10,13 +10,11 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login({ username, password });
       if (result.isSuccess) {
-
         // navigate("/"); this will redirect to whatever url we put after logging in
       } else if (result.isError) {
         setError(result.error);

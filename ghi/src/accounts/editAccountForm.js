@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetTokenQuery, useUpdateMutation } from "../store/accountsApi";
 
 const EditAccountForm = () => {
   const { data: accountData, isLoading, error } = useGetTokenQuery();
   const [edit] = useUpdateMutation();
 
-  console.log(accountData);
-
   const accountIdFromData = accountData?.account?.id;
-  const [username, setUsername] = useState(accountData?.account.username || "");
-  const [avatarImg, setAvatarImg] = useState(
-    accountData?.account.avatar_img || ""
-  );
-  const [email, setEmail] = useState(accountData?.account.email || "");
-  const [eventManager, setEventManager] = useState(
-    accountData?.account.event_manager || false
-  );
+  const [username, setUsername] = useState("");
+  const [avatarImg, setAvatarImg] = useState("");
+  const [email, setEmail] = useState("");
+  const [eventManager, setEventManager] = useState("");
+
+  useEffect(() => {
+    if (accountData) {
+      setUsername(accountData.account.username);
+      setAvatarImg(accountData.account.avatar_img);
+      setEmail(accountData.account.email);
+      setEventManager(accountData.account.event_manager);
+    }
+  }, [accountData]);
 
   const handleUpdateAccount = async () => {
     const updatedAccount = {
