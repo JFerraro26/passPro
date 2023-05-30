@@ -1,8 +1,26 @@
 import { NavLink } from "react-router-dom";
 import EventDropdown from "./EventDropdown";
+import LogoutButton from "../accounts/logoutButton";
+import { useGetTokenQuery } from "../redux/store/accountsApi";
+import { useState } from "react";
+import { useEffect } from "react";
 import NavBarSearch from "./NavBarSearch";
 
 function Nav() {
+  const getTokenQuery = useGetTokenQuery();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (getTokenQuery.isSuccess) {
+      setIsLoggedIn(true);
+    } else if (getTokenQuery.isError) {
+      setIsLoggedIn(false);
+      // Look more into this, catching 401 unauthorized error
+      console.clear();
+      // console.log("You are not logged in");
+    }
+  }, [getTokenQuery]);
+
   return (
     <nav>
       <div className="navbar flex items-center w-full h-16 px-2 gap-4">
@@ -24,12 +42,16 @@ function Nav() {
           >
             Cart
           </NavLink>
-          <NavLink
-            className="text-2xl font-semibold hover:text-red-500"
-            to="/login"
-          >
-            Login
-          </NavLink>
+          {isLoggedIn ? (
+            <LogoutButton />
+          ) : (
+            <NavLink
+              className="text-2xl font-semibold hover:text-red-500"
+              to="/accounts/login"
+            >
+              Login
+            </NavLink>
+          )}
         </div>
       </div>
     </nav>

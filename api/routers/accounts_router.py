@@ -15,6 +15,8 @@ from queries.accounts_queries import (
     AccountOut,
     Error,
     DuplicateAccountError,
+    EditAccountIn,
+    EditAccountOut,
 )
 from queries.events_queries import EventOut, EventRepository
 from pydantic import BaseModel, UUID4
@@ -22,15 +24,6 @@ from queries.sales_queries import SaleTiedToEventOut, SaleRepository
 
 
 router = APIRouter()
-
-
-# @router.put("/accounts/{account_id}", response_model=Union[AccountOut, Error])
-# def update_account(
-#     account_id: uuid.UUID,
-#     account: AccountIn,
-#     repo: Accountsrepository = Depends(),
-# ) -> Union[AccountOut, Error]:
-#     return repo.update(account_id, account)
 
 
 class AccountForm(BaseModel):
@@ -49,11 +42,22 @@ class HttpError(BaseModel):
 router = APIRouter()
 
 
+@router.put(
+    "/api/accounts/{account_id}", response_model=Union[EditAccountOut, Error]
+)
+def update_account(
+    account_id: str,
+    account: EditAccountIn,
+    repo: Accountsrepository = Depends(),
+) -> Union[EditAccountOut, Error]:
+    return repo.update_account_info(account_id, account)
+
+
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
     account: Accountsrepository = Depends(
-        authenticator.try_get_current_account_data
+        authenticator.get_current_account_data
     ),
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
