@@ -1,15 +1,18 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useGetTokenQuery } from "../redux/store/accountsApi";
 
 function EventDetail() {
-  const event = useSelector((state) => state.eventGrab.globalEvent);
+  const event = useSelector((state) => state.rootReducer.eventGrab.globalEvent);
 
+  const { data: accountData, isLoading, error } = useGetTokenQuery();
   const [account, setAccount] = useState({});
   console.log(account);
 
   useEffect(() => {
     async function fetchAccountData() {
-      const accountId = "9c78fbde-d01c-4853-86f4-7bb722751003";
+      if (isLoading) return;
+      const accountId = accountData.account.id;
       const response = await fetch(
         `${process.env.REACT_APP_API_HOST}/api/accounts/${accountId}`
       );
@@ -21,7 +24,7 @@ function EventDetail() {
       }
     }
     fetchAccountData();
-  }, []);
+  }, [isLoading, accountData]);
 
   if (event == null) {
     return (
