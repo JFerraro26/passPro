@@ -11,7 +11,7 @@ function EventDropdown() {
     <div className="relative">
       <button
         onClick={handleOpen}
-        className="relative z-10 block text-2xl font-semibold hover:text-red-500"
+        className="relative block text-2xl font-semibold hover:text-red-500"
         id="my-content-button"
       >
         Events
@@ -19,7 +19,7 @@ function EventDropdown() {
       {open ? (
         <button
           onClick={handleOpen}
-          className="fixed inset-0 h-full w-full bg-black opacity-50 cursor-default"
+          className="fixed inset-0 h-full w-full cursor-default"
         ></button>
       ) : null}
       {open ? (

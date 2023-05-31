@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import EventDropdown from "./EventDropdown";
-import LogoutButton from "../accounts/logoutButton";
 import { useGetTokenQuery } from "../redux/store/accountsApi";
 import { useState } from "react";
 import { useEffect } from "react";
 import NavBarSearch from "./NavBarSearch";
+import ProfileDropdown from "./ProfileDropdown";
 
 function Nav() {
   const getTokenQuery = useGetTokenQuery();
@@ -23,7 +23,7 @@ function Nav() {
 
   return (
     <nav>
-      <div className="navbar flex items-center w-full h-16 px-2 gap-4">
+      <div className="navbar bg-blue-500 flex items-center w-full h-16 px-2 gap-4">
         <NavLink className="text-2xl font-semibold hover:text-red-500" to="/">
           Home
         </NavLink>
@@ -43,7 +43,7 @@ function Nav() {
             Cart
           </NavLink>
           {isLoggedIn ? (
-            <LogoutButton />
+            <ProfileDropdown />
           ) : (
             <NavLink
               className="text-2xl font-semibold hover:text-red-500"

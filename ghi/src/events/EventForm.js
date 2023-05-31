@@ -94,7 +94,20 @@ function EventForm() {
       };
     }
     const response = await fetch(eventUrl, eventFetchConfig);
-    if (!response.ok) {
+    if (response.ok) {
+      setTypeEvent("");
+      setNameEvent("");
+      setImageEvent("");
+      setDate("");
+      setStartTime("");
+      setEndTime("");
+      setDescription("");
+      setTicketsMax("");
+      setTicketsPrice("");
+      setVenue("");
+      setCity("");
+      setStateId("");
+    } else {
       console.error(response);
     }
   };

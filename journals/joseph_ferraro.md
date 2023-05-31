@@ -61,3 +61,11 @@ Today, I worked on:
 - an account api that grabs the events and sales associated with an account
 
 The team worked on a redux token issue and the front end for the sales cart
+
+## 5/30/23
+
+Today, I worked on:
+
+- The event searchbar correctly displays the events in the querry and upon click takes you to that event detail page
+
+The team worked on individual front end goals.
