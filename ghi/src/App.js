@@ -10,6 +10,7 @@ import Cart from "./sales/cart";
 import MyTickets from "./sales/MyTickets";
 import EditAccountFormContainer from "./accounts/editAccountForm";
 import MyProfile from "./accounts/myProfile";
+import EventsList from "./events/EventsList";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="" element={<EventManager />} />
             <Route path="form" element={<EventForm />} />
             <Route path="detail" element={<EventDetail />} />
+            <Route path="list" element={<EventsList />} />
           </Route>
           <Route path="/sales">
             <Route path="my-tickets" element={<MyTickets />} />
