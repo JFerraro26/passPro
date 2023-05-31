@@ -13,6 +13,7 @@ function Nav() {
   useEffect(() => {
     if (getTokenQuery.isSuccess) {
       setIsLoggedIn(true);
+      console.log(getTokenQuery);
     } else if (getTokenQuery.isError) {
       setIsLoggedIn(false);
       // Look more into this, catching 401 unauthorized error

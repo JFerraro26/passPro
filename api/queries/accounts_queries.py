@@ -69,7 +69,6 @@ class Accountsrepository:
                             account.email,
                             account.event_manager,
                             account_id,
-                            account_id,
                         ],
                     )
                     if db.rowcount > 0:
