@@ -58,7 +58,7 @@ function NavBarSearch() {
           openDropdown();
           handleQueryChange(e);
         }}
-        className="relative z-10 border w-80"
+        className="relative border w-80"
         id="search-bar"
         name="search-bar"
         placeholder="Enter Event, City, State, or Venue"
