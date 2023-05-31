@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { setEvent } from "./redux/slices/eventSlice";
-import Nav from "./nav/Nav";
 
 function MainPage() {
   const testRedux = useDispatch();
