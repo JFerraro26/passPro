@@ -46,7 +46,7 @@ router = APIRouter()
     "/api/accounts/{account_id}", response_model=Union[EditAccountOut, Error]
 )
 def update_account(
-    account_id: str,
+    account_id: UUID4,
     account: EditAccountIn,
     repo: Accountsrepository = Depends(),
 ) -> Union[EditAccountOut, Error]:

@@ -1,22 +1,25 @@
-import { useState } from "react";
-import { useLoginMutation } from "../redux/store/accountsApi";
+import { useState, useEffect } from "react";
+import { useGetTokenQuery, useLoginMutation } from "../redux/store/accountsApi";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 
 const LoginForm = () => {
     const navigate = useNavigate();
     const [login] = useLoginMutation();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { error } = await login({ username, password });
-            if (!error) {
+            const { data } = await login({ username, password });
+            if (data) {
                 navigate("/");
-            } else if (error) {
-                setError(error.message);
+            } else if (!data) {
+                console.error("Error logging In");
             }
         } catch (error) {
             console.error("Login error:", error);

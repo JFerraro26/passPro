@@ -1,22 +1,28 @@
-import React from "react";
-import { useGetTokenQuery } from "../redux/store/accountsApi";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import EditAccountForm from "./editAccountForm";
 import EventManager from "../events/EventManager";
+import MyTickets from "../sales/MyTickets";
+import { useSelector } from "react-redux";
 
 const MyProfile = () => {
-    const accountData = useGetTokenQuery();
+    // const {
+    //     data: accountData,
+    //     isLoading,
+    //     isError,
+    //     refetch,
+    // } = useGetTokenQuery(undefined, {
+    //     refetchOnMountOrArgChange: true,
+    // });
     const [settingsClicked, setSettingsClicked] = useState(false);
     const [ticketsClicked, setTicketsClicked] = useState(false);
     const [manageEventClicked, setManageEventClicked] = useState(false);
-    let profileImage = accountData.currentData?.account.avatar_img;
-    const isEventManager = accountData.currentData?.account.event_manager;
+    const accountData = useSelector(
+        (state) => state.rootReducer?.accountInfo.account || null
+    );
+    const profileImage = accountData?.avatar_img || null;
 
-    if (accountData.isLoading) {
-        return <div>Loading...</div>;
-    } else if (accountData.isError) {
-        return <div>You must be logged in to view this page</div>;
-    }
+    useEffect(() => {}, [accountData]);
 
     return (
         <div className="flex flex-wrap justify-start">
@@ -33,7 +39,7 @@ const MyProfile = () => {
                     style={{ marginTop: "10px" }}
                     className="text-3xl text-center"
                 >
-                    Hello {accountData.currentData.account.username}
+                    Hello {accountData?.username}
                 </h1>
             </div>
             <div className="w-6/12 sm:w-8/12 mx-auto mt-10 px-4">
@@ -73,7 +79,7 @@ const MyProfile = () => {
                     >
                         My Settings
                     </button>
-                    {isEventManager ? (
+                    {/* {isEventManager ? (
                         <button
                             href=""
                             className="m-2 p-2 bg-white rounded-lg w-full"
@@ -87,13 +93,13 @@ const MyProfile = () => {
                         >
                             Manage Event
                         </button>
-                    ) : null}
+                    ) : null} */}
                 </div>
             </div>
             <div className="w-6/12 sm:w-8/12 m-0-auto">
                 {settingsClicked ? <EditAccountForm /> : null}
                 {manageEventClicked ? <EventManager /> : null}
-                {ticketsClicked ? null : null}
+                {ticketsClicked ? <MyTickets /> : null}
             </div>
         </div>
     );

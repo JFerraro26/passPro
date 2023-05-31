@@ -1,9 +1,10 @@
-from pydantic import BaseModel, UUID4
+from pydantic import BaseModel, UUID4, AnyUrl
 from typing import List, Union
 from queries.pool import pool
 from datetime import date, time
 from decimal import Decimal
 from queries.events_queries import EventOut
+from uuid import UUID
 
 
 class Error(BaseModel):
@@ -27,14 +28,20 @@ class SalesOut(BaseModel):
 class SaleTiedToEventOut(BaseModel):
     event_id: UUID4
     event_name: str
+    event_image: AnyUrl
     event_type: str
-    event_date: date
-    event_start: time
-    event_end: time
-    event_ticket_price: str
-    event_venue: str
-    event_city: str
-    event_state: str
+    date: date
+    start_time: time
+    end_time: time
+    description: str
+    tickets_sold: int
+    tickets_max: int
+    tickets_price: Decimal
+    promoted: bool
+    venue: str
+    city: str
+    state_id: str
+    created_by: UUID4
     sale_id: UUID4
     sale_quantity: int
     sale_sold_to: UUID4
@@ -88,7 +95,7 @@ class SaleRepository:
             return {"Message": "Could not complete request"}
 
     def get_sale_from_account(
-        self, account_id: UUID4
+        self, account_id: UUID
     ) -> Union[List[SaleTiedToEventOut], Error]:
         try:
             with pool.connection() as conn:
@@ -98,14 +105,20 @@ class SaleRepository:
                         SELECT
                             events.id
                             , events.event_name
+                            , events.event_image
                             , events.event_type
                             , events.date
                             , events.start_time
                             , events.end_time
+                            , events.description
+                            , events.tickets_sold
+                            , events.tickets_max
                             , events.tickets_price
+                            , events.promoted
                             , events.venue
                             , events.city
                             , events.state_id
+                            , events.created_by
                             , sales.id as sale_id
                             , sales.quantity
                             , sales.sold_to
@@ -120,17 +133,23 @@ class SaleRepository:
                         sale = SaleTiedToEventOut(
                             event_id=record[0],
                             event_name=record[1],
-                            event_type=record[2],
-                            event_date=record[3],
-                            event_start=record[4],
-                            event_end=record[5],
-                            event_ticket_price=record[6],
-                            event_venue=record[7],
-                            event_city=record[8],
-                            event_state=record[9],
-                            sale_id=record[10],
-                            sale_quantity=record[11],
-                            sale_sold_to=record[12],
+                            event_image=record[2],
+                            event_type=record[3],
+                            date=record[4],
+                            start_time=record[5],
+                            end_time=record[6],
+                            description=record[7],
+                            tickets_sold=record[8],
+                            tickets_max=record[9],
+                            tickets_price=record[10],
+                            promoted=record[11],
+                            venue=record[12],
+                            city=record[13],
+                            state_id=record[14],
+                            created_by=record[15],
+                            sale_id=record[16],
+                            sale_quantity=record[17],
+                            sale_sold_to=record[18],
                         )
                         result.append(sale)
                     return result

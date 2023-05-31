@@ -2,7 +2,7 @@ import {
     useSignUpMutation,
     useLoginMutation,
 } from "../redux/store/accountsApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
@@ -28,12 +28,6 @@ const SignUpForm = () => {
                 email,
                 event_manager: eventManager,
             });
-            if (result.isSuccess) {
-                await login();
-                navigate("/");
-            } else if (result.isError) {
-                setError(result.error);
-            }
         } catch (error) {
             console.error("Login error:", error);
         }
@@ -45,6 +39,16 @@ const SignUpForm = () => {
         setEventManager(false);
         e.target.reset();
     };
+    useEffect(() => {
+        if (!result.isLoading) {
+            if (result.isSuccess) {
+                login({ username, password });
+                navigate("/");
+            } else if (result.isError) {
+                setError(result.error);
+            }
+        }
+    }, [result, login, navigate, username, password]);
 
     return (
         <div className="container mx-auto">

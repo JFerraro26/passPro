@@ -3,6 +3,8 @@ import {
     useGetTokenQuery,
     useUpdateMutation,
 } from "../redux/store/accountsApi";
+import { useDispatch } from "react-redux";
+import { setAccountInfo } from "../redux/slices/accountSlice";
 
 const EditAccountForm = () => {
     const { data: accountData, isLoading, error } = useGetTokenQuery();
@@ -13,6 +15,8 @@ const EditAccountForm = () => {
     const [avatarImg, setAvatarImg] = useState("");
     const [email, setEmail] = useState("");
     const [eventManager, setEventManager] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (accountData) {
@@ -32,6 +36,14 @@ const EditAccountForm = () => {
         };
 
         await edit({ accountId: accountIdFromData, updatedAccount });
+
+        // if (eventManager) {
+        //     dispatch(
+        //         setAccountInfo({
+        //             isEventManager: true,
+        //         })
+        //     );
+        // }
     };
 
     if (isLoading) {
@@ -59,6 +71,18 @@ const EditAccountForm = () => {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             placeholder="Username"
+                            className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+                        />
+                    </div>
+                    <div className="flex flex-col space-y-1">
+                        <label className="text-sm font-semibold text-gray-500">
+                            Password Confirmation:
+                        </label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
                             className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
                         />
                     </div>
