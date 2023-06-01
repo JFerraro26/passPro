@@ -6,14 +6,6 @@ import MyTickets from "../sales/MyTickets";
 import { useSelector } from "react-redux";
 
 const MyProfile = () => {
-    // const {
-    //     data: accountData,
-    //     isLoading,
-    //     isError,
-    //     refetch,
-    // } = useGetTokenQuery(undefined, {
-    //     refetchOnMountOrArgChange: true,
-    // });
     const [settingsClicked, setSettingsClicked] = useState(false);
     const [ticketsClicked, setTicketsClicked] = useState(false);
     const [manageEventClicked, setManageEventClicked] = useState(false);
@@ -21,6 +13,8 @@ const MyProfile = () => {
         (state) => state.rootReducer?.accountInfo.account || null
     );
     const profileImage = accountData?.avatar_img || null;
+    const isEventManager = accountData?.event_manager || null;
+
 
     useEffect(() => {}, [accountData]);
 
@@ -79,7 +73,7 @@ const MyProfile = () => {
                     >
                         My Settings
                     </button>
-                    {/* {isEventManager ? (
+                    {isEventManager ? (
                         <button
                             href=""
                             className="m-2 p-2 bg-white rounded-lg w-full"
@@ -93,7 +87,7 @@ const MyProfile = () => {
                         >
                             Manage Event
                         </button>
-                    ) : null} */}
+                    ) : null}
                 </div>
             </div>
             <div className="w-6/12 sm:w-8/12 m-0-auto">

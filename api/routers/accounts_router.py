@@ -48,7 +48,7 @@ router = APIRouter()
 def update_account(
     account_id: UUID4,
     account: EditAccountIn,
-    repo: Accountsrepository = Depends(),
+    repo: Accountsrepository = Depends(authenticator.get_current_account_data),
 ) -> Union[EditAccountOut, Error]:
     return repo.update_account_info(account_id, account)
 
@@ -57,7 +57,7 @@ def update_account(
 async def get_token(
     request: Request,
     account: Accountsrepository = Depends(
-        authenticator.get_current_account_data
+        authenticator.try_get_current_account_data
     ),
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
