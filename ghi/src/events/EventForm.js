@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useGetTokenQuery } from "../redux/store/accountsApi";
 import StateList from "../state_list/StateList";
+import { useSelector } from "react-redux";
 
 function EventForm() {
   const { state } = useLocation();
-  const { data: accountData, isLoading, error } = useGetTokenQuery();
   const [typeEvent, setTypeEvent] = useState("");
   const [nameEvent, setNameEvent] = useState("");
   const [imageEvent, setImageEvent] = useState("");
@@ -18,6 +17,7 @@ function EventForm() {
   const [venue, setVenue] = useState("");
   const [city, setCity] = useState("");
   const [stateId, setStateId] = useState("");
+  const account = useSelector((state) => state.rootReducer.accountInfo.account);
 
   useEffect(() => {
     if (state == null) {
@@ -49,12 +49,6 @@ function EventForm() {
     }
   }, [state]);
 
-  if (isLoading) {
-    return <p>Loading....</p>;
-  } else {
-    var accountId = accountData.account.id;
-  }
-
   const EventSubmitCreate = async (event) => {
     event.preventDefault();
     const formData = {};
@@ -72,7 +66,7 @@ function EventForm() {
     formData.venue = venue;
     formData.city = city;
     formData.state_id = stateId;
-    formData.created_by = accountId;
+    formData.created_by = account.id;
     if (state === null) {
       var eventUrl = `${process.env.REACT_APP_API_HOST}/api/events`;
       var eventFetchConfig = {
@@ -269,10 +263,7 @@ function EventForm() {
               placeholder="Venue..."
             />
           </div>
-          <button
-            disabled={isLoading}
-            className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full"
-          >
+          <button className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full">
             Submit
           </button>
         </form>

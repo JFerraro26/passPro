@@ -221,4 +221,24 @@ Front-End
 
 ## Additional Thoughts/Idea
 
--
+---
+
+# 5/30/23
+
+## Topics
+
+Redux
+ES6
+Auth
+
+
+## What was worked on?
+
+- Today I worked on the front end portion of the my profile. We were also able to to fix the issues with the react redux not holding onto the account info or updating with the account info correctly. I was able to nest a component inside with an onclick and using ternary operator
+
+## To-Do
+
+- Finish my profile page and nest all neccessary information inside of the page.
+
+## Additional Thoughts/Idea
+---

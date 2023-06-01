@@ -1,22 +1,25 @@
 import { NavLink } from "react-router-dom";
 import EventDropdown from "./EventDropdown";
 import { useGetTokenQuery } from "../redux/store/accountsApi";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import NavBarSearch from "./NavBarSearch";
 import ProfileDropdown from "./ProfileDropdown";
+import { setAccountInfo } from "../redux/slices/accountSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Nav() {
   const getTokenQuery = useGetTokenQuery();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (getTokenQuery.isSuccess) {
       setIsLoggedIn(true);
+      // dispatch(setAccountInfo(getTokenQuery.currentData.account));
     } else if (getTokenQuery.isError) {
       setIsLoggedIn(false);
       // Look more into this, catching 401 unauthorized error
-      console.clear();
+      // console.clear();
       // console.log("You are not logged in");
     }
   }, [getTokenQuery]);

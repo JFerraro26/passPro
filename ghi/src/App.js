@@ -20,7 +20,6 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/accounts">
-            <Route path="" element={<EditAccountFormContainer />} />
             <Route path="login" element={<LoginForm />} />
             <Route path="signup" element={<SignUpForm />} />
             <Route path="profile" element={<MyProfile />} />
