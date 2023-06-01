@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
-import {
-  useGetTokenQuery,
-  useUpdateMutation,
-} from "../redux/store/accountsApi";
+import { useUpdateMutation } from "../redux/store/accountsApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setAccountInfo } from "../redux/slices/accountSlice";
 
 const EditAccountForm = () => {
-  const { data: accountData, isLoading, error } = useGetTokenQuery();
+  const account = useSelector((state) => state.rootReducer.accountInfo.account);
   const [edit] = useUpdateMutation();
+  console.log(account);
 
-  const accountIdFromData = accountData?.account?.id;
   const [username, setUsername] = useState("");
   const [avatarImg, setAvatarImg] = useState("");
   const [email, setEmail] = useState("");
   const [eventManager, setEventManager] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (accountData) {
-      setUsername(accountData.account.username);
-      setAvatarImg(accountData.account.avatar_img);
-      setEmail(accountData.account.email);
-      setEventManager(accountData.account.event_manager);
+    if (account) {
+      setUsername(account.username);
+      setAvatarImg(account.avatar_img);
+      setEmail(account.email);
+      setEventManager(account.event_manager);
     }
-  }, [accountData]);
+  }, [account]);
 
   const handleUpdateAccount = async () => {
     const updatedAccount = {
@@ -31,16 +32,21 @@ const EditAccountForm = () => {
       event_manager: eventManager,
     };
 
-    await edit({ accountId: accountIdFromData, updatedAccount });
+    const response = await edit({ accountId: account.id, updatedAccount });
+    if (response) {
+      dispatch(setAccountInfo(updatedAccount));
+    } else {
+      console.error(response);
+    }
+
+    // if (eventManager) {
+    //     dispatch(
+    //         setAccountInfo({
+    //             isEventManager: true,
+    //         })
+    //     );
+    // }
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error occurred while fetching account data</div>;
-  }
 
   return (
     <div className="container mx-auto">
@@ -56,6 +62,18 @@ const EditAccountForm = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
+              className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+            />
+          </div>
+          <div className="flex flex-col space-y-1">
+            <label className="text-sm font-semibold text-gray-500">
+              Password Confirmation:
+            </label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
               className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
             />
           </div>

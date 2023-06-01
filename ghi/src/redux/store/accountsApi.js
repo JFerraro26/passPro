@@ -40,6 +40,12 @@ export const accountsApi = createApi({
       invalidatesTags: (result) => {
         return (result && ["Token"]) || [];
       },
+      // transformResponse: (response) => {
+      //     console.log(response);
+      //     const data = JSON.parse(response);
+      //     const { username, email, avatar_img, event_manager } = data;
+      //     return { username, email, avatar_img, event_manager };
+      // },
     }),
     getToken: builder.query({
       query: () => ({
@@ -78,7 +84,6 @@ export const accountsApi = createApi({
     update: builder.mutation({
       query: ({ accountId, updatedAccount }) => {
         const { username, avatar_img, email, event_manager } = updatedAccount;
-        console.log(accountId);
         const body = JSON.stringify({
           username,
           avatar_img,
@@ -94,6 +99,9 @@ export const accountsApi = createApi({
             "Content-Type": "application/json",
           },
         };
+      },
+      invalidatesTags: (result) => {
+        return (result && ["Token"]) || [];
       },
     }),
     logout: builder.mutation({

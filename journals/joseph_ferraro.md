@@ -69,3 +69,11 @@ Today, I worked on:
 - The event searchbar correctly displays the events in the querry and upon click takes you to that event detail page
 
 The team worked on individual front end goals.
+
+## 5/31/23
+
+Today, I worked on:
+
+- Event Manager Agreement
+
+The team worked on redux and individual goals.

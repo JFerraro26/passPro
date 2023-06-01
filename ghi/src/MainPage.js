@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { setEvent } from "./redux/slices/eventSlice";
 
 function MainPage() {
   return (

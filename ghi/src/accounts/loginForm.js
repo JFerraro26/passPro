@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGetTokenQuery, useLoginMutation } from "../redux/store/accountsApi";
-// import { useNavigate } from "react-router-dom";
-import { store } from "../redux/store/store";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setAccountInfo } from "../redux/slices/accountSlice";
 
 const LoginForm = () => {
-  // const navigate = useNavigate();
-  const [login, result] = useLoginMutation();
+  const navigate = useNavigate();
+  const [login] = useLoginMutation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [accountUsername, setAccountUsername] = useState(null);
+  const dispatchAccount = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login({ username, password });
-      if (result.isSuccess) {
-        // navigate("/"); this will redirect to whatever url we put after logging in
-      } else if (result.isError) {
-        setError(result.error);
+      const { data } = await login({ username, password });
+      if (data) {
+        setAccountUsername(username);
+      } else if (!data) {
+        console.error("Error logging In");
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -27,6 +29,25 @@ const LoginForm = () => {
     setPassword("");
     e.target.reset();
   };
+
+  useEffect(() => {
+    async function fetchAccountData() {
+      if (accountUsername === null) {
+        return;
+      }
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/account/${accountUsername}`
+      );
+      if (response.ok) {
+        const accountData = await response.json();
+        dispatchAccount(setAccountInfo(accountData));
+        navigate("/");
+      } else {
+        console.error(response);
+      }
+    }
+    fetchAccountData();
+  }, [accountUsername]);
 
   return (
     <div className="container mx-auto">

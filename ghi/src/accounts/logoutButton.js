@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLogoutMutation } from "../redux/store/accountsApi";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const LogoutButton = () => {
   const [logout] = useLogoutMutation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
-      await logout();
+      dispatch(logout());
       navigate("/accounts/login");
     } catch (error) {
       console.log("error", error);
