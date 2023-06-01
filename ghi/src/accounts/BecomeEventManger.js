@@ -1,25 +1,33 @@
 import { useState } from "react";
 import { useUpdateMutation } from "../redux/store/accountsApi";
-import { useGetTokenQuery } from "../redux/store/accountsApi";
-import { Dispatch } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setAccountInfo } from "../redux/slices/accountSlice";
 
 function BecomeEventManager() {
   const [open, setOpen] = useState(false);
   const [edit] = useUpdateMutation();
-  const { data: accountData } = useGetTokenQuery();
-  console.log(accountData);
+  const account = useSelector((state) => state.rootReducer.accountInfo.account);
+  const dispatchAccount = useDispatch();
 
-  const handleAccept = async () => {
-    const updatedAccount = {
-      username: accountData.account.username,
-      avatar_img: accountData.account.avatar_img,
-      email: accountData.account.email,
-      event_manager: true,
-    };
-    await edit({
-      accountId: accountData.account.id,
-      updatedAccount,
-    });
+  const updatedAccount = {
+    id: account.id,
+    username: account.username,
+    avatar_img: account.avatar_img,
+    email: account.email,
+    event_manager: false,
+  };
+
+  const handleAccept = async (e) => {
+    try {
+      await edit({
+        accountId: account.id,
+        updatedAccount,
+      });
+      dispatchAccount(setAccountInfo(updatedAccount));
+    } catch (error) {
+      console.error("failed to update account");
+    }
   };
 
   return (
@@ -40,7 +48,7 @@ function BecomeEventManager() {
                 </h1>
                 <p className="mt-4">
                   Agreement Regarding Allocation of Sales Proceeds. This
-                  Agreement is made between [Your Name] and PassPro Inc,
+                  Agreement is made between {account.username} and PassPro Inc,
                   collectively referred to as the "Parties," for the purpose of
                   defining the allocation of sales proceeds generated through
                   events managed by the Event Manager.

@@ -4,6 +4,7 @@ from queries.pool import pool
 from datetime import date, time
 from decimal import Decimal
 from queries.events_queries import EventOut
+from uuid import UUID
 
 
 class Error(BaseModel):
@@ -94,7 +95,7 @@ class SaleRepository:
             return {"Message": "Could not complete request"}
 
     def get_sale_from_account(
-        self, account_id: UUID4
+        self, account_id: UUID
     ) -> Union[List[SaleTiedToEventOut], Error]:
         try:
             with pool.connection() as conn:

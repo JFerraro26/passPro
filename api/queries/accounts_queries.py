@@ -49,7 +49,7 @@ class AccountOutWithPassword(AccountOut):
 
 class Accountsrepository:
     def update_account_info(
-        self, account_id: str, account: EditAccountIn
+        self, account_id: UUID, account: EditAccountIn
     ) -> Union[AccountOut, Error]:
         try:
             with pool.connection() as conn:
