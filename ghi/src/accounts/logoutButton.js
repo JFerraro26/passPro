@@ -11,7 +11,7 @@ const LogoutButton = () => {
   const handleLogout = () => {
     try {
       dispatch(logout());
-      navigate("/accounts/login");
+      navigate("/");
     } catch (error) {
       console.log("error", error);
     }

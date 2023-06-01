@@ -38,14 +38,6 @@ const EditAccountForm = () => {
     } else {
       console.error(response);
     }
-
-    // if (eventManager) {
-    //     dispatch(
-    //         setAccountInfo({
-    //             isEventManager: true,
-    //         })
-    //     );
-    // }
   };
 
   return (
