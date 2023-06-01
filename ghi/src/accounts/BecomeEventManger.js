@@ -15,7 +15,7 @@ function BecomeEventManager() {
     username: account.username,
     avatar_img: account.avatar_img,
     email: account.email,
-    event_manager: false,
+    event_manager: true,
   };
 
   const handleAccept = async (e) => {
@@ -41,7 +41,7 @@ function BecomeEventManager() {
       {open ? (
         <div className="fixed top-0 left-0 h-full w-full">
           <div className="m-16 grid grid-cols-5 grid-rows-5">
-            <div className="bg-orange-100 flex flex-col col-start-2 col-span-3 row-start-2 row-span-3 border-4 border-blue-500 rounded-2xl">
+            <div className="bg-orange-100 flex flex-col col-start-2 col-span-3 row-start-1 row-span-3 border-4 border-blue-500 rounded-2xl mt-16">
               <div className="m-8">
                 <h1 className="text-center text-2xl font-semibold">
                   Event Manager Agreement

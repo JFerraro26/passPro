@@ -110,3 +110,16 @@ def get_event_and_sale_from_account(
     else:
         response.status_code = 400
         return {"Message": "Something went wrong"}
+
+
+@router.get("/api/account/{username}", response_model=Union[AccountOut, Error])
+def get_account_for_login(
+    username: str,
+    response: Response,
+    repo: Accountsrepository = Depends(),
+) -> AccountOut:
+    account = repo.get_account_for_login(username)
+    if account is None:
+        response.status_code = 404
+        return {"message": "account does not exist"}
+    return account
