@@ -48,7 +48,9 @@ router = APIRouter()
 def update_account(
     account_id: UUID4,
     account: EditAccountIn,
-    repo: Accountsrepository = Depends(),
+    repo: Accountsrepository = Depends(
+        authenticator.try_get_current_account_data
+    ),
 ) -> Union[EditAccountOut, Error]:
     return repo.update_account_info(account_id, account)
 
