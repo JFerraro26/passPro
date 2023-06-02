@@ -165,8 +165,6 @@ FastAPI
 Front-End
 Tailwind
 
-
-
 ## What was worked on?
 
 - Today I worked on finishing up the front end auth and learning more about how redux actually works. We learned on how to access the state that is stored in the store. I was able to figure out how to also attach the headers automatically thanks to some guidance from learn.
@@ -175,7 +173,111 @@ Tailwind
 
 - Get started on the profile page front end and start having all the components ready for it.
 
-
 ## Additional Thoughts/Idea
 
 - I definitely need to read more on accessing states inside of stores for redux.
+
+---
+
+# 5/25/23
+
+## Topics
+
+Redux
+Redux Tool Kit
+Auth
+FastAPI
+Front-End
+
+## What was worked on?
+
+- Today I worked on finalizing the edit portion of the account in the back end and got started with the front end today. Unfortunately for the front end, I started to get some errors because the state was not loaded yet but the page tries to load first. I finally figured out how to wrap the whole thing into an async method with await as well. I am still trying to figure out how I can pass through the ID to redux to populate the api call for a put request.
+
+## To-Do
+
+- I still need to finish the edit portion of the front end
+- Get started on the profile page hopefully.
+
+## Additional Thoughts/Idea
+
+---
+
+# 5/26/23
+
+## Topics
+
+Redux
+Auth
+FastAPI
+Front-End
+
+## What was worked on?
+
+- Today I worked on one single bug, I can't seem to fix the issue where it holds the previous token even though I've tried to sign in and log out. I added a logout feature onto the front end too to be able to log out of the account
+
+## To-Do
+
+- Figure out whats going on with the state management and see why its showing the old information in there
+
+## Additional Thoughts/Idea
+
+---
+
+# 5/30/23
+
+## Topics
+
+Redux
+ES6
+Auth
+
+
+## What was worked on?
+
+- Today I worked on the front end portion of the my profile. We were also able to to fix the issues with the react redux not holding onto the account info or updating with the account info correctly. I was able to nest a component inside with an onclick and using ternary operator
+
+## To-Do
+
+- Finish my profile page and nest all neccessary information inside of the page.
+
+## Additional Thoughts/Idea
+---
+
+# 5/31/2023
+
+## Topic
+
+Redux
+Auth
+
+## What was worked ?
+
+- Today I was trying to handle the edit account information to where it would reflect the changes of the edit but unfortunately we couldn't get it to change the information. We ended up making a new slice and trying to store the account information through there. We are still having issues with it and couldn't figure out why it wasn't updating properly.
+
+## To-Do
+
+- Figure out why the update portion isn't working for the accounts information.
+
+## Additional Thoughts/Idea
+
+---
+# 6/1/2023
+
+## Topic
+
+Redux
+State management
+
+## What was worked ?
+
+- Today we worked on fixing merge conflicts. We were also able to fix the edit account issue where it would not update the state. Joe was able to think of a great idea to create another get request in the backend. I ended up adding a few things into the backend to require a logged in account
+
+## To-Do
+
+- Get started with deployment tonight
+
+## Additional Thoughts/Idea
+- Need to start drafting up Read me.
+
+---
+

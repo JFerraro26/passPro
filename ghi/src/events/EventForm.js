@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useGetTokenQuery } from "../store/accountsApi";
+import StateList from "../state_list/StateList";
+import { useSelector } from "react-redux";
 
 function EventForm() {
   const { state } = useLocation();
@@ -15,9 +16,8 @@ function EventForm() {
   const [ticketsPrice, setTicketsPrice] = useState("");
   const [venue, setVenue] = useState("");
   const [city, setCity] = useState("");
-  const [states, setStates] = useState([]);
   const [stateId, setStateId] = useState("");
-  const { data, isLoading } = useGetTokenQuery();
+  const account = useSelector((state) => state.rootReducer.accountInfo.account);
 
   useEffect(() => {
     if (state == null) {
@@ -49,29 +49,8 @@ function EventForm() {
     }
   }, [state]);
 
-  useEffect(() => {
-    async function fetchStateData() {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_HOST}/api/states`
-      );
-      if (response.ok) {
-        const stateData = await response.json();
-        setStates(stateData);
-      } else {
-        console.error(response);
-      }
-    }
-    fetchStateData();
-  }, []);
-
-  if (isLoading) {
-    return <p>loading</p>;
-  }
-
   const EventSubmitCreate = async (event) => {
     event.preventDefault();
-    const accountId = data.account.id;
-    console.log(accountId);
     const formData = {};
     formData.event_type = typeEvent;
     formData.event_name = nameEvent;
@@ -87,9 +66,9 @@ function EventForm() {
     formData.venue = venue;
     formData.city = city;
     formData.state_id = stateId;
-    formData.created_by = accountId;
+    formData.created_by = account.id;
     if (state === null) {
-      var eventUrl = "http://localhost:8000/api/events";
+      var eventUrl = `${process.env.REACT_APP_API_HOST}/api/events`;
       var eventFetchConfig = {
         method: "post",
         body: JSON.stringify(formData),
@@ -99,10 +78,10 @@ function EventForm() {
       };
     } else {
       const eventId = state.event.id;
-      var eventUrl = `http://localhost:8000/api/events/${eventId}`;
+      var eventUrl = `${process.env.REACT_APP_API_HOST}/api/events/${eventId}`;
       var eventFetchConfig = {
         method: "put",
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
         headers: {
           "Content-Type": "application/json",
         },
@@ -110,7 +89,18 @@ function EventForm() {
     }
     const response = await fetch(eventUrl, eventFetchConfig);
     if (response.ok) {
-      console.log("created");
+      setTypeEvent("");
+      setNameEvent("");
+      setImageEvent("");
+      setDate("");
+      setStartTime("");
+      setEndTime("");
+      setDescription("");
+      setTicketsMax("");
+      setTicketsPrice("");
+      setVenue("");
+      setCity("");
+      setStateId("");
     } else {
       console.error(response);
     }
@@ -132,6 +122,7 @@ function EventForm() {
               className="border"
               name="event-type"
               id="event-type"
+              required
             >
               <option value="">Please Choose an event type</option>
               <option value="sport">Sport</option>
@@ -158,6 +149,7 @@ function EventForm() {
               value={imageEvent}
               onChange={(e) => setImageEvent(e.target.value)}
               className="border"
+              required
               type="text"
               id="event-url"
               name="event-url"
@@ -170,6 +162,7 @@ function EventForm() {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className="border"
+              required
               type="date"
               id="date"
               name="date"
@@ -181,6 +174,7 @@ function EventForm() {
               value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
               className="border"
+              required
               type="time"
               id="start_time"
               name="start_time"
@@ -192,6 +186,7 @@ function EventForm() {
               value={endTime}
               onChange={(e) => setEndTime(e.target.value)}
               className="border"
+              required
               type="time"
               id="end_time"
               name="end_time"
@@ -203,6 +198,7 @@ function EventForm() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className="border min-h-10"
+              required
               type="text"
               name="event-description"
               placeholder="Description..."
@@ -217,6 +213,7 @@ function EventForm() {
               value={ticketsMax}
               onChange={(e) => setTicketsMax(e.target.value)}
               className="border"
+              required
               type="number"
               id="tickets-max"
               name="tickets-max"
@@ -230,6 +227,7 @@ function EventForm() {
               value={ticketsPrice}
               onChange={(e) => setTicketsPrice(e.target.value)}
               className="border"
+              required
               type="number"
               id="tickets-price"
               name="tickets-price"
@@ -238,24 +236,14 @@ function EventForm() {
               min="0"
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="venue">Venue</label>
-            <input
-              value={venue}
-              onChange={(e) => setVenue(e.target.value)}
-              className="border"
-              type="text"
-              id="venue"
-              name="venue"
-              placeholder="Venue..."
-            />
-          </div>
+          <StateList stateId={stateId} setStateId={setStateId} />
           <div className="flex flex-col">
             <label htmlFor="city">City</label>
             <input
               value={city}
               onChange={(e) => setCity(e.target.value)}
               className="border"
+              required
               type="text"
               id="city"
               name="city"
@@ -263,23 +251,17 @@ function EventForm() {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="state">State</label>
-            <select
-              value={stateId}
-              onChange={(e) => setStateId(e.target.value)}
+            <label htmlFor="venue">Venue</label>
+            <input
+              value={venue}
+              onChange={(e) => setVenue(e.target.value)}
               className="border"
-              name="state"
-              id="state"
-            >
-              <option value="">Please Choose an State ...</option>
-              {states?.map((state) => {
-                return (
-                  <option value={state.id} key={state.id}>
-                    {state.state_name}
-                  </option>
-                );
-              })}
-            </select>
+              required
+              type="text"
+              id="venue"
+              name="venue"
+              placeholder="Venue..."
+            />
           </div>
           <button className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full">
             Submit
