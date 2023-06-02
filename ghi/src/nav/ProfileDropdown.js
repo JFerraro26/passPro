@@ -33,7 +33,7 @@ function ProfileDropdown() {
           >
             My Profile
           </NavLink>
-          <LogoutButton />
+          <LogoutButton onClick={handleOpen} />
         </div>
       ) : null}
     </div>

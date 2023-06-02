@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLogoutMutation } from "../redux/store/accountsApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setAccountInfo } from "../redux/slices/accountSlice";
 
 const LogoutButton = () => {
   const [logout] = useLogoutMutation();
@@ -10,10 +11,10 @@ const LogoutButton = () => {
 
   const handleLogout = () => {
     try {
+      dispatch(setAccountInfo(null));
       dispatch(logout());
-      navigate("/");
     } catch (error) {
-      console.log("error", error);
+      navigate("/accounts/login");
     }
   };
 

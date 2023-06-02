@@ -8,21 +8,16 @@ import { setAccountInfo } from "../redux/slices/accountSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Nav() {
-  const getTokenQuery = useGetTokenQuery();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const dispatch = useDispatch();
+  const accountData = useSelector((store) => store.rootReducer.accountInfo);
 
   useEffect(() => {
-    if (getTokenQuery.isSuccess) {
-      setIsLoggedIn(true);
-      // dispatch(setAccountInfo(getTokenQuery.currentData.account));
-    } else if (getTokenQuery.isError) {
+    if (accountData.account === null) {
       setIsLoggedIn(false);
-      // Look more into this, catching 401 unauthorized error
-      // console.clear();
-      // console.log("You are not logged in");
+    } else {
+      setIsLoggedIn(true);
     }
-  }, [getTokenQuery]);
+  }, [accountData]);
 
   return (
     <nav>
