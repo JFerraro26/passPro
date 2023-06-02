@@ -10,6 +10,7 @@ function MyTickets() {
     const accountInfo = useGetTokenQuery();
     const accountId = accountInfo.currentData.account.id;
 
+
     useEffect(() => {
         const fetchAccountData = async () => {
             const url = `http://localhost:8000/api/accounts/${accountId}`;
@@ -19,7 +20,7 @@ function MyTickets() {
             if (response.ok) {
                 const data = await response.json();
                 setAccount(data.sales);
-                console.log("data", data.sales);
+                console.log("data", data);
             }
         };
         // fetchSaleData();

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLogoutMutation } from "../redux/store/accountsApi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";

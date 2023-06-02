@@ -21,3 +21,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/")
+def test_root():
+    return {"Hello There, If you see this message that means it's working"}

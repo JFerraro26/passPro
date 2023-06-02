@@ -1,11 +1,9 @@
 import { NavLink } from "react-router-dom";
 import EventDropdown from "./EventDropdown";
-import { useGetTokenQuery } from "../redux/store/accountsApi";
 import { useState, useEffect } from "react";
 import NavBarSearch from "./NavBarSearch";
+import { useSelector } from "react-redux";
 import ProfileDropdown from "./ProfileDropdown";
-import { setAccountInfo } from "../redux/slices/accountSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 function Nav() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,7 +17,10 @@ function Nav() {
       setIsLoggedIn(false);
     } else {
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(true);
     }
+  }, [accountData]);
   }, [accountData]);
 
   return (
