@@ -35,7 +35,7 @@ steps = [
         """,
     ],
     [
-        ##Create events table
+        # Create events table
         """
         CREATE TABLE events (
             id UUID DEFAULT uuid_generate_v4() PRIMARY KEY UNIQUE,
@@ -57,7 +57,7 @@ steps = [
 
         );
         """,
-        ##Drop the events table
+        # Drop the events table
         """
         DROP TABLE events;
         """,
