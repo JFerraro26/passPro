@@ -145,10 +145,6 @@ class Accountsrepository:
                     hashed_password=info.password,
                 )
 
-    def account_in_to_out(self, id: str, account: AccountIn):
-        old_data = account.dict()
-        return AccountOut(id=id, **old_data)
-
     def delete(self, account_id: UUID) -> bool:
         try:
             with pool.connection() as conn:

@@ -242,3 +242,42 @@ Auth
 
 ## Additional Thoughts/Idea
 ---
+
+# 5/31/2023
+
+## Topic
+
+Redux
+Auth
+
+## What was worked ?
+
+- Today I was trying to handle the edit account information to where it would reflect the changes of the edit but unfortunately we couldn't get it to change the information. We ended up making a new slice and trying to store the account information through there. We are still having issues with it and couldn't figure out why it wasn't updating properly.
+
+## To-Do
+
+- Figure out why the update portion isn't working for the accounts information.
+
+## Additional Thoughts/Idea
+
+---
+# 6/1/2023
+
+## Topic
+
+Redux
+State management
+
+## What was worked ?
+
+- Today we worked on fixing merge conflicts. We were also able to fix the edit account issue where it would not update the state. Joe was able to think of a great idea to create another get request in the backend. I ended up adding a few things into the backend to require a logged in account
+
+## To-Do
+
+- Get started with deployment tonight
+
+## Additional Thoughts/Idea
+- Need to start drafting up Read me.
+
+---
+
