@@ -9,10 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Nav() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const accountData = useSelector((store) => store.rootReducer.accountInfo);
+  const accountData = useSelector(
+    (store) => store.rootReducer.accountInfo.account
+  );
+  console.log(accountData);
 
   useEffect(() => {
-    if (accountData.account === null) {
+    if (accountData === null) {
       setIsLoggedIn(false);
     } else {
       setIsLoggedIn(true);

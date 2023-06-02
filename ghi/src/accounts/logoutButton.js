@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setAccountInfo } from "../redux/slices/accountSlice";
 
-const LogoutButton = () => {
+const LogoutButton = ({ handleOpen }) => {
   const [logout] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,7 +21,10 @@ const LogoutButton = () => {
   return (
     <button
       className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white hover:rounded-lg"
-      onClick={handleLogout}
+      onClick={() => {
+        handleLogout();
+        handleOpen();
+      }}
     >
       Logout
     </button>
