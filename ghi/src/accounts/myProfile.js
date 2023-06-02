@@ -4,6 +4,7 @@ import EditAccountForm from "./editAccountForm";
 import EventManager from "../events/EventManager";
 import MyTickets from "../sales/MyTickets";
 import { useSelector } from "react-redux";
+import BecomeEventManager from "./BecomeEventManger";
 
 const MyProfile = () => {
   const [settingsClicked, setSettingsClicked] = useState(false);
@@ -81,7 +82,9 @@ const MyProfile = () => {
             >
               Manage Event
             </button>
-          ) : null}
+          ) : (
+            <BecomeEventManager />
+          )}
         </div>
       </div>
       <div className="w-6/12 sm:w-8/12 m-0-auto">

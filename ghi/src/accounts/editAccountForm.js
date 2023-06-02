@@ -24,9 +24,10 @@ const EditAccountForm = () => {
   const handleUpdateAccount = async (e) => {
     e.preventDefault();
     const updatedAccount = {
-      username,
+      id: account.id,
+      username: username,
       avatar_img: avatarImg,
-      email,
+      email: email,
       event_manager: eventManager,
     };
 
