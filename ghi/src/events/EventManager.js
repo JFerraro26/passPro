@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setEvent } from "../redux/slices/eventSlice";
 
 function EventManager() {
   const [events, setEvents] = useState([]);
+  const dispatchEvent = useDispatch();
 
   useEffect(() => {
     async function fetchEventData() {
-      const response = await fetch("http://localhost:8000/api/events");
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/events`
+      );
       if (response.ok) {
         const data = await response.json();
         setEvents(data);
@@ -23,7 +28,7 @@ function EventManager() {
     );
     if (confirm) {
       const eventID = event.id;
-      const custUrl = `http://localhost:8000/api/events/${eventID}`;
+      const custUrl = `${process.env.REACT_APP_API_HOST}/api/events/${eventID}`;
       const fetchConfig = { method: "delete" };
       const response = await fetch(custUrl, fetchConfig);
       if (response.ok) {
@@ -72,7 +77,7 @@ function EventManager() {
                 <td className="whitespace-nowrap px-6 py-4">
                   <Link
                     className="hover:text-blue-400"
-                    state={{ event: event }}
+                    onClick={() => dispatchEvent(setEvent(event))}
                     to="/events/detail"
                   >
                     {event.event_name}
