@@ -24,5 +24,5 @@ app.add_middleware(
 
 
 @app.get("/")
-def test_root():
-    return {"Hello There, If you see this message that means it's working"}
+def root():
+    return {"message": "If you see this, Root is working"}
