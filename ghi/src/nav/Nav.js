@@ -17,10 +17,7 @@ function Nav() {
       setIsLoggedIn(false);
     } else {
       setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(true);
     }
-  }, [accountData]);
   }, [accountData]);
 
   return (

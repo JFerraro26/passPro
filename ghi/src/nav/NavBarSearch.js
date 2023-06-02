@@ -78,7 +78,7 @@ function NavBarSearch() {
             {filteredEvents?.map((event) => {
               return (
                 <Link
-                  className="border w-80 hover:bg-blue-400 bg-white"
+                  className="z-10 border w-80 hover:bg-blue-400 bg-white"
                   to="/events/detail"
                   key={event.id}
                   onClick={() => {
