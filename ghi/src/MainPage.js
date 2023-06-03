@@ -3,12 +3,17 @@ import { setEvent } from "./redux/slices/eventSlice";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import { MdSportsBasketball } from "react-icons/md";
+import { FaTheaterMasks, FaMusic } from "react-icons/fa";
 
 function MainPage() {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [leftIndex, setLeftIndex] = useState(0);
   const [rightIndex, setRightIndex] = useState(2);
   const [events, setEvents] = useState([]);
+  const eventDispatch = useDispatch();
 
   useEffect(() => {
     async function getEventData() {
@@ -65,7 +70,10 @@ function MainPage() {
     }
   };
 
-  const goToEvent()
+  const goToEvent = () => {
+    eventDispatch(setEvent(events[currentIndex]));
+    navigate("/events/detail");
+  };
 
   return (
     <>
@@ -98,10 +106,11 @@ function MainPage() {
           </div>
           <div className="flex flex-col justify-center content-center col-start-2 col-span-3 mt-2.5">
             <h1 className="text-7xl font-bold text-center">PassPro</h1>
-            <div onClick={} className="grid grid-cols-4 grid-rows-5 m-2">
+            <div className="grid grid-cols-4 grid-rows-5 m-2">
               <div className="relative shadow-xl shadow-blue-500 border-4 border-blue-500 rounded-3xl overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5">
                 <img
-                  className="absolute top-0 left-0 object-cover opacity-50 w-full h-full"
+                  onClick={goToEvent}
+                  className="absolute top-0 left-0 object-cover opacity-50 w-full h-full cursor-pointer"
                   src={events[currentIndex]?.event_image}
                 />
               </div>
@@ -164,8 +173,16 @@ function MainPage() {
               </div>
             </div>
           </div>
-          <div className="flex border col-start-1 col-span-5 mt-12">
-            <p>stuff here</p>
+          <div className="flex justify-evenly border col-start-1 col-span-5 mt-12">
+            <button>
+              <MdSportsBasketball />
+            </button>
+            <button>
+              <FaTheaterMasks />
+            </button>
+            <button>
+              <FaMusic />
+            </button>
           </div>
         </div>
       ) : (
