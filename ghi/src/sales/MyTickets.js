@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setEvent } from "../redux/slices/eventSlice";
 import { useGetTokenQuery } from "../redux/store/accountsApi";
+import { setEvent } from "../redux/slices/eventSlice";
+
 
 function MyTickets() {
     const [account, setAccount] = useState([]);
     const dispatchEvent = useDispatch();
     const accountInfo = useGetTokenQuery();
-    const accountId = accountInfo.currentData.account.id;
+    // const accountId = accountInfo.currentData.account.id;
 
 
     useEffect(() => {
         const fetchAccountData = async () => {
-            const url = `http://localhost:8000/api/accounts/${accountId}`;
-
+            const url = `http://localhost:8000/api/accounts/5a148dd8-fe0d-4efd-86b1-af3917a2bdbf`;
+// ${accountId}
             const response = await fetch(url);
 
             if (response.ok) {
@@ -25,7 +26,8 @@ function MyTickets() {
         };
         // fetchSaleData();
         fetchAccountData();
-    }, [accountId]);
+    }, []);
+    // [accountId]
 
     return (
         <>
@@ -49,7 +51,7 @@ function MyTickets() {
                     </tr>
                 </thead>
                 <tbody>
-                    {account.map((sale) => {
+                    {account?.map((sale) => {
                         return (
                             <tr
                                 key={sale.sale_id}

@@ -281,3 +281,20 @@ State management
 
 ---
 
+# 6/2/2023
+
+## Topic
+
+Deployment
+
+## What was worked ?
+
+- Today I mainly focused on getting our backend deployed but was running into some issues with fixing the pipelines inside of gitlab. Our whole team was able to successfully verify our accounts in gitlab. Last night I was able to finish the API endpoint readme portion.
+
+## To-Do
+
+- Figure out blocker for backend deployment and get started deploying frontend
+
+## Additional Thoughts/Idea
+
+---
