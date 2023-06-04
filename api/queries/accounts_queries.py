@@ -4,6 +4,10 @@ from queries.pool import pool
 from uuid import UUID
 
 
+class DuplicateAccountError(BaseModel):
+    message: str
+
+
 class Error(BaseModel):
     message: str
 
