@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLoginMutation } from "../redux/store/accountsApi";
+import { useLoginMutation } from "../redux/apis/accountsApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAccountInfo } from "../redux/slices/accountSlice";

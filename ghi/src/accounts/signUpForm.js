@@ -1,7 +1,4 @@
-import {
-    useSignUpMutation,
-    useLoginMutation,
-} from "../redux/store/accountsApi";
+import { useSignUpMutation, useLoginMutation } from "../redux/apis/accountsApi";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

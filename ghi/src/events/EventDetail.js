@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useGetTokenQuery } from "../redux/store/accountsApi";
+import { useGetTokenQuery } from "../redux/apis/accountsApi";
 
 function EventDetail() {
     const event = useSelector(
