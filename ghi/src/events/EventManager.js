@@ -22,6 +22,20 @@ function EventManager() {
     fetchEventData();
   }, []);
 
+  //   const AddToCartButtonClick = async (event) => {
+  //   console.log(`Added ${event.event_name} to your cart`);
+  //     const eventID = event.id;
+  //     const custUrl = `http://localhost:8000/api/events/${eventID}`;
+  //     const fetchConfig = { method: "delete" };
+  //     const response = await fetch(custUrl, fetchConfig);
+  //     if (response.ok) {
+  //       const updatedEvents = events.filter((item) => item.id !== eventID);
+  //       setEvents(updatedEvents);
+  //     } else {
+  //       console.error(response);
+  //     }
+  // };
+
   const DeleteButtonClick = async (event) => {
     const confirm = window.confirm(
       `Are you sure you want to delete ${event.event_name}?`
