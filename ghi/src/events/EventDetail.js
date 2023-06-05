@@ -7,7 +7,7 @@ function EventDetail() {
         (state) => state.rootReducer.eventGrab.globalEvent
     );
 
-    const { data: accountData, isLoading, error } = useGetTokenQuery();
+    const { data: accountData, isLoading } = useGetTokenQuery();
     const [account, setAccount] = useState({});
     console.log(account);
 
