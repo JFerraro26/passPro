@@ -42,7 +42,4 @@ services:
             HOST: "0.0.0.0"
             PUBLIC_URL: http://localhost:3000
             REACT_APP_API_HOST: http://localhost:8000
-
-
-
 # ./glv-cloud-cli deploy -a fastapi -i registry.gitlab.com/pass-pro/app/api_image:latest -e SIGNING_KEY=7da8b48fd9452fd24a812915812de86bf3c88683001ed934bed33f253387cbad -e DATABASE_URL=postgresql://passpro:password@feb-23-pt-16-postgres-service.default.svc.cluster.local/passpro -e CORS_HOST=https://rc678-galvanize.gitlab.io
