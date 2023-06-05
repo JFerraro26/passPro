@@ -5,5 +5,8 @@
 - Chad Manuel
 
 # Design
+
 ---
-* [API End points](api.md)
+
+- [API End points](api.md)
+- [Graphical Human Interface](ghi.md)
