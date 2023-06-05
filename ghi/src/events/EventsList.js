@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCartList } from "../redux/slices/cartSlice";
+import { useSelector } from "react-redux";
 
 function EventsList() {
 
+    const arr = useSelector((state) => state.rootReducer.cart.globalCartList);
+    console.log("array", arr);
     const [event, setEvent] = useState([]);
+    const dispatchCartList = useDispatch();
 
     const fetchEventData = async () => {
         const url = "http://localhost:8000/api/events";
@@ -21,6 +27,13 @@ function EventsList() {
     useEffect(() => {
         fetchEventData();
     }, []);
+
+    const AddToCartClick = async (event) => {
+        // const updatedList = arr.push(event);
+        // console.log("Updated", updatedList);
+        dispatchCartList(setCartList(event));
+        console.log("Sent to Cart!");
+    };
 
     return (
         <>
@@ -62,6 +75,7 @@ function EventsList() {
                         <td className="whitespace-nowrap px-6 py-4">{event.tickets_sold}</td>
                         <td>
                             <button
+                                onClick={() => AddToCartClick(event)}
                                 className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
                                 type="button">
                                 Add to Cart

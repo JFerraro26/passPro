@@ -12,10 +12,10 @@ import MyProfile from "./accounts/myProfile";
 import EventsList from "./events/EventsList";
 
 function App() {
-    const domain = /https:\/\/[^/]+/;
-    const basename = process.env.PUBLIC_URL.replace(domain, "");
+    // const domain = /https:\/\/[^/]+/;
+    // const basename = process.env.PUBLIC_URL.replace(domain, "");
     return (
-        <BrowserRouter basename={basename}>
+        <BrowserRouter>
             <Nav />
             <div>
                 <Routes>

@@ -1,11 +1,11 @@
 from pydantic import BaseModel
-from typing import Optional, List, Union
+from typing import Optional, Union
 from queries.pool import pool
 from uuid import UUID
 
 
-class DuplicateAccountError(ValueError):
-    pass
+class DuplicateAccountError(BaseModel):
+    message: str
 
 
 class Error(BaseModel):

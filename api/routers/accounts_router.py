@@ -8,7 +8,7 @@ from fastapi import (
 )
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
-from typing import Union, List, Optional, Dict
+from typing import Union, List, Dict
 from queries.accounts_queries import (
     AccountIn,
     Accountsrepository,
