@@ -4,8 +4,8 @@ from queries.pool import pool
 from uuid import UUID
 
 
-class DuplicateAccountError(BaseModel):
-    message: str
+class DuplicateAccountError(Exception):
+    pass
 
 
 class Error(BaseModel):
