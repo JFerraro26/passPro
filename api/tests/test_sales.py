@@ -1,12 +1,12 @@
 from fastapi.testclient import TestClient
-from routers.sales_router import router
+from main import app
 from queries.sales_queries import SaleRepository
 
 
-client = TestClient(router)
+client = TestClient(app)
 
 
-class EmptySalesQueries:
+class EmptySaleQueries:
     def list_sales(self):
         return []
 
@@ -14,7 +14,10 @@ class EmptySalesQueries:
 class CreateSaleQueries:
     def create(self, sale):
         result = {
-
+            "id": "c9566ede-48b5-46ac-8739-17630e312fee",
+            "event": "1a863318-8370-485b-adb4-cc4601e5b089",
+            "quantity": 10,
+            "sold_to": "abcc62d4-e091-48d1-baf0-5676098e67fe",
         }
         result.update(sale)
         return result
@@ -22,28 +25,39 @@ class CreateSaleQueries:
 
 def test_list_sales():
     # Arrange
-    router.dependency_overrides[SaleRepository] = EmptySalesQueries
+    app.dependency_overrides[SaleRepository] = EmptySaleQueries
 
-    response = client.get("/api/sales")
     # Act
-    router.dependency_overrides = {}
+    response = client.get("/api/sales")
+
+    app.dependency_overrides = {}
 
     # Assert
     assert response.status_code == 200
-    assert response.json() == {"sales": []}
-
-
-def test_init():
-    assert 1 == 1
+    assert response.json() == []
 
 
 def test_create_sale():
     # Arrange
-    router.dependency_overrides[SaleRepository] = CreateSaleQueries
+    app.dependency_overrides[SaleRepository] = CreateSaleQueries
 
     # Act
+    json = {
+        "event": "1a863318-8370-485b-adb4-cc4601e5b089",
+        "quantity": 10,
+        "sold_to": "abcc62d4-e091-48d1-baf0-5676098e67fe",
+    }
+
+    expected = {
+        "id": "c9566ede-48b5-46ac-8739-17630e312fee",
+        "event": "1a863318-8370-485b-adb4-cc4601e5b089",
+        "quantity": 10,
+        "sold_to": "abcc62d4-e091-48d1-baf0-5676098e67fe",
+    }
+
     response = client.post("/api/sales", json=json)
-    router.dependency_overrides = {}
+
+    app.dependency_overrides = {}
 
     # Asset
     assert response.status_code == 200
