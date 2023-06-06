@@ -5,10 +5,9 @@ import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
 export const store = configureStore({
     reducer: { rootReducer, [accountsApi.reducerPath]: accountsApi.reducer },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({ serializableCheck: false }).concat(
-            accountsApi.middleware
-        ),
+    middleware: getDefaultMiddleware({ serializableCheck: false }).concat(
+        accountsApi.middleware
+    ),
 });
 
 setupListeners(store.dispatch);
