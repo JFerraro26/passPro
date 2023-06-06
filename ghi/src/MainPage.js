@@ -196,7 +196,7 @@ function MainPage() {
               className="w-20 h-18 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
               onClick={() => goToEventsList("concert")}
             >
-              <p>Concert</p>
+              <p>Concerts</p>
               <FaMusic />
             </button>
           </div>
