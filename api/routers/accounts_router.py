@@ -8,7 +8,7 @@ from fastapi import (
 )
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
-from typing import Union, List, Optional, Dict
+from typing import Union, List, Dict
 from queries.accounts_queries import (
     AccountIn,
     Accountsrepository,
@@ -46,9 +46,11 @@ router = APIRouter()
     "/api/accounts/{account_id}", response_model=Union[EditAccountOut, Error]
 )
 def update_account(
-    account_id: str,
+    account_id: UUID4,
     account: EditAccountIn,
-    repo: Accountsrepository = Depends(),
+    repo: Accountsrepository = Depends(
+        authenticator.try_get_current_account_data
+    ),
 ) -> Union[EditAccountOut, Error]:
     return repo.update_account_info(account_id, account)
 
@@ -57,7 +59,7 @@ def update_account(
 async def get_token(
     request: Request,
     account: Accountsrepository = Depends(
-        authenticator.get_current_account_data
+        authenticator.try_get_current_account_data
     ),
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
@@ -110,3 +112,16 @@ def get_event_and_sale_from_account(
     else:
         response.status_code = 400
         return {"Message": "Something went wrong"}
+
+
+@router.get("/api/account/{username}", response_model=Union[AccountOut, Error])
+def get_account_for_login(
+    username: str,
+    response: Response,
+    repo: Accountsrepository = Depends(),
+) -> AccountOut:
+    account = repo.get_account_for_login(username)
+    if account is None:
+        response.status_code = 404
+        return {"message": "account does not exist"}
+    return account

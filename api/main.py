@@ -13,6 +13,10 @@ app.include_router(events_router.router)
 app.include_router(sales_router.router)
 app.include_router(states_router.router)
 
+origins = [
+    "http://localhost:3000",
+    os.environ.get("CORS_HOST", None),
+]
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,3 +25,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/")
+def root():
+    return {"message": "If you see this, Root is working"}

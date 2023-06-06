@@ -1,10 +1,10 @@
 from pydantic import BaseModel
-from typing import Optional, List, Union
+from typing import Optional, Union
 from queries.pool import pool
 from uuid import UUID
 
 
-class DuplicateAccountError(ValueError):
+class DuplicateAccountError(Exception):
     pass
 
 
@@ -49,7 +49,7 @@ class AccountOutWithPassword(AccountOut):
 
 class Accountsrepository:
     def update_account_info(
-        self, account_id: str, account: EditAccountIn
+        self, account_id: UUID, account: EditAccountIn
     ) -> Union[AccountOut, Error]:
         try:
             with pool.connection() as conn:
@@ -68,7 +68,6 @@ class Accountsrepository:
                             account.avatar_img,
                             account.email,
                             account.event_manager,
-                            account_id,
                             account_id,
                         ],
                     )
@@ -146,10 +145,6 @@ class Accountsrepository:
                     hashed_password=info.password,
                 )
 
-    def account_in_to_out(self, id: str, account: AccountIn):
-        old_data = account.dict()
-        return AccountOut(id=id, **old_data)
-
     def delete(self, account_id: UUID) -> bool:
         try:
             with pool.connection() as conn:
@@ -166,6 +161,31 @@ class Accountsrepository:
             print(e)
             return False
 
+    def get_account_for_login(self, username: str) -> Union[AccountOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , username
+                            , avatar_img
+                            , email
+                            , event_manager
+                        FROM accounts
+                        WHERE username = %s
+                        """,
+                        [username],
+                    )
+                    record = result.fetchone()
+                    if record:
+                        return self.record_to_account_out_login(record)
+                    else:
+                        return None
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that account"}
+
     def record_to_account_out(self, record) -> AccountOutWithPassword:
         account_dict = {
             "id": str(record[0]),
@@ -174,5 +194,15 @@ class Accountsrepository:
             "email": record[3],
             "event_manager": record[4],
             "password": record[5],
+        }
+        return account_dict
+
+    def record_to_account_out_login(self, record) -> AccountOutWithPassword:
+        account_dict = {
+            "id": str(record[0]),
+            "username": record[1],
+            "avatar_img": record[2],
+            "email": record[3],
+            "event_manager": record[4],
         }
         return account_dict

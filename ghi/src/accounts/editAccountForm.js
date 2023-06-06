@@ -1,46 +1,43 @@
 import React, { useEffect, useState } from "react";
-import {
-  useGetTokenQuery,
-  useUpdateMutation,
-} from "../redux/store/accountsApi";
+import { useUpdateMutation } from "../redux/store/accountsApi";
+import { useDispatch, useSelector } from "react-redux";
+import { setAccountInfo } from "../redux/slices/accountSlice";
 
 const EditAccountForm = () => {
-  const { data: accountData, isLoading, error } = useGetTokenQuery();
+  const account = useSelector((state) => state.rootReducer.accountInfo.account);
   const [edit] = useUpdateMutation();
-
-  const accountIdFromData = accountData?.account?.id;
   const [username, setUsername] = useState("");
   const [avatarImg, setAvatarImg] = useState("");
   const [email, setEmail] = useState("");
   const [eventManager, setEventManager] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (accountData) {
-      setUsername(accountData.account.username);
-      setAvatarImg(accountData.account.avatar_img);
-      setEmail(accountData.account.email);
-      setEventManager(accountData.account.event_manager);
+    if (account) {
+      setUsername(account.username);
+      setAvatarImg(account.avatar_img);
+      setEmail(account.email);
+      setEventManager(account.event_manager);
     }
-  }, [accountData]);
+  }, [account]);
 
-  const handleUpdateAccount = async () => {
+  const handleUpdateAccount = async (e) => {
+    e.preventDefault();
     const updatedAccount = {
-      username,
+      id: account.id,
+      username: username,
       avatar_img: avatarImg,
-      email,
+      email: email,
       event_manager: eventManager,
     };
 
-    await edit({ accountId: accountIdFromData, updatedAccount });
+    const response = await edit({ accountId: account.id, updatedAccount });
+    if (response) {
+      dispatch(setAccountInfo(updatedAccount));
+    } else {
+      console.error(response);
+    }
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error occurred while fetching account data</div>;
-  }
 
   return (
     <div className="container mx-auto">
