@@ -26,7 +26,7 @@
     "access_token": "string",
     "token_type": "Bearer",
     "account": {
-        "id": "string",
+        "id": "UUID",
         "username": "string",
         "avatar_img": "string",
         "email": "string",
@@ -123,7 +123,7 @@
     {
     "Events": [
         {
-        "id": "string",
+        "id": "UUID",
         "event_name": "string",
         "event_image": "www.test.com/string.jpeg",
         "event_type": "string",
@@ -138,7 +138,7 @@
         "venue": "string",
         "city": "string",
         "state_id": "string",
-        "created_by": "string"
+        "created_by": "UUID"
             },
         ],
     }
@@ -173,7 +173,7 @@
         "access_token": "string",
         "token_type": "Bearer",
         "account": {
-        "id": "string",
+        "id": "UUID",
         "username": "string",
         "avatar_img": "string",
         "email": "string",
@@ -270,8 +270,8 @@
                 "promoted": true,
                 "venue": "string",
                 "city": "string",
-                "state_id": "string",
-                "created_by": "string"
+                "state_id": "UUID",
+                "created_by": "UUID"
             }
         ]
     ```
@@ -310,8 +310,8 @@
             "promoted": true,
             "venue": "string",
             "city": "string",
-            "state_id": "string",
-            "created_by": "string"
+            "state_id": "UUID",
+            "created_by": "UUID"
         }
     ```
 
@@ -341,8 +341,8 @@
         "promoted": true,
         "venue": "string",
         "city": "string",
-        "state_id": "string",
-        "created_by": "string"
+        "state_id": "UUID",
+        "created_by": "UUID"
     }
     ```
 
@@ -363,8 +363,8 @@
             "promoted": true,
             "venue": "string",
             "city": "string",
-            "state_id": "string",
-            "created_by": "string"
+            "state_id": "UUID",
+            "created_by": "UUID"
         }
     ```
 
@@ -416,7 +416,7 @@
             "venue": "string",
             "city": "string",
             "state_id": "string",
-            "created_by": "string"
+            "created_by": "UUID"
         }
     ```
 
@@ -439,7 +439,7 @@
             "venue": "string",
             "city": "string",
             "state_id": "string",
-            "created_by": "string"
+            "created_by": "UUID"
         }
     ```
 
@@ -469,9 +469,9 @@
     [
         {
             "id": "string",
-            "event": "string",
+            "event": "UUID",
             "quantity": 0,
-            "sold_to": "string"
+            "sold_to": "UUID"
         }
     ]
     ```
@@ -488,9 +488,9 @@
 
     ```
         {
-            "event": "string",
+            "event": "UUID",
             "quantity": 0,
-            "sold_to": "string"
+            "sold_to": "UUID"
         }
     ```
 
@@ -499,9 +499,9 @@
     ```
         {
             "id": "string",
-            "event": "string",
+            "event": "UUID",
             "quantity": 0,
-            "sold_to": "string"
+            "sold_to": "UUID"
         }
     ```
 
