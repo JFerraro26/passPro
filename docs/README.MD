@@ -9,6 +9,7 @@
 ---
 
 - [API End points](api.md)
+- [Graphical Human Interface](ghi.md)
 
 ### Events
 
