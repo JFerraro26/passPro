@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCartList } from "../redux/slices/cartSlice";
 import { setEvent } from "../redux/slices/eventSlice";
+import dayjs from "dayjs";
 
 function EventsList() {
+    const [state, setState] = useState(useLocation().state);
     const [events, setEvents] = useState([]);
     const dispatch = useDispatch();
     const [filteredEvents, setFilteredEvents] = useState([]);
@@ -21,15 +23,24 @@ function EventsList() {
             const url = `${process.env.REACT_APP_API_HOST}/api/events`;
             const response = await fetch(url);
             if (response.ok) {
-                const data = await response.json();
-                setEvents(data);
-                setFilteredEvents(data);
+                if (state === null) {
+                    const data = await response.json();
+                    setEvents(data);
+                    setFilteredEvents(data);
+                } else {
+                    const data = await response.json();
+                    setEvents(data);
+                    setFilteredEvents(
+                        data.filter((event) => state.includes(event.event_type))
+                    );
+                    setEventType(true);
+                }
             } else {
                 console.error(response);
             }
         };
         fetchEventData();
-    }, []);
+    }, [state]);
 
     useEffect(() => {
         setStates(
@@ -109,6 +120,7 @@ function EventsList() {
         setStateButton(false);
         setCityButton(false);
         setVenueButton(false);
+        setState(null);
     };
 
     return (
@@ -132,6 +144,13 @@ function EventsList() {
                                     name="eventType"
                                     id="sports-checkbox"
                                     value="sport"
+                                    defaultChecked={
+                                        state !== null &&
+                                        filteredEvents.some(
+                                            (event) =>
+                                                event.event_type === "sport"
+                                        )
+                                    }
                                 />
                             </div>
                             <div className="flex gap-x-2">
@@ -143,6 +162,13 @@ function EventsList() {
                                     name="eventType"
                                     id="theater-checkbox"
                                     value="theater"
+                                    defaultChecked={
+                                        state !== null &&
+                                        filteredEvents.some(
+                                            (event) =>
+                                                event.event_type === "theater"
+                                        )
+                                    }
                                 />
                             </div>
                             <div className="flex gap-x-2">
@@ -154,6 +180,13 @@ function EventsList() {
                                     name="eventType"
                                     id="concert-checkbox"
                                     value="concert"
+                                    defaultChecked={
+                                        state !== null &&
+                                        filteredEvents.some(
+                                            (event) =>
+                                                event.event_type === "concert"
+                                        )
+                                    }
                                 />
                             </div>
                             <button className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full">
@@ -278,7 +311,7 @@ function EventsList() {
                                     className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
                                 >
                                     <td className="whitespace-nowrap px-6 py-4">
-                                        {event.date}
+                                        {dayjs(event.date).format("MM/DD/YYYY")}
                                     </td>
                                     <td className="whitespace-nowrap px-6 py-4">
                                         <Link

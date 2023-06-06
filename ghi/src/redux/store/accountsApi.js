@@ -40,12 +40,6 @@ export const accountsApi = createApi({
             invalidatesTags: (result) => {
                 return (result && ["Token"]) || [];
             },
-            // transformResponse: (response) => {
-            //     console.log(response);
-            //     const data = JSON.parse(response);
-            //     const { username, email, avatar_img, event_manager } = data;
-            //     return { username, email, avatar_img, event_manager };
-            // },
         }),
         getToken: builder.query({
             query: () => ({
