@@ -10,7 +10,6 @@ function Nav() {
   const accountData = useSelector(
     (store) => store.rootReducer.accountInfo.account
   );
-  console.log(accountData);
 
   useEffect(() => {
     if (accountData === null) {

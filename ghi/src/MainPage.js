@@ -88,17 +88,17 @@ function MainPage() {
                 />
               </div>
               <div className="flex z-0 justify-center items-center col-start-1 col-span-4 row-start-1 row-span-1">
-                <h1 className="text-xs font-semibold">
+                <h1 className="text-xs truncate font-semibold">
                   {events[rightIndex]?.event_name}
                 </h1>
               </div>
               <div className="flex z-0 justify-center items-center col-start-1 col-span-2 row-start-5 row-span-1">
-                <h1 className="text-xs font-semibold">
+                <h1 className="text-xs truncate font-semibold">
                   {events[rightIndex]?.city}, {events[rightIndex]?.state_id}{" "}
                 </h1>
               </div>
               <div className="flex z-0 justify-center items-center col-start-3 col-span-2 row-start-5 row-span-1">
-                <h1 className="text-xs font-semibold">
+                <h1 className="text-xs truncate font-semibold">
                   {dayjs(events[rightIndex]?.date).format("MM-DD-YY")}
                 </h1>
               </div>
@@ -115,17 +115,17 @@ function MainPage() {
                 />
               </div>
               <div className="flex z-0 justify-center items-center col-start-1 col-span-4 row-start-1 row-span-1">
-                <h1 className="text-3xl font-semibold">
+                <h1 className="text-3xl truncate font-semibold">
                   {events[currentIndex]?.event_name}
                 </h1>
               </div>
               <div className="flex z-0 justify-center items-center col-start-1 col-span-2 row-start-5 row-span-1">
-                <h1 className="text-2xl font-semibold">
+                <h1 className="text-2xl truncate font-semibold">
                   {events[currentIndex]?.city}, {events[currentIndex]?.state_id}{" "}
                 </h1>
               </div>
               <div className="flex z-0 justify-center items-center col-start-3 col-span-2 row-start-5 row-span-1">
-                <h1 className="text-2xl font-semibold">
+                <h1 className="text-2xl truncate font-semibold">
                   {dayjs(events[currentIndex]?.date).format("MM-DD-YY")}
                 </h1>
               </div>
@@ -157,17 +157,17 @@ function MainPage() {
                 />
               </div>
               <div className="flex z-0 justify-center items-center col-start-1 col-span-4 row-start-1 row-span-1">
-                <h1 className="text-xs font-semibold">
+                <h1 className="text-xs truncate font-semibold">
                   {events[leftIndex]?.event_name}
                 </h1>
               </div>
               <div className="flex z-0 justify-center items-center col-start-1 col-span-2 row-start-5 row-span-1">
-                <h1 className="text-xs font-semibold">
+                <h1 className="text-xs truncate font-semibold">
                   {events[leftIndex]?.city}, {events[leftIndex]?.state_id}{" "}
                 </h1>
               </div>
               <div className="flex z-0 justify-center items-center col-start-3 col-span-2 row-start-5 row-span-1">
-                <h1 className="text-xs font-semibold">
+                <h1 className="text-xs truncate font-semibold">
                   {dayjs(events[leftIndex]?.date).format("MM-DD-YY")}
                 </h1>
               </div>
