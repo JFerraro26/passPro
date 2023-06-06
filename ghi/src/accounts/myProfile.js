@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EditAccountForm from "./editAccountForm";
 import EventManager from "../events/EventManager";
 import MyTickets from "../sales/MyTickets";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BecomeEventManager from "./BecomeEventManger";
+import { Link } from "react-router-dom";
+import { setEvent } from "../redux/slices/eventSlice";
 
 const MyProfile = () => {
     const [settingsClicked, setSettingsClicked] = useState(false);
@@ -14,51 +15,41 @@ const MyProfile = () => {
     const accountData = useSelector(
         (state) => state.rootReducer?.accountInfo.account || null
     );
+    const dispatchEvent = useDispatch();
     const profileImage = accountData?.avatar_img || null;
     const isEventManager = accountData?.event_manager || null;
 
-    console.log("events_list", myEvents);
-
     useEffect(() => {
-        const fetchSaleData = async () => {
-            const salesResponse = await fetch(
-                `${process.env.REACT_APP_API_HOST}/api/sales`
+        const fetchSalesAndEventsData = async () => {
+            const response = await fetch(
+                `${process.env.REACT_APP_API_HOST}/api/accounts/${accountData.id}`
             );
-            const eventResponse = await fetch(
-                `${process.env.REACT_APP_API_HOST}/api/events`
-            );
-            if (salesResponse && eventResponse) {
-                const salesData = await salesResponse.json();
-                const eventData = await eventResponse.json();
-                const boughtTickets = salesData.filter(
-                    (event) => event.sold_to === accountData?.id
-                );
-                const boughtTicketsEvents = boughtTickets.map(
-                    (ticket) => ticket.event
-                );
-                const nextEvent = eventData.filter((event) =>
-                    boughtTicketsEvents.includes(event.id)
-                );
-                console.log(nextEvent);
-                setMyEvents(nextEvent);
+            if (response) {
+                const data = await response.json();
+                setMyEvents(data);
             } else {
-                console.error(salesResponse || eventResponse);
+                console.error(response);
             }
         };
-        fetchSaleData();
+        fetchSalesAndEventsData();
     }, [accountData]);
 
     return (
-        <div className="flex flex-wrap justify-start">
+        <div className="flex flex-wrap justify-center">
             <div className="w-6/12 sm:w-4/12 px-4">
-                <h1 style={{ marginBottom: "10px" }} className="text-3xl">
+                <h1
+                    style={{ marginBottom: "10px" }}
+                    className="text-3xl text-center"
+                >
                     My Profile
                 </h1>
-                <img
-                    src={profileImage}
-                    alt="profilepicture"
-                    className="shadow-lg rounded-full max-w-full h-auto align-middle border-none"
-                />
+                <div className="flex justify-center">
+                    <img
+                        src={profileImage}
+                        alt="profilepicture"
+                        className="shadow-lg rounded-full h-auto align-middle border-none max-w-md max-h-md"
+                    />
+                </div>
                 <h1
                     style={{ marginTop: "10px" }}
                     className="text-3xl text-center"
@@ -67,29 +58,51 @@ const MyProfile = () => {
                 </h1>
             </div>
             <div className="w-6/12 sm:w-8/12 mx-auto mt-10 px-4">
-                <h2 className="text-xl">Next Event</h2>
-                <div className="flex flex-col items-start bg-gray-200 p-4 rounded-lg">
-                    {myEvents.length === 0 ? (
-                        <p>No events yet</p>
-                    ) : (
-                        myEvents.slice(0, 1).map((event) => (
-                            <div key={event.id}>
-                                <img
-                                    className="object-cover w-full h-full"
-                                    src={event.event_image}
-                                    alt={event.event_name}
-                                />
-                                <p>{event.event_name}</p>
-                            </div>
-                        ))
-                    )}
+                <h2 className="text-xl text-center">Next Event</h2>
+                <div className="flex flex-col bg-blue-200 p-4 rounded-lg w-96 h-60 mx-auto">
+                    <div className="">
+                        {myEvents.length === 0 ||
+                        myEvents.events.length === 0 ? (
+                            <>
+                                <p className="text-center">
+                                    You do not have any events yet
+                                </p>
+                                <Link
+                                    className="bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded flex justify-center"
+                                    type="button"
+                                    to="/events/list"
+                                >
+                                    Checkout our Events Here!
+                                </Link>
+                            </>
+                        ) : (
+                            myEvents.sales.slice(0, 1).map((event) => (
+                                <Link
+                                    to={`/events/detail/`}
+                                    key={event.event_id}
+                                    onClick={() =>
+                                        dispatchEvent(setEvent(event))
+                                    }
+                                >
+                                    <img
+                                        className="object-cover w-96 h-41"
+                                        src={event.event_image}
+                                        alt={event.event_name}
+                                    />
+                                    <p className="font-bold">
+                                        {event.event_name}
+                                    </p>
+                                </Link>
+                            ))
+                        )}
+                    </div>
                 </div>
             </div>
-            <div className="w-6/12 sm:w-4/12 m-0-auto">
-                <div className="flex flex-col items-start bg-gray-200 p-4 rounded-lg">
+            <div className="w-6/12 sm:w-4/12 m-0-auto m-w-sm m-h-sm">
+                <div className="flex flex-col items-start bg-blue-200 p-4 rounded-lg ">
                     <button
                         href=""
-                        className="m-2 p-2 bg-white rounded-lg w-full"
+                        className="w-full bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded my-3"
                         onClick={(e) => {
                             setTicketsClicked((prevValue) => !prevValue);
                             setSettingsClicked(false);
@@ -101,7 +114,7 @@ const MyProfile = () => {
 
                     <button
                         href=""
-                        className="m-2 p-2 bg-white rounded-lg w-full"
+                        className="w-full bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded my-3"
                         onClick={(e) => {
                             setSettingsClicked((prevValue) => !prevValue);
                             setTicketsClicked(false);
@@ -113,7 +126,7 @@ const MyProfile = () => {
                     {isEventManager ? (
                         <button
                             href=""
-                            className="m-2 p-2 bg-white rounded-lg w-full"
+                            className="w-full bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded my-3"
                             onClick={(e) => {
                                 setManageEventClicked(
                                     (prevValue) => !prevValue
@@ -131,7 +144,9 @@ const MyProfile = () => {
             </div>
             <div className="w-6/12 sm:w-8/12 m-0-auto">
                 {settingsClicked ? <EditAccountForm /> : null}
-                {manageEventClicked ? <EventManager /> : null}
+                {manageEventClicked ? (
+                    <EventManager myEvents={myEvents} />
+                ) : null}
                 {ticketsClicked ? <MyTickets myEvents={myEvents} /> : null}
             </div>
         </div>

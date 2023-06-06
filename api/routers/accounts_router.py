@@ -104,9 +104,11 @@ def get_event_and_sale_from_account(
         if sales and events:
             return {"events": events, "sales": sales}
         elif sales:
-            return {"sales": sales}
+            return {"events": [], "sales": sales}
+        elif events:
+            return {"events": events, "sales": []}
         else:
-            return {"events": events}
+            return {"events": [], "sales": []}
     else:
         response.status_code = 400
         return {"Message": "Something went wrong"}

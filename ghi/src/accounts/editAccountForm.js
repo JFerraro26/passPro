@@ -86,19 +86,7 @@ const EditAccountForm = () => {
                         />
                     </div>
                     <div className="flex justify-center">
-                        <label>
-                            Event Manager:
-                            <input
-                                type="checkbox"
-                                checked={eventManager}
-                                onChange={(e) =>
-                                    setEventManager(e.target.checked)
-                                }
-                            />
-                        </label>
-                    </div>
-                    <div className="flex justify-center">
-                        <button className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4">
+                        <button className="bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded">
                             Update Account
                         </button>
                     </div>
