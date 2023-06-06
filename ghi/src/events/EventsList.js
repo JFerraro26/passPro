@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCartList } from "../redux/slices/cartSlice";
 import { setEvent } from "../redux/slices/eventSlice";
-import { AiOutlineCaretDown } from "react-icons/ai";
+import dayjs from "dayjs";
 
 function EventsList() {
   const [state, setState] = useState(useLocation().state);
@@ -20,7 +20,7 @@ function EventsList() {
 
   useEffect(() => {
     const fetchEventData = async () => {
-      const url = "http://localhost:8000/api/events";
+      const url = `${process.env.REACT_APP_API_HOST}/api/events`;
       const response = await fetch(url);
       if (response.ok) {
         if (state === null) {
@@ -275,7 +275,9 @@ function EventsList() {
                   key={event.id}
                   className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
                 >
-                  <td className="whitespace-nowrap px-6 py-4">{event.date}</td>
+                  <td className="whitespace-nowrap px-6 py-4">
+                    {dayjs(event.date).format("MM/DD/YYYY")}
+                  </td>
                   <td className="whitespace-nowrap px-6 py-4">
                     <Link
                       className="hover:text-blue-400"
