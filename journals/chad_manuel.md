@@ -300,3 +300,21 @@ Deployment
 ## Additional Thoughts/Idea
 
 ---
+
+# 6/3/2023
+
+## Topic
+
+Deployment
+
+## What was worked ?
+
+-   Today we were able to get our backend deployed. I mainly worked on getting the frontend deployed.
+
+## To-Do
+
+-   I need to refactor my code to call a different api in order to get the sales and event info.
+
+## Additional Thoughts/Idea
+
+---
