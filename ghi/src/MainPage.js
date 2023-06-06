@@ -75,6 +75,10 @@ function MainPage() {
     navigate("/events/detail");
   };
 
+  const goToEventsList = (state) => {
+    navigate("/events/list", { state });
+  };
+
   return (
     <>
       {events ? (
@@ -173,14 +177,26 @@ function MainPage() {
               </div>
             </div>
           </div>
-          <div className="flex justify-evenly border col-start-1 col-span-5 mt-12">
-            <button>
+          <div className="flex justify-evenly col-start-1 col-span-5 mt-12">
+            <button
+              className="w-20 h-18 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
+              onClick={() => goToEventsList("sport")}
+            >
+              <p>Sports</p>
               <MdSportsBasketball />
             </button>
-            <button>
+            <button
+              className="w-20 h-18 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
+              onClick={() => goToEventsList("theater")}
+            >
+              <p>Theater</p>
               <FaTheaterMasks />
             </button>
-            <button>
+            <button
+              className="w-20 h-18 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
+              onClick={() => goToEventsList("concert")}
+            >
+              <p>Concert</p>
               <FaMusic />
             </button>
           </div>
