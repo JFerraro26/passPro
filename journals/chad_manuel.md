@@ -318,3 +318,25 @@ Deployment
 ## Additional Thoughts/Idea
 
 ---
+
+---
+
+# 6/6/2023
+
+## Topic
+
+Tailwind
+React
+Redux
+
+## What was worked ?
+
+-   Today I mainly worked on the profile page. I refactored the code and made a fetch request to get the events and sales information then passing it down to it's child components.
+
+## To-Do
+
+-   Get started with another part of the readme and hopefully finish the project mvps soon.
+
+## Additional Thoughts/Idea
+
+-

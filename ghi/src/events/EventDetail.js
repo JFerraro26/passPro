@@ -8,7 +8,7 @@ function EventDetail() {
     if (event == null) {
         return (
             <>
-                <p>Something Went Wrong</p>-
+                <p>Something Went Wrong</p>
             </>
         );
     }
