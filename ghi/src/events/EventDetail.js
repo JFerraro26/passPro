@@ -1,36 +1,14 @@
 import { useSelector } from "react-redux";
-// import { useEffect, useState } from "react";
-// import { useGetTokenQuery } from "../redux/apis/accountsApi";
 
 function EventDetail() {
     const event = useSelector(
         (state) => state.rootReducer.eventGrab.globalEvent
     );
 
-    // const { data: accountData, isLoading } = useGetTokenQuery();
-    // const [account, setAccount] = useState({});
-
-    // useEffect(() => {
-    //     async function fetchAccountData() {
-    //         if (isLoading) return;
-    //         const accountId = accountData.account.id;
-    //         const response = await fetch(
-    //             `${process.env.REACT_APP_API_HOST}/api/accounts/${accountId}`
-    //         );
-    //         if (response.ok) {
-    //             const accountData = await response.json();
-    //             setAccount(accountData);
-    //         } else {
-    //             console.error(response);
-    //         }
-    //     }
-    //     fetchAccountData();
-    // }, [isLoading, accountData]);
-
     if (event == null) {
         return (
             <>
-                <p>Something Went Wrong</p>-
+                <p>Something Went Wrong</p>
             </>
         );
     }

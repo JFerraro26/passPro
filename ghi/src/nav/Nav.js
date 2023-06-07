@@ -7,11 +7,10 @@ import ProfileDropdown from "./ProfileDropdown";
 import { Link } from "react-router-dom";
 
 function Nav() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const accountData = useSelector(
-        (store) => store.rootReducer.accountInfo.account
-    );
-    console.log(accountData);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const accountData = useSelector(
+    (store) => store.rootReducer.accountInfo.account
+  );
 
     useEffect(() => {
         if (accountData === null) {
