@@ -95,6 +95,7 @@ async def create_account(
 def get_event_and_sale_from_account(
     account_id: UUID4,
     response: Response,
+    account: dict = Depends(authenticator.get_current_account_data),
     event_repo: EventRepository = Depends(),
     sales_repo: SaleRepository = Depends(),
 ):
@@ -115,7 +116,7 @@ def get_event_and_sale_from_account(
 
 
 @router.get("/api/account/{username}", response_model=Union[AccountOut, Error])
-def get_account_for_login(
+async def get_account_for_login(
     username: str,
     response: Response,
     repo: Accountsrepository = Depends(),
