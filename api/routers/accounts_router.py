@@ -8,27 +8,22 @@ from fastapi import (
 )
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
-from typing import Union, List, Optional
+from typing import Union, List, Dict
 from queries.accounts_queries import (
     AccountIn,
     Accountsrepository,
     AccountOut,
     Error,
     DuplicateAccountError,
+    EditAccountIn,
+    EditAccountOut,
 )
-from pydantic import BaseModel
+from queries.events_queries import EventOut, EventRepository
+from pydantic import BaseModel, UUID4
+from queries.sales_queries import SaleTiedToEventOut, SaleRepository
 
 
 router = APIRouter()
-
-
-# @router.put("/accounts/{account_id}", response_model=Union[AccountOut, Error])
-# def update_account(
-#     account_id: uuid.UUID,
-#     account: AccountIn,
-#     repo: Accountsrepository = Depends(),
-# ) -> Union[AccountOut, Error]:
-#     return repo.update(account_id, account)
 
 
 class AccountForm(BaseModel):
@@ -45,6 +40,19 @@ class HttpError(BaseModel):
 
 
 router = APIRouter()
+
+
+@router.put(
+    "/api/accounts/{account_id}", response_model=Union[EditAccountOut, Error]
+)
+def update_account(
+    account_id: UUID4,
+    account: EditAccountIn,
+    repo: Accountsrepository = Depends(
+        authenticator.try_get_current_account_data
+    ),
+) -> Union[EditAccountOut, Error]:
+    return repo.update_account_info(account_id, account)
 
 
 @router.get("/token", response_model=AccountToken | None)
@@ -80,3 +88,42 @@ async def create_account(
     form = AccountForm(username=info.username, password=info.password)
     token = await authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
+
+
+@router.get(
+    "/api/accounts/{account_id}",
+    response_model=Dict[str, List[Union[EventOut, SaleTiedToEventOut]]],
+)
+def get_event_and_sale_from_account(
+    account_id: UUID4,
+    response: Response,
+    event_repo: EventRepository = Depends(),
+    sales_repo: SaleRepository = Depends(),
+):
+    if response:
+        events = event_repo.get_event_from_account(account_id)
+        sales = sales_repo.get_sale_from_account(account_id)
+        if sales and events:
+            return {"events": events, "sales": sales}
+        elif sales:
+            return {"events": [], "sales": sales}
+        elif events:
+            return {"events": events, "sales": []}
+        else:
+            return {"events": [], "sales": []}
+    else:
+        response.status_code = 400
+        return {"Message": "Something went wrong"}
+
+
+@router.get("/api/account/{username}", response_model=Union[AccountOut, Error])
+def get_account_for_login(
+    username: str,
+    response: Response,
+    repo: Accountsrepository = Depends(),
+) -> AccountOut:
+    account = repo.get_account_for_login(username)
+    if account is None:
+        response.status_code = 404
+        return {"message": "account does not exist"}
+    return account

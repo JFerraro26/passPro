@@ -35,7 +35,7 @@ steps = [
         """,
     ],
     [
-        ##Create events table
+        # Create events table
         """
         CREATE TABLE events (
             id UUID DEFAULT uuid_generate_v4() PRIMARY KEY UNIQUE,
@@ -52,12 +52,12 @@ steps = [
             promoted BOOLEAN DEFAULT false,
             venue VARCHAR(100),
             city VARCHAR(100),
-            state_id UUID REFERENCES states(id),
+            state_id VARCHAR(100),
             created_by UUID REFERENCES accounts(id)
 
         );
         """,
-        ##Drop the events table
+        # Drop the events table
         """
         DROP TABLE events;
         """,

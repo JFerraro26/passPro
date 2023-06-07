@@ -1,9 +1,10 @@
 from pydantic import BaseModel
-from typing import Optional, List, Union
+from typing import Optional, Union
 from queries.pool import pool
+from uuid import UUID
 
 
-class DuplicateAccountError(ValueError):
+class DuplicateAccountError(Exception):
     pass
 
 
@@ -14,6 +15,21 @@ class Error(BaseModel):
 class AccountIn(BaseModel):
     username: str
     password: str
+    avatar_img: Optional[str]
+    email: str
+    event_manager: bool
+
+
+class EditAccountIn(BaseModel):
+    username: str
+    avatar_img: Optional[str]
+    email: str
+    event_manager: bool
+
+
+class EditAccountOut(BaseModel):
+    id = str
+    username: str
     avatar_img: Optional[str]
     email: str
     event_manager: bool
@@ -32,8 +48,8 @@ class AccountOutWithPassword(AccountOut):
 
 
 class Accountsrepository:
-    def update(
-        self, account_id: str, account: AccountIn
+    def update_account_info(
+        self, account_id: UUID, account: EditAccountIn
     ) -> Union[AccountOut, Error]:
         try:
             with pool.connection() as conn:
@@ -42,7 +58,6 @@ class Accountsrepository:
                         """
                         UPDATE accounts
                         SET username = %s
-                            , password = %s
                             , avatar_img = %s
                             , email = %s
                             , event_manager = %s
@@ -50,7 +65,6 @@ class Accountsrepository:
                         """,
                         [
                             account.username,
-                            account.password,
                             account.avatar_img,
                             account.email,
                             account.event_manager,
@@ -58,12 +72,18 @@ class Accountsrepository:
                         ],
                     )
                     if db.rowcount > 0:
-                        return self.get(account.username)
+                        return EditAccountOut(
+                            username=account.username,
+                            avatar_img=account.avatar_img,
+                            email=account.email,
+                            event_manager=account.event_manager,
+                            account_id=account_id,
+                        )
                     else:
                         return Error(message="Account not found")
         except Exception as e:
             print(e)
-            return {"message": "could not update account"}
+            return Error(message="Could not update account")
 
     def get(self, username: str) -> AccountOutWithPassword:
         try:
@@ -125,11 +145,7 @@ class Accountsrepository:
                     hashed_password=info.password,
                 )
 
-    def account_in_to_out(self, id: str, account: AccountIn):
-        old_data = account.dict()
-        return AccountOut(id=id, **old_data)
-
-    def delete(self, account_id: str) -> bool:
+    def delete(self, account_id: UUID) -> bool:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -145,6 +161,31 @@ class Accountsrepository:
             print(e)
             return False
 
+    def get_account_for_login(self, username: str) -> Union[AccountOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , username
+                            , avatar_img
+                            , email
+                            , event_manager
+                        FROM accounts
+                        WHERE username = %s
+                        """,
+                        [username],
+                    )
+                    record = result.fetchone()
+                    if record:
+                        return self.record_to_account_out_login(record)
+                    else:
+                        return None
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that account"}
+
     def record_to_account_out(self, record) -> AccountOutWithPassword:
         account_dict = {
             "id": str(record[0]),
@@ -153,5 +194,15 @@ class Accountsrepository:
             "email": record[3],
             "event_manager": record[4],
             "password": record[5],
+        }
+        return account_dict
+
+    def record_to_account_out_login(self, record) -> AccountOutWithPassword:
+        account_dict = {
+            "id": str(record[0]),
+            "username": record[1],
+            "avatar_img": record[2],
+            "email": record[3],
+            "event_manager": record[4],
         }
         return account_dict
