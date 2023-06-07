@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, Response
 from queries.events_queries import Error, EventIn, EventRepository, EventOut
 from typing import List, Union
 from uuid import UUID
+from authenticator import authenticator
 
 
 router = APIRouter()
@@ -9,7 +10,10 @@ router = APIRouter()
 
 @router.post("/api/events", response_model=Union[EventOut, Error])
 def create_event(
-    event: EventIn, response: Response, repo: EventRepository = Depends()
+    event: EventIn,
+    response: Response,
+    account: dict = Depends(authenticator.get_current_account_data),
+    repo: EventRepository = Depends(),
 ):
     return repo.create(event)
 
