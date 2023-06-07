@@ -1,21 +1,26 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import TicketQuantity from "./TicketQuantity";
+import { CartSlice } from "../redux/slices/cartSlice";
+import { useDispatch } from "react-redux";
 
-function Cart() {
+function Cart(props) {
   const eventList = useSelector(
     (state) => state.rootReducer.cart.globalCartList
   );
   const account = useSelector((state) => state.rootReducer.accountInfo.account);
+  // console.log(eventList);
+
   const [quantity, setQuantity] = useState(0);
   const handleQuantityChange = (e) => {
     const value = e.target.value;
     setQuantity(value);
   };
 
-  let totalPrice = 0;
-  for (let event of eventList) {
-    totalPrice += event.tickets_price * quantity;
-  }
+  // let totalPrice = 0;
+  // for (let event of eventList) {
+  //   totalPrice += event.tickets_price * quantity;
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +29,7 @@ function Cart() {
       const saleData = {};
 
       saleData.event = event.id;
-      saleData.quantity = quantity;
+      saleData.quantity = event.quantity;
       saleData.sold_to = account.id;
 
       const saleUrl = `${process.env.REACT_APP_API_HOST}/api/sales`;
@@ -114,19 +119,12 @@ function Cart() {
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className="flex flex-col space-y-1">
-                          <input
-                            onChange={handleQuantityChange}
-                            value={quantity}
-                            name="quantity"
-                            type="number"
-                            placeholder="0"
-                            className="px-2 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
-                          />
+                          <TicketQuantity event={event} />
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className="flex flex-col space-y-1">
-                          ${event.tickets_price * quantity}
+                          {/* ${event.tickets_price * quantity} */}
                         </div>
                       </td>
                     </tr>
@@ -135,7 +133,7 @@ function Cart() {
               </tbody>
             </table>
             <div className="flex justify-end">
-              <h3>Total: ${totalPrice}</h3>
+              {/* <h3>Total: ${totalPrice}</h3> */}
             </div>
             <div className="flex justify-end">
               <button
