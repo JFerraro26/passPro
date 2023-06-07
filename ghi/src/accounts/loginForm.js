@@ -50,7 +50,7 @@ const LoginForm = () => {
       }
     }
     fetchAccountData();
-  }, [accountUsername, dispatchAccount, navigate]);
+  }, [accountUsername, dispatchAccount, navigate, token]);
 
   return (
     <div className="container mx-auto">

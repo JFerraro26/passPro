@@ -37,7 +37,7 @@ const MyProfile = () => {
       }
     };
     fetchSalesAndEventsData();
-  }, [accountData]);
+  }, [accountData, token]);
 
   return (
     <div className="flex flex-wrap justify-center">
