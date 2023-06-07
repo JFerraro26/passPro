@@ -1,7 +1,4 @@
-import {
-    useSignUpMutation,
-    useLoginMutation,
-} from "../redux/store/accountsApi";
+import { useSignUpMutation, useLoginMutation } from "../redux/apis/accountsApi";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -43,7 +40,7 @@ const SignUpForm = () => {
         if (!result.isLoading) {
             if (result.isSuccess) {
                 login({ username, password });
-                navigate("/");
+                navigate("/accounts/login");
             } else if (result.isError) {
                 console.log("Invalid Information");
                 setInvalidCredentials(true);
