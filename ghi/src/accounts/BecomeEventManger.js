@@ -36,7 +36,7 @@ function BecomeEventManager() {
     return (
         <div className="relative">
             <button
-                className="m-2 p-2 bg-white rounded-lg w-full"
+                className="w-full bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded my-3"
                 onClick={() => setOpen(!open)}
             >
                 Become Event Manager

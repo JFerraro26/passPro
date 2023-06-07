@@ -62,7 +62,7 @@ const MyProfile = () => {
                 <div className="flex flex-col bg-blue-200 p-4 rounded-lg w-96 h-60 mx-auto">
                     <div className="">
                         {myEvents.length === 0 ||
-                        myEvents.events.length === 0 ? (
+                        myEvents.sales.length === 0 ? (
                             <>
                                 <p className="text-center">
                                     You do not have any events yet
@@ -138,7 +138,9 @@ const MyProfile = () => {
                             Manage Event
                         </button>
                     ) : (
-                        <BecomeEventManager />
+                        <div className="w-full">
+                            <BecomeEventManager />
+                        </div>
                     )}
                 </div>
             </div>
