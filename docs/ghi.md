@@ -24,6 +24,14 @@ This the base profile page. A user can view their purchased tickets. A user can 
 
 ![Profile](wireframes/profile.jpg)
 
+## Event Manager
+
+This is a page within the profile page that displays any events that a user has created. It also allows actions to edit or delete an event.
+
+![Event Manger](wireframes/event-manager.jpg)
+
 ## Cart
 
-This
+This page is where a user can adjust the ammount of tickets they wish to buy or remove an event from their cart. They can then purchase the tickets
+
+![Cart](wireframes/cart.jpg)
