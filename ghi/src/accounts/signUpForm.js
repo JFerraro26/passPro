@@ -40,7 +40,7 @@ const SignUpForm = () => {
         if (!result.isLoading) {
             if (result.isSuccess) {
                 login({ username, password });
-                navigate("/");
+                navigate("/accounts/login");
             } else if (result.isError) {
                 console.log("Invalid Information");
                 setInvalidCredentials(true);

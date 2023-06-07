@@ -5,12 +5,13 @@ import NavBarSearch from "./NavBarSearch";
 import { useSelector } from "react-redux";
 import ProfileDropdown from "./ProfileDropdown";
 import { Link } from "react-router-dom";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 function Nav() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const accountData = useSelector(
-    (store) => store.rootReducer.accountInfo.account
-  );
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const accountData = useSelector(
+        (store) => store.rootReducer.accountInfo.account
+    );
 
     useEffect(() => {
         if (accountData === null) {
@@ -40,7 +41,7 @@ function Nav() {
                         className="text-2xl font-semibold hover:text-red-500"
                         to="/sales/cart"
                     >
-                        Cart
+                        <AiOutlineShoppingCart />
                     </NavLink>
                     {isLoggedIn ? (
                         <ProfileDropdown />
@@ -49,7 +50,7 @@ function Nav() {
                             className="text-2xl font-semibold hover:text-red-500"
                             to="/accounts/login"
                         >
-                            Login
+                            Login/Signup
                         </NavLink>
                     )}
                 </div>
