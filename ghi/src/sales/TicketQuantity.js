@@ -4,30 +4,35 @@ import { updateCartList } from "../redux/slices/cartSlice";
 
 function TicketQuantity(props) {
   let dispatch = useDispatch();
+  const [ticketQuantity, setTicketQuantity] = useState(props.event.quantity);
 
   const addTicket = () => {
-    setticketQuantity(ticketQuantity + 1);
-    dispatch(updateCartList(eventObject));
+    setTicketQuantity(ticketQuantity + 1);
+    dispatch(updateCartList((eventList[props.index] = eventObject)));
+    console.log();
     console.log("eventObject", eventObject);
     console.log("eventList", eventList);
+    console.log("eventList index", eventList[props.index]);
+    // console.log("eventList update", (eventList[props.index] = eventObject));
   };
+// console.log("eventList update", (eventList));
+  //   eventList[props.index] = eventObject
 
   const reduceTicket = () => {
     if (ticketQuantity === 0) {
       return;
     } else {
-      setticketQuantity(ticketQuantity - 1);
-      dispatch(updateCartList(eventObject));
+      setTicketQuantity(ticketQuantity - 1);
+      //   dispatch(updateCartList(eventObject));
       console.log("eventObject", eventObject);
       console.log("eventList", eventList);
     }
   };
-  
+
   const eventList = useSelector(
     (state) => state.rootReducer.cart.globalCartList
   );
 
-  const [ticketQuantity, setticketQuantity] = useState(props.event.quantity);
 
   const eventObject = {
     city: props.event.city,
@@ -49,26 +54,9 @@ function TicketQuantity(props) {
     venue: props.event.venue,
   };
 
-  // console.log(props.event);
-  // console.log(props.index);
-
-//   const addTicket = () => {
-//     setticketQuantity(ticketQuantity + 1);
-//     dispatch(updateCartList(eventObject));
-//     console.log("eventObject", eventObject);
-//     console.log("eventList", eventList);
-//   };
-
-//   const reduceTicket = () => {
-//     if (ticketQuantity === 0) {
-//       return;
-//     } else {
-//       setticketQuantity(ticketQuantity - 1);
-//       dispatch(updateCartList(eventObject));
-//       console.log("eventObject", eventObject);
-//       console.log("eventList", eventList);
-//     }
-//   };
+//   console.log("props.event", props.event);
+//   console.log("props.index", props.index);
+//   console.log("eventList", eventList);
 
   return (
     <div className="flex">

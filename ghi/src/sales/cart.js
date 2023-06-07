@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import TicketQuantity from "./TicketQuantity";
-import { CartSlice } from "../redux/slices/cartSlice";
-import { useDispatch } from "react-redux";
+
 
 function Cart(props) {
   const eventList = useSelector(
@@ -99,7 +98,7 @@ function Cart(props) {
                 </tr>
               </thead>
               <tbody>
-                {eventList?.map((event) => {
+                {eventList?.map((event, index) => {
                   return (
                     <tr
                       key={event.id}
@@ -119,7 +118,7 @@ function Cart(props) {
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className="flex flex-col space-y-1">
-                          <TicketQuantity event={event} />
+                          <TicketQuantity event={event} index={index} />
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
