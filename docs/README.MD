@@ -3,88 +3,43 @@
 - Michael Gianoulakis
 - Joseph Ferraro
 - Chad Manuel
-
-# Design
-
 ---
+## Design
 
 - [API End points](api.md)
 - [Graphical Human Interface](ghi.md)
+- [Data Model](model.md)
+---
+## Goal
 
-### Events
+Pass Pro's goal is to offer a simple and efficient platform for individuals to buy tickets and empower event hosts to easily create and sell tickets for their own events.
 
-| name         | type                        | unique | optional        |
-| ------------ | --------------------------- | ------ | --------------- |
-| event_name   | str                         | no     | no              |
-| event_image  | str                         | no     | no              |
-| event_type   | str                         | no     | no              |
-| date         | date                        | no     | no              |
-| start_time   | time                        | no     | no              |
-| end_time     | time                        | no     | no              |
-| description  | str                         | no     | no              |
-| event_id     | str                         | no     | no              |
-| tickets_sold | int                         | no     | default = 0     |
-| max_tickets  | int                         | no     | no              |
-| ticket_price | int                         | no     | no              |
-| created_by   | reference to Account entity | no     | no              |
-| promoted     | bool                        | no     | default = false |
-| venue        | str                         | no     | no              |
-| city         | str                         | no     | no              |
-| state_id     | str                         | no     | no              |
+---
 
-### Sales
+## Running the Project
+To launch this application on your local machine, please ensure that you meet the requirements.
 
-| name     | type                        | unique | optional |
-| -------- | --------------------------- | ------ | -------- |
-| event    | reference to Event entity   | no     | no       |
-| quantity | int                         | no     | no       |
-| sold_to  | reference to Account entity | no     | no       |
+#### Requirements:
 
-### Accounts
+* Docker
+* Google Chrome or any browser
 
-| name          | type | unique | optional        |
-| ------------- | ---- | ------ | --------------- |
-| username      | str  | yes    | no              |
-| password      | str  | no     | no              |
-| avatar_img    | str  | no     | yes             |
-| email         | str  | yes    | no              |
-| event_manager | bool | no     | default = false |
-
-### Events
-
-| name         | type                        | unique | optional        |
-| ------------ | --------------------------- | ------ | --------------- |
-| event_name   | str                         | no     | no              |
-| event_image  | str                         | no     | no              |
-| event_type   | str                         | no     | no              |
-| date         | date                        | no     | no              |
-| start_time   | time                        | no     | no              |
-| end_time     | time                        | no     | no              |
-| description  | str                         | no     | no              |
-| event_id     | str                         | no     | no              |
-| tickets_sold | int                         | no     | default = 0     |
-| max_tickets  | int                         | no     | no              |
-| ticket_price | int                         | no     | no              |
-| created_by   | reference to Account entity | no     | no              |
-| promoted     | bool                        | no     | default = false |
-| venue        | str                         | no     | no              |
-| city         | str                         | no     | no              |
-| state_id     | str                         | no     | no              |
-
-### Sales
-
-| name     | type                        | unique | optional |
-| -------- | --------------------------- | ------ | -------- |
-| event    | reference to Event entity   | no     | no       |
-| quantity | int                         | no     | no       |
-| sold_to  | reference to Account entity | no     | no       |
-
-### Accounts
-
-| name          | type | unique | optional        |
-| ------------- | ---- | ------ | --------------- |
-| username      | str  | yes    | no              |
-| password      | str  | no     | no              |
-| avatar_img    | str  | no     | yes             |
-| email         | str  | yes    | no              |
-| event_manager | bool | no     | default = false |
+#### Installation
+1. Fork Project by clicking Fork on top right of project(Login Required)
+2. Press Clone to grab URL from Forked project page then open up a terminal and run the git clone command.
+```
+    git clone "URL HERE"
+```
+3. Once the clone finishes, navigate to the correct directory by running this command in your terminal.
+```
+    cd passpro/app
+```
+4. While the terminal and run the following commands(Ensure Docker is running)
+```
+    1. docker-compose build
+    2. docker-compose up
+```
+5. There should be 3 containers that are running(The containers should be green)
+6. Wait until the terminal shows `You can now view app in the browser.`
+7. Open up Chrome(Browser) and type in `http://localhost:3000/` in the address bar.
+---
