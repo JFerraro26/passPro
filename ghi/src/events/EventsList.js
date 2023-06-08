@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCartList } from "../redux/slices/cartSlice";
 import { setEvent } from "../redux/slices/eventSlice";
 import dayjs from "dayjs";
 
