@@ -1,6 +1,8 @@
 from fastapi.testclient import TestClient
 from main import app
 from queries.sales_queries import SaleRepository
+from queries.accounts_queries import AccountOut
+from authenticator import authenticator
 
 
 client = TestClient(app)
@@ -23,6 +25,16 @@ class CreateSaleQueries:
         return result
 
 
+def fake_get_current_account_data():
+    return AccountOut(
+        id="f539138a-d3bf-46e8-a241-8de361ef6d62",
+        username="joe",
+        avatar_img="https://placehold.co/600x400",
+        email="joe@email.com",
+        event_manager=True,
+    )
+
+
 def test_list_sales():
     # Arrange
     app.dependency_overrides[SaleRepository] = EmptySaleQueries
@@ -40,6 +52,9 @@ def test_list_sales():
 def test_create_sale():
     # Arrange
     app.dependency_overrides[SaleRepository] = CreateSaleQueries
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = fake_get_current_account_data
 
     # Act
     json = {

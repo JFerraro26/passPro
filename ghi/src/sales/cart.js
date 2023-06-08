@@ -6,11 +6,12 @@ import { deleteCartItem } from "../redux/slices/cartSlice";
 
 
 function Cart() {
-  let dispatch = useDispatch();
   const eventList = useSelector(
     (state) => state.rootReducer.cart.globalCartList
   );
   const account = useSelector((state) => state.rootReducer.accountInfo.account);
+  const token = account?.token;
+  let dispatch = useDispatch();
 
   let totalPrice = 0;
   for (let event of eventList) {
@@ -32,10 +33,14 @@ function Cart() {
         method: "post",
         body: JSON.stringify(saleData),
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
+      console.log(JSON.stringify(saleData));
+      console.log("saledata", saleData);
       const response = await fetch(saleUrl, fetchConfig);
+      console.log("response", response);
       if (response.ok) {
         const newSale = await response.json();
         console.log("Tickets Purchased!", newSale);

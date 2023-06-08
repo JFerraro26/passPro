@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useUpdateMutation } from "../redux/store/accountsApi";
+import { useUpdateMutation } from "../redux/apis/accountsApi";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setAccountInfo } from "../redux/slices/accountSlice";
@@ -9,6 +9,7 @@ function BecomeEventManager() {
   const [edit] = useUpdateMutation();
   const account = useSelector((state) => state.rootReducer.accountInfo.account);
   const dispatchAccount = useDispatch();
+  const token = account?.token;
 
   const updatedAccount = {
     id: account.id,
@@ -20,10 +21,13 @@ function BecomeEventManager() {
 
   const handleAccept = async (e) => {
     try {
+      console.log("updated account", updatedAccount);
       await edit({
         accountId: account.id,
         updatedAccount,
+        token: token,
       });
+      updatedAccount.token = token;
       dispatchAccount(setAccountInfo(updatedAccount));
     } catch (error) {
       console.error("failed to update account");

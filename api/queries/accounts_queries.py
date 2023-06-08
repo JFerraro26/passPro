@@ -83,7 +83,9 @@ class Accountsrepository:
                         return Error(message="Account not found")
         except Exception as e:
             print(e)
-            return Error(message="Could not update account")
+            return Error(
+                message="Could not update Account Check terminal for errors"
+            )
 
     def get(self, username: str) -> AccountOutWithPassword:
         try:

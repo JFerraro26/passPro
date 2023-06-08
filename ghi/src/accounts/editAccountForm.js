@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useUpdateMutation } from "../redux/store/accountsApi";
+import { useUpdateMutation } from "../redux/apis/accountsApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccountInfo } from "../redux/slices/accountSlice";
 
@@ -11,6 +11,7 @@ const EditAccountForm = () => {
   const [email, setEmail] = useState("");
   const [eventManager, setEventManager] = useState("");
   const dispatch = useDispatch();
+  const token = account?.token;
 
   useEffect(() => {
     if (account) {
@@ -21,18 +22,25 @@ const EditAccountForm = () => {
     }
   }, [account]);
 
+  const updatedAccount = {
+    id: account.id,
+    username: username,
+    avatar_img: avatarImg,
+    email: email,
+    event_manager: eventManager,
+  };
+
   const handleUpdateAccount = async (e) => {
     e.preventDefault();
-    const updatedAccount = {
-      id: account.id,
-      username: username,
-      avatar_img: avatarImg,
-      email: email,
-      event_manager: eventManager,
-    };
 
-    const response = await edit({ accountId: account.id, updatedAccount });
+    const response = await edit({
+      accountId: account.id,
+      updatedAccount,
+      token: token,
+    });
+    console.log(response);
     if (response) {
+      updatedAccount.token = token;
       dispatch(setAccountInfo(updatedAccount));
     } else {
       console.error(response);
@@ -79,17 +87,7 @@ const EditAccountForm = () => {
             />
           </div>
           <div className="flex justify-center">
-            <label>
-              Event Manager:
-              <input
-                type="checkbox"
-                checked={eventManager}
-                onChange={(e) => setEventManager(e.target.checked)}
-              />
-            </label>
-          </div>
-          <div className="flex justify-center">
-            <button className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4">
+            <button className="bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded">
               Update Account
             </button>
           </div>
