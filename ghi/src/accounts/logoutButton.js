@@ -14,13 +14,13 @@ const LogoutButton = ({ handleOpen }) => {
             dispatch(setAccountInfo(null));
             dispatch(logout());
         } catch (error) {
-            navigate("/accounts/login");
+            navigate("/");
         }
     };
 
     return (
         <button
-            className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white hover:rounded-lg"
+            className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white hover:rounded-lg w-full"
             onClick={() => {
                 handleLogout();
                 handleOpen();
