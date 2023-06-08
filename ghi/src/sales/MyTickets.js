@@ -39,7 +39,16 @@ function MyTickets({ myEvents }) {
                 <td className="whitespace-nowrap px-6 py-4">
                   {sale.sale_quantity}
                 </td>
-                
+                <td>
+                  <Link
+                    onClick={() => dispatchEvent(setEvent(sale))}
+                    to="/events/detail"
+                    className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    type="button"
+                  >
+                    Details
+                  </Link>
+                </td>
               </tr>
             ))
           ) : (
