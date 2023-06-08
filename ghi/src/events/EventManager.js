@@ -68,20 +68,14 @@ function EventManager({ myEvents }) {
               >
                 <td className="whitespace-nowrap px-6 py-4">{event.date}</td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  <Link
-                    className="hover:text-blue-400"
-                    onClick={() => dispatchEvent(setEvent(event))}
-                    to="/events/detail"
-                  >
                     {event.event_name}
-                  </Link>
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">{event.venue}</td>
                 <td className="whitespace-nowrap px-6 py-4">{event.city}</td>
                 <td className="whitespace-nowrap px-6 py-4">
                   {event.tickets_sold}/{event.tickets_max}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className="whitespace-nowrap px-1 py-4">
                   <div className="inline-flex">
                     <Link
                       className="bg-transparent hover:bg-yellow-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-500 hover:border-transparent rounded"
@@ -99,6 +93,16 @@ function EventManager({ myEvents }) {
                       Delete
                     </button>
                   </div>
+                </td>
+                <td>
+                  <Link
+                    onClick={() => dispatchEvent(setEvent(event))}
+                    to="/events/detail"
+                    className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    type="button"
+                  >
+                    Details
+                  </Link>
                 </td>
               </tr>
             ))
