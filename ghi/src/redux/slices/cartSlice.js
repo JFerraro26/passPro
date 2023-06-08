@@ -21,9 +21,16 @@ export const CartSlice = createSlice({
                 state.globalCartList[eventIndex].quantity = quantity;
             }
         },
+        deleteCartItem: (state, action) => {
+            const { eventId } = action.payload;
+            const eventIndex = state.globalCartList.findIndex((event) => event.id === eventId)
+            if (eventIndex >= 0) {
+              state.globalCartList.splice(eventIndex, 1);
+            }
+        }
     },
 });
 
-export const { setCartList, updateCartQuantity, globalCartList } = CartSlice.actions;
+export const { setCartList, updateCartQuantity, deleteCartItem, globalCartList } = CartSlice.actions;
 
 export default CartSlice.reducer;

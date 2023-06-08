@@ -19,7 +19,6 @@ function MyTickets() {
             if (response.ok) {
                 const data = await response.json();
                 setAccount(data.sales);
-                console.log("data", data);
             }
         };
         // fetchSaleData();

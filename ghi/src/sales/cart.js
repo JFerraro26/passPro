@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import TicketQuantity from "./TicketQuantity";
+import { useDispatch } from "react-redux";
+import { deleteCartItem } from "../redux/slices/cartSlice";
 
 
 function Cart() {
+  let dispatch = useDispatch();
   const eventList = useSelector(
     (state) => state.rootReducer.cart.globalCartList
   );
@@ -32,13 +35,20 @@ function Cart() {
           "Content-Type": "application/json",
         },
       };
-      console.log(JSON.stringify(saleData));
-      console.log("saledata", saleData);
       const response = await fetch(saleUrl, fetchConfig);
       if (response.ok) {
         const newSale = await response.json();
         console.log("Tickets Purchased!", newSale);
       }
+    }
+  };
+
+  const DeleteButtonClick = async (event) => {
+    const confirm = window.confirm(
+      `Are you sure you want to delete ${event.event_name} from the cart?`
+    );
+    if (confirm) {
+      dispatch(deleteCartItem({eventId: event.id}))
     }
   };
 
@@ -115,7 +125,21 @@ function Cart() {
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className="flex flex-col space-y-1">
-                          ${event.tickets_price * event.quantity}
+                          $
+                          {parseFloat(
+                            event.tickets_price * event.quantity
+                          ).toFixed(2)}
+                        </div>
+                      </td>
+                      <td className="whitespace-nowrap px-1 py-4">
+                        <div className="inline-flex">
+                          <button
+                            onClick={() => DeleteButtonClick(event)}
+                            className="bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+                            type="button"
+                          >
+                            Delete
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -124,7 +148,7 @@ function Cart() {
               </tbody>
             </table>
             <div className="flex justify-end">
-              <h3>Total: ${totalPrice}</h3>
+              <h3>Total: ${parseFloat(totalPrice).toFixed(2)}</h3>
             </div>
             <div className="flex justify-end">
               <button
@@ -142,8 +166,3 @@ function Cart() {
 }
 
 export default Cart;
-
-// onChange={(e) => {
-//     handleQuantityChange(e);
-//     handlePriceChange(e);
-// }}

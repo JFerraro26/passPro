@@ -25,10 +25,6 @@ function TicketQuantity(props) {
     };
   };
 
-  const eventList = useSelector(
-    (state) => state.rootReducer.cart.globalCartList
-  );
-
 
   return (
     <div className="flex">
