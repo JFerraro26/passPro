@@ -44,7 +44,7 @@ function EventDetail() {
           <h1>{event.event_name}</h1>
         </div>
         <div className="flex col-start-1 col-span-3 row-start-2 row-span-2">
-          <p>{event.description}</p>
+          <p className="whitespace-pre-line">{event.description}</p>
         </div>
         <div className="flex flex-col col-start-4 col-span-2 row-start-2 row-span-2">
           <div>

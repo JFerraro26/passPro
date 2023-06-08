@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import TicketQuantity from "./TicketQuantity";
 import { useDispatch } from "react-redux";
 import { deleteCartItem } from "../redux/slices/cartSlice";
+import LoginPopUp from "../nav/LoginPopUp";
 import { useNavigate } from "react-router-dom";
 
 function Cart() {
@@ -42,7 +43,43 @@ function Cart() {
             };
             const response = await fetch(saleUrl, fetchConfig);
 
-            if (response.ok) {
+            const updateData = {};
+
+            updateData.event_name = event.event_name;
+            updateData.event_image = event.event_image;
+            updateData.event_type = event.event_type;
+            updateData.date = event.date;
+            updateData.start_time = event.start_time;
+            updateData.end_time = event.end_time;
+            updateData.description = event.description;
+            updateData.tickets_sold = event.tickets_sold + event.quantity;
+            updateData.tickets_max = event.tickets_max;
+            updateData.tickets_price = event.tickets_price;
+            updateData.promoted = event.promoted;
+            updateData.venue = event.venue;
+            updateData.city = event.city;
+            updateData.state_id = event.state_id;
+            updateData.created_by = event.created_by;
+
+            const fetchUpdateConfig = {
+                method: "put",
+                body: JSON.stringify(updateData),
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const updateResponse = await fetch(
+                `${process.env.REACT_APP_API_HOST}/api/events/${saleData.event}`,
+                fetchUpdateConfig
+            );
+            if (!response.ok) {
+                console.error(response);
+            }
+
+            if (!updateResponse.ok) {
+                console.error(updateResponse);
+            } else {
                 navigate("/sales/confirmation");
             }
         }
@@ -59,9 +96,9 @@ function Cart() {
 
     return (
         <>
-            <div className="container mx-auto">
+            <div className="flex flex-col mx-auto">
                 <h1 className="flex justify-center">Cart Checkout</h1>
-                <div className="flex justify-center">
+                <div className="flex-col justify-end">
                     <form onSubmit={handleSubmit} className="grid-cols-2">
                         <table className="min-w-full text-center text-sm font-light">
                             <thead className="border-b font-medium dark:border-neutral-500">
@@ -163,15 +200,22 @@ function Cart() {
                         <div className="flex justify-end">
                             <h3>Total: ${parseFloat(totalPrice).toFixed(2)}</h3>
                         </div>
-                        <div className="flex justify-end">
-                            <button
-                                className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
-                                type="submit"
-                            >
-                                Checkout
-                            </button>
-                        </div>
+                        {token ? (
+                            <div className="flex justify-end">
+                                <button
+                                    className="px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                                    type="submit"
+                                >
+                                    Checkout
+                                </button>
+                            </div>
+                        ) : null}
                     </form>
+                    {!token ? (
+                        <div className=" justify-center">
+                            <LoginPopUp />
+                        </div>
+                    ) : null}
                 </div>
             </div>
         </>
