@@ -18,7 +18,7 @@ class CreateEventQueries:
         result = {
             "id": "c08ca5b3-88b4-4d21-a82d-d8faa271549b",
             "event_name": "Flogging Molly",
-            "event_image": "https://ih1.redbubble.net/image.2875948426.6700/flat,128x128,075,t.jpg",
+            "event_image": "https://placehold.co/400",
             "event_type": "concert",
             "date": "2023-07-01",
             "start_time": "00:51:00",
@@ -71,7 +71,7 @@ def test_create_event():
     # Act
     json = {
         "event_name": "Flogging Molly",
-        "event_image": "https://ih1.redbubble.net/image.2875948426.6700/flat,128x128,075,t.jpg",
+        "event_image": "https://placehold.co/400",
         "event_type": "concert",
         "date": "2023-07-01",
         "start_time": "00:51:00",
@@ -90,7 +90,7 @@ def test_create_event():
     expected = {
         "id": "c08ca5b3-88b4-4d21-a82d-d8faa271549b",
         "event_name": "Flogging Molly",
-        "event_image": "https://ih1.redbubble.net/image.2875948426.6700/flat,128x128,075,t.jpg",
+        "event_image": "https://placehold.co/400",
         "event_type": "concert",
         "date": "2023-07-01",
         "start_time": "00:51:00",
