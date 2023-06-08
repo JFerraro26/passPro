@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setAccountInfo } from "../redux/slices/accountSlice";
 
 const SignUpForm = ({ setOpen }) => {
-  const [signUp, result] = useSignUpMutation();
+  const [signUp] = useSignUpMutation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [login] = useLoginMutation();
