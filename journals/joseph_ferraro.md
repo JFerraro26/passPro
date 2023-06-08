@@ -101,3 +101,11 @@ Today, I worked on:
 - the protected endpoints in the backend and front end
 
 The team worked on frontend goals and the protected endpoints
+
+## 6/8/23
+
+Today I worked on:
+
+- Front End Goals
+
+The team worked on frontend goals
