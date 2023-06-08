@@ -3,23 +3,23 @@ import { useSelector } from "react-redux";
 import TicketQuantity from "./TicketQuantity";
 
 
-function Cart(props) {
+function Cart() {
   const eventList = useSelector(
     (state) => state.rootReducer.cart.globalCartList
   );
   const account = useSelector((state) => state.rootReducer.accountInfo.account);
-  // console.log(eventList);
 
-  const [quantity, setQuantity] = useState(0);
-  const handleQuantityChange = (e) => {
-    const value = e.target.value;
-    setQuantity(value);
-  };
+  // const [quantity, setQuantity] = useState(0);
+  // const handleQuantityChange = (e) => {
+  //   const value = e.target.value;
+  //   setQuantity(value);
+  // };
+console.log("eventList", eventList);
 
-  // let totalPrice = 0;
-  // for (let event of eventList) {
-  //   totalPrice += event.tickets_price * quantity;
-  // }
+  let totalPrice = 0;
+  for (let event of eventList) {
+    totalPrice += event.tickets_price * event.quantity;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -123,7 +123,7 @@ function Cart(props) {
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className="flex flex-col space-y-1">
-                          {/* ${event.tickets_price * quantity} */}
+                          ${event.tickets_price * event.quantity}
                         </div>
                       </td>
                     </tr>
@@ -132,7 +132,7 @@ function Cart(props) {
               </tbody>
             </table>
             <div className="flex justify-end">
-              {/* <h3>Total: ${totalPrice}</h3> */}
+              <h3>Total: ${totalPrice}</h3>
             </div>
             <div className="flex justify-end">
               <button
