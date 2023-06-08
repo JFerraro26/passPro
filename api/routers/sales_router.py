@@ -19,7 +19,8 @@ def create_sale(
 
 @router.get("/api/sales", response_model=Union[List[SalesOut], Error])
 def list_sales(
-    response: Response, repo: SaleRepository = Depends(),
+    response: Response,
+    repo: SaleRepository = Depends(),
 ):
     if response:
         return repo.list_sales()
