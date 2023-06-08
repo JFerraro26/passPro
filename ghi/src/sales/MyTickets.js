@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setEvent } from "../redux/slices/eventSlice";
 
 function MyTickets({ myEvents }) {
-  const dispatchEvent = useDispatch();
+    const dispatchEvent = useDispatch();
 
   return (
     <>
