@@ -38,7 +38,10 @@ const LoginForm = () => {
         return;
       }
       const response = await fetch(
-        `${process.env.REACT_APP_API_HOST}/api/account/${accountUsername}`
+        `${process.env.REACT_APP_API_HOST}/api/account/${accountUsername}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       if (response.ok) {
         const accountData = await response.json();

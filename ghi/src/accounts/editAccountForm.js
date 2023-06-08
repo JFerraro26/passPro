@@ -11,6 +11,7 @@ const EditAccountForm = () => {
   const [email, setEmail] = useState("");
   const [eventManager, setEventManager] = useState("");
   const dispatch = useDispatch();
+  const token = account?.token;
 
   useEffect(() => {
     if (account) {
@@ -21,19 +22,25 @@ const EditAccountForm = () => {
     }
   }, [account]);
 
+  const updatedAccount = {
+    id: account.id,
+    username: username,
+    avatar_img: avatarImg,
+    email: email,
+    event_manager: eventManager,
+  };
+
   const handleUpdateAccount = async (e) => {
     e.preventDefault();
-    const updatedAccount = {
-      id: account.id,
-      username: username,
-      avatar_img: avatarImg,
-      email: email,
-      event_manager: eventManager,
-    };
 
-    const response = await edit({ accountId: account.id, updatedAccount });
+    const response = await edit({
+      accountId: account.id,
+      updatedAccount,
+      token: token,
+    });
+    console.log(response);
     if (response) {
-      updatedAccount.token = account.token;
+      updatedAccount.token = token;
       dispatch(setAccountInfo(updatedAccount));
     } else {
       console.error(response);
