@@ -39,10 +39,12 @@ const SignUpForm = () => {
     useEffect(() => {
         if (!result.isLoading) {
             if (result.isSuccess) {
-                login({ username, password });
-                navigate("/accounts/login");
+                const { data } = login({ username, password });
+                if (data) {
+                    setUsername(username);
+                }
+                navigate("/");
             } else if (result.isError) {
-                console.log("Invalid Information");
                 setInvalidCredentials(true);
             }
         }
