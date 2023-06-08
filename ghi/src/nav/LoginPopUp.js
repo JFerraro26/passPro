@@ -6,7 +6,7 @@ function LogInPopUP() {
     const [open, setOpen] = useState(false);
     const [login, setLogin] = useState(false);
     return (
-        <div className="relative">
+        <div className="flex justify-end">
             <button
                 className="relative block text-2xl font-semibold hover:text-red-500"
                 onClick={() => setOpen(true)}

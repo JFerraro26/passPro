@@ -7,24 +7,32 @@ function TicketQuantity(props) {
   const [ticketQuantity, setTicketQuantity] = useState(props.event.quantity);
 
   const addTicket = () => {
-
     const updateTicketQuantity = props.event.quantity + 1;
 
-    dispatch(updateCartQuantity({ eventId: props.event.id, quantity: updateTicketQuantity }));
+    dispatch(
+      updateCartQuantity({
+        eventId: props.event.id,
+        quantity: updateTicketQuantity,
+      })
+    );
     setTicketQuantity(updateTicketQuantity);
   };
 
   const reduceTicket = () => {
-    if (ticketQuantity === 0) {
+    if (ticketQuantity === 1) {
       return;
     } else {
-    const updateTicketQuantity = props.event.quantity - 1;
+      const updateTicketQuantity = props.event.quantity - 1;
 
-    dispatch(updateCartQuantity({eventId: props.event.id, quantity: updateTicketQuantity,}));
-    setTicketQuantity(updateTicketQuantity);
-    };
+      dispatch(
+        updateCartQuantity({
+          eventId: props.event.id,
+          quantity: updateTicketQuantity,
+        })
+      );
+      setTicketQuantity(updateTicketQuantity);
+    }
   };
-
 
   return (
     <div className="flex">
