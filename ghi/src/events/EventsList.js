@@ -50,10 +50,6 @@ function EventsList() {
     setVenues(Array.from(new Set(filteredEvents.map((event) => event.venue))));
   }, [filteredEvents]);
 
-  const AddToCartClick = async (event) => {
-    dispatch(setCartList(event));
-  };
-
   const handleEventSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData(e.target);
@@ -279,13 +275,7 @@ function EventsList() {
                     {dayjs(event.date).format("MM/DD/YYYY")}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">
-                    <Link
-                      className="hover:text-blue-400"
-                      onClick={() => dispatch(setEvent(event))}
-                      to="/events/detail"
-                    >
-                      {event.event_name}
-                    </Link>
+                    {event.event_name}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4">{event.venue}</td>
                   <td className="whitespace-nowrap px-6 py-4">{event.city}</td>
@@ -293,13 +283,14 @@ function EventsList() {
                     {event.state_id}
                   </td>
                   <td>
-                    <button
-                      onClick={() => AddToCartClick(event)}
-                      className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
+                    <Link
+                      onClick={() => dispatch(setEvent(event))}
+                      to="/events/detail"
+                      className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                       type="button"
                     >
-                      Add to Cart
-                    </button>
+                      Details
+                    </Link>
                   </td>
                 </tr>
               );

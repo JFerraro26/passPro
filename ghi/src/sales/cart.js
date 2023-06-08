@@ -9,13 +9,6 @@ function Cart() {
   );
   const account = useSelector((state) => state.rootReducer.accountInfo.account);
 
-  // const [quantity, setQuantity] = useState(0);
-  // const handleQuantityChange = (e) => {
-  //   const value = e.target.value;
-  //   setQuantity(value);
-  // };
-console.log("eventList", eventList);
-
   let totalPrice = 0;
   for (let event of eventList) {
     totalPrice += event.tickets_price * event.quantity;
@@ -42,7 +35,6 @@ console.log("eventList", eventList);
       console.log(JSON.stringify(saleData));
       console.log("saledata", saleData);
       const response = await fetch(saleUrl, fetchConfig);
-      console.log("response", response);
       if (response.ok) {
         const newSale = await response.json();
         console.log("Tickets Purchased!", newSale);
