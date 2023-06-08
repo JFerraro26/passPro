@@ -33,13 +33,9 @@ function Cart() {
           "Content-Type": "application/json",
         },
       };
-      console.log(JSON.stringify(saleData));
-      console.log("saledata", saleData);
       const response = await fetch(saleUrl, fetchConfig);
-      console.log("response", response);
-      if (response.ok) {
-        const newSale = await response.json();
-        console.log("Tickets Purchased!", newSale);
+      if (!response.ok) {
+        console.error(response);
       }
     }
   };

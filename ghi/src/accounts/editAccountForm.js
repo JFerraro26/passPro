@@ -38,7 +38,6 @@ const EditAccountForm = () => {
       updatedAccount,
       token: token,
     });
-    console.log(response);
     if (response) {
       updatedAccount.token = token;
       dispatch(setAccountInfo(updatedAccount));

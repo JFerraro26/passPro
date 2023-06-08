@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLoginMutation } from "../redux/apis/accountsApi";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAccountInfo } from "../redux/slices/accountSlice";
-import { Link } from "react-router-dom";
 
-const LoginForm = () => {
-  const navigate = useNavigate();
+const LoginForm = ({ setOpen }) => {
   const [login] = useLoginMutation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -47,13 +44,13 @@ const LoginForm = () => {
         const accountData = await response.json();
         accountData.token = token;
         dispatchAccount(setAccountInfo(accountData));
-        navigate("/");
+        setOpen(false);
       } else {
         console.error(response);
       }
     }
     fetchAccountData();
-  }, [accountUsername, dispatchAccount, navigate, token]);
+  }, [accountUsername, dispatchAccount, token]);
 
   return (
     <div className="container mx-auto">
@@ -121,11 +118,6 @@ const LoginForm = () => {
             </div>
           </form>
         </div>
-      </div>
-      <div className="flex justify-center mt-4">
-        <Link to="/accounts/signup" className="text-blue-500 underline">
-          Need an account? Sign Up Here!
-        </Link>
       </div>
     </div>
   );

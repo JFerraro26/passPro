@@ -21,7 +21,6 @@ function BecomeEventManager() {
 
   const handleAccept = async (e) => {
     try {
-      console.log("updated account", updatedAccount);
       await edit({
         accountId: account.id,
         updatedAccount,
