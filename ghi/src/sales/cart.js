@@ -6,6 +6,7 @@ function Cart() {
     (state) => state.rootReducer.cart.globalCartList
   );
   const account = useSelector((state) => state.rootReducer.accountInfo.account);
+  const token = account?.token;
 
   const [quantity, setQuantity] = useState(0);
   const handleQuantityChange = (e) => {
@@ -28,6 +29,7 @@ function Cart() {
         method: "post",
         body: JSON.stringify(saleData),
         headers: {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
