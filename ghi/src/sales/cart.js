@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import TicketQuantity from "./TicketQuantity";
 import { useDispatch } from "react-redux";
-import { deleteCartItem } from "../redux/slices/cartSlice";
+import { deleteCartItem, clearCartList } from "../redux/slices/cartSlice";
 import LoginPopUp from "../nav/LoginPopUp";
 import { useNavigate } from "react-router-dom";
 
@@ -80,6 +80,7 @@ function Cart() {
             if (!updateResponse.ok) {
                 console.error(updateResponse);
             } else {
+                dispatch(clearCartList());
                 navigate("/sales/confirmation");
             }
         }
