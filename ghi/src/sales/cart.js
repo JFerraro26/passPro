@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
+import TicketQuantity from "./TicketQuantity";
+import { useDispatch } from "react-redux";
+import { deleteCartItem } from "../redux/slices/cartSlice";
+
 
 function Cart() {
   const eventList = useSelector(
@@ -7,12 +11,12 @@ function Cart() {
   );
   const account = useSelector((state) => state.rootReducer.accountInfo.account);
   const token = account?.token;
+  let dispatch = useDispatch();
 
-  const [quantity, setQuantity] = useState(0);
-  const handleQuantityChange = (e) => {
-    const value = e.target.value;
-    setQuantity(value);
-  };
+  let totalPrice = 0;
+  for (let event of eventList) {
+    totalPrice += event.tickets_price * event.quantity;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +25,7 @@ function Cart() {
       const saleData = {};
 
       saleData.event = event.id;
-      saleData.quantity = quantity;
+      saleData.quantity = event.quantity;
       saleData.sold_to = account.id;
 
       const saleUrl = `${process.env.REACT_APP_API_HOST}/api/sales`;
@@ -37,6 +41,15 @@ function Cart() {
       if (!response.ok) {
         console.error(response);
       }
+    }
+  };
+
+  const DeleteButtonClick = async (event) => {
+    const confirm = window.confirm(
+      `Are you sure you want to delete ${event.event_name} from the cart?`
+    );
+    if (confirm) {
+      dispatch(deleteCartItem({eventId: event.id}))
     }
   };
 
@@ -79,10 +92,16 @@ function Cart() {
                   >
                     Ticket Quantity
                   </th>
+                  <th
+                    scope="col"
+                    className=" px-6 py-4 dark:border-neutral-500"
+                  >
+                    Price
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {eventList?.map((event) => {
+                {eventList?.map((event, index) => {
                   return (
                     <tr
                       key={event.id}
@@ -102,14 +121,26 @@ function Cart() {
                       </td>
                       <td className="whitespace-nowrap px-6 py-4">
                         <div className="flex flex-col space-y-1">
-                          <input
-                            onChange={handleQuantityChange}
-                            value={quantity}
-                            name="quantity"
-                            type="number"
-                            placeholder="0"
-                            className="px-2 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
-                          />
+                          <TicketQuantity event={event} index={index} />
+                        </div>
+                      </td>
+                      <td className="whitespace-nowrap px-6 py-4">
+                        <div className="flex flex-col space-y-1">
+                          $
+                          {parseFloat(
+                            event.tickets_price * event.quantity
+                          ).toFixed(2)}
+                        </div>
+                      </td>
+                      <td className="whitespace-nowrap px-1 py-4">
+                        <div className="inline-flex">
+                          <button
+                            onClick={() => DeleteButtonClick(event)}
+                            className="bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+                            type="button"
+                          >
+                            Delete
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -117,6 +148,9 @@ function Cart() {
                 })}
               </tbody>
             </table>
+            <div className="flex justify-end">
+              <h3>Total: ${parseFloat(totalPrice).toFixed(2)}</h3>
+            </div>
             <div className="flex justify-end">
               <button
                 className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
