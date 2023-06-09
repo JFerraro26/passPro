@@ -12,7 +12,7 @@ function ProfileDropdown() {
         setOpen(!open);
     };
     return (
-        <div className="relative">
+        <div className="relative z-10">
             <button
                 onClick={handleOpen}
                 className="relative block text-2xl font-semibold hover:text-red-500"
@@ -27,7 +27,7 @@ function ProfileDropdown() {
                 ></button>
             ) : null}
             {open ? (
-                <div className="absolute  top-auto right-0 w-48 mt-2 py-2 bg-white rounded-lg shadow-xl">
+                <div className="absolute top-auto right-0 w-48 mt-2 py-2 bg-white rounded-lg shadow-xl">
                     <NavLink
                         className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white hover:rounded-lg w-full text-center"
                         to="/accounts/profile"
