@@ -23,10 +23,6 @@ const LoginForm = ({ setOpen }) => {
         setInvalidLogin(true);
       }
     } catch (error) {}
-
-    setUsername("");
-    setPassword("");
-    e.target.reset();
   };
 
   useEffect(() => {
