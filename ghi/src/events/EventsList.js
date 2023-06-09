@@ -53,19 +53,19 @@ function EventsList() {
         );
     }, [filteredEvents]);
 
-  const handleEventSubmit = (e) => {
-    e.preventDefault();
-    let formData = new FormData(e.target);
-    let selectedEventTypes = Array.from(formData.getAll("eventType"));
-    if (selectedEventTypes.length === 0) {
-      return;
-    }
-    setFilteredEvents(
-      filteredEvents.filter((event) =>
-        selectedEventTypes.includes(event.event_type)
-      )
-    );
-  };
+    const handleEventSubmit = (e) => {
+        e.preventDefault();
+        let formData = new FormData(e.target);
+        let selectedEventTypes = Array.from(formData.getAll("eventType"));
+        if (selectedEventTypes.length === 0) {
+            return;
+        }
+        setFilteredEvents(
+            filteredEvents.filter((event) =>
+                selectedEventTypes.includes(event.event_type)
+            )
+        );
+    };
 
     const handleStateSubmit = (e) => {
         e.preventDefault();
@@ -301,42 +301,38 @@ function EventsList() {
                     <tbody>
                         {filteredEvents?.map((event) => {
                             return (
-                              <tr
-                                key={event.id}
-                                className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
-                              >
-                                <td className="whitespace-nowrap px-6 py-4">
-                                  {dayjs(event.date).format("MM/DD/YYYY")}
-                                </td>
-                                <td className="whitespace-nowrap px-6 py-4">
-                                  <Link
-                                    className="hover:text-blue-400"
-                                    onClick={() => dispatch(setEvent(event))}
-                                    to="/events/detail"
-                                  >
-                                    {event.event_name}
-                                  </Link>
-                                </td>
-                                <td className="whitespace-nowrap px-6 py-4">
-                                  {event.venue}
-                                </td>
-                                <td className="whitespace-nowrap px-6 py-4">
-                                  {event.city}
-                                </td>
-                                <td className="whitespace-nowrap px-6 py-4">
-                                  {event.state_id}
-                                </td>
-                                <td>
-                                  <Link
-                                    onClick={() => dispatch(setEvent(event))}
-                                    to="/events/detail"
-                                    className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                                    type="button"
-                                  >
-                                    Details
-                                  </Link>
-                                </td>
-                              </tr>
+                                <tr
+                                    key={event.id}
+                                    className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+                                >
+                                    <td className="whitespace-nowrap px-6 py-4">
+                                        {dayjs(event.date).format("MM/DD/YYYY")}
+                                    </td>
+                                    <td className="whitespace-nowrap px-6 py-4">
+                                        {event.event_name}
+                                    </td>
+                                    <td className="whitespace-nowrap px-6 py-4">
+                                        {event.venue}
+                                    </td>
+                                    <td className="whitespace-nowrap px-6 py-4">
+                                        {event.city}
+                                    </td>
+                                    <td className="whitespace-nowrap px-6 py-4">
+                                        {event.state_id}
+                                    </td>
+                                    <td>
+                                        <Link
+                                            onClick={() =>
+                                                dispatch(setEvent(event))
+                                            }
+                                            to="/events/detail"
+                                            className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                            type="button"
+                                        >
+                                            Details
+                                        </Link>
+                                    </td>
+                                </tr>
                             );
                         })}
                     </tbody>
