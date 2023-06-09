@@ -104,7 +104,7 @@ function MainPage() {
               </div>
               <div className="flex z-0 justify-center items-center col-start-3 col-span-2 row-start-5 row-span-1">
                 <h1 className="text-xs truncate font-semibold">
-                  {dayjs(events[rightIndex]?.date).format("MM/DD/YY")}
+                  {dayjs(events[rightIndex]?.date).format("MM-DD-YY")}
                 </h1>
               </div>
             </div>
@@ -132,7 +132,7 @@ function MainPage() {
               </div>
               <div className="flex z-0 justify-center items-center col-start-3 col-span-2 row-start-5 row-span-1">
                 <h1 className="text-2xl truncate font-semibold">
-                  {dayjs(events[currentIndex]?.date).format("MM/DD/YY")}
+                  {dayjs(events[currentIndex]?.date).format("MM-DD-YY")}
                 </h1>
               </div>
               <div className="z-0 flex justify-start items-center col-start-1 col-span-1 row-start-3 row-span-1">
@@ -174,7 +174,7 @@ function MainPage() {
               </div>
               <div className="flex z-0 justify-center items-center col-start-3 col-span-2 row-start-5 row-span-1">
                 <h1 className="text-xs truncate font-semibold">
-                  {dayjs(events[leftIndex]?.date).format("MM/DD/YY")}
+                  {dayjs(events[leftIndex]?.date).format("MM-DD-YY")}
                 </h1>
               </div>
             </div>
