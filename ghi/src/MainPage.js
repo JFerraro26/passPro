@@ -160,7 +160,6 @@ function MainPage() {
                                 </button>
                             </div>
                         </div>
-                        <p className="text-center">Make that Money</p>
                     </div>
                     <div className="flex flex-col justify-center content-center col-start-5 col-span-1 mt-12">
                         <div className="grid grid-cols-4 grid-rows-5 m-2">
