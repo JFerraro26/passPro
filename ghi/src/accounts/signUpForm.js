@@ -30,10 +30,8 @@ const SignUpForm = ({ setOpen }) => {
     e.preventDefault();
     try {
       const signUpResponse = await signUp(userData);
-      console.log(signUpResponse);
       if (signUpResponse.status === 200) {
         const { data } = await login({ username, password });
-        console.log(data);
         if (data) {
           setToken(data.access_token);
           setAccountUsername(username);
