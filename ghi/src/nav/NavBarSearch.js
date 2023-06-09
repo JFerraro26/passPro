@@ -61,7 +61,7 @@ function NavBarSearch() {
         className="relative border rounded-md h-10 w-80"
         id="search-bar"
         name="search-bar"
-        placeholder="Enter Event, City, State, or Venue"
+        placeholder="  Enter Event, City, State, or Venue"
       />
 
       {open ? (

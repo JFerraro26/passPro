@@ -6,11 +6,13 @@ function EventDetail() {
   const event = useSelector((state) => state.rootReducer.eventGrab.globalEvent);
   const dispatch = useDispatch();
   const [tickets, setTickets] = useState(1);
+  const [purchased, setPurchased] = useState(false);
 
   const AddToCartClick = (event) => {
     const updatedEvent = { ...event };
     updatedEvent.quantity = tickets;
     dispatch(setCartList(updatedEvent));
+    setPurchased(true);
   };
   if (event == null) {
     return (
@@ -25,7 +27,7 @@ function EventDetail() {
   };
 
   const removeTicket = () => {
-    if (tickets === 0) {
+    if (tickets <= 1) {
       return;
     } else {
       setTickets(tickets - 1);
@@ -47,30 +49,36 @@ function EventDetail() {
           <p className="whitespace-pre-line">{event.description}</p>
         </div>
         <div className="px-24 py-5 text-center flex flex-col col-start-4 col-span-2 row-start-2 row-span-2">
-          <div>
-            <div className="flex justify-center">
-              <div
-                onClick={removeTicket}
-                className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
-              >
-                -
+          {!purchased ? (
+            <div>
+              <div className="flex justify-center">
+                <div
+                  onClick={removeTicket}
+                  className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
+                >
+                  -
+                </div>
+                <div className="px-2 py-2 text-lg font-semibold">{tickets}</div>
+                <div
+                  onClick={addTicket}
+                  className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
+                >
+                  +
+                </div>
               </div>
-              <div className="px-2 py-2 text-lg font-semibold">{tickets}</div>
-              <div
-                onClick={addTicket}
-                className="bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
+              <button
+                onClick={() => AddToCartClick(event)}
+                className="my-2 bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
+                type="button"
               >
-                +
-              </div>
+                Add to Cart
+              </button>
             </div>
-            <button
-              onClick={() => AddToCartClick(event)}
-              className="my-2 bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
-              type="button"
-            >
-              Add to Cart
-            </button>
-          </div>
+          ) : (
+            <div className="border border-blue-500 bg-orange-300 rounded-xl">
+              <p className="text-2xl">Ticket added to Cart</p>
+            </div>
+          )}
           <p className="text-lg font-semibold">Event Date:</p>
           <div className="text-lg font-semibold">{event.date}</div>
           <p className="text-lg font-semibold">Event Time:</p>
