@@ -19,7 +19,7 @@ function TicketQuantity(props) {
   };
 
   const reduceTicket = () => {
-    if (ticketQuantity === 1) {
+    if (ticketQuantity <= 1) {
       return;
     } else {
       const updateTicketQuantity = props.event.quantity - 1;
