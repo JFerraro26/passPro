@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { setCartList } from "../redux/slices/cartSlice";
+import dayjs from "dayjs";
 
 function EventDetail() {
   const event = useSelector((state) => state.rootReducer.eventGrab.globalEvent);
@@ -71,11 +72,16 @@ function EventDetail() {
               Add to Cart
             </button>
           </div>
-          <p className="text-lg font-semibold">Event Date:</p>
-          <div className="text-lg font-semibold">{event.date}</div>
-          <p className="text-lg font-semibold">Event Time:</p>
           <div className="text-lg font-semibold">
-            {event.start_time} to {event.end_time}
+            Price: ${parseFloat(event.tickets_price * tickets).toFixed(2)}
+          </div>
+          <p className="mt-3 text-lg font-semibold">Event Date:</p>
+          <div className="text-lg font-semibold">
+            {dayjs(event.date).format("MM/DD/YYYY")}
+          </div>
+          <p className="mt-3 text-lg font-semibold">Event Time:</p>
+          <div className="text-lg font-semibold">
+            {dayjs(event.date + event.start_time).format("h:mm A")} - {dayjs(event.date + event.end_time).format("h:mm A")}
           </div>
         </div>
       </div>
