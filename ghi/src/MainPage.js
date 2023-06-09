@@ -1,12 +1,19 @@
+import { useDispatch } from "react-redux";
+import { setEvent } from "./redux/slices/eventSlice";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import { MdSportsBasketball } from "react-icons/md";
+import { FaTheaterMasks, FaMusic } from "react-icons/fa";
 
 function MainPage() {
+    const navigate = useNavigate();
     const [currentIndex, setCurrentIndex] = useState(1);
     const [leftIndex, setLeftIndex] = useState(0);
     const [rightIndex, setRightIndex] = useState(2);
     const [events, setEvents] = useState([]);
+    const eventDispatch = useDispatch();
 
     useEffect(() => {
         async function getEventData() {
@@ -63,6 +70,15 @@ function MainPage() {
         }
     };
 
+    const goToEvent = () => {
+        eventDispatch(setEvent(events[currentIndex]));
+        navigate("/events/detail");
+    };
+
+    const goToEventsList = (state) => {
+        navigate("/events/list", { state });
+    };
+
     return (
         <>
             {events ? (
@@ -71,24 +87,24 @@ function MainPage() {
                         <div className="grid grid-cols-4 grid-rows-5 m-2">
                             <div className="relative shadow-xl shadow-blue-500 border-4 border-blue-500 rounded-3xl overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5">
                                 <img
-                                    alt="event"
                                     className="absolute top-0 left-0 object-cover opacity-50 w-full h-full"
                                     src={events[rightIndex]?.event_image}
+                                    alt="event"
                                 />
                             </div>
                             <div className="flex z-0 justify-center items-center col-start-1 col-span-4 row-start-1 row-span-1">
-                                <h1 className="text-xs font-semibold">
+                                <h1 className="text-xs truncate font-semibold">
                                     {events[rightIndex]?.event_name}
                                 </h1>
                             </div>
                             <div className="flex z-0 justify-center items-center col-start-1 col-span-2 row-start-5 row-span-1">
-                                <h1 className="text-xs font-semibold">
+                                <h1 className="text-xs truncate font-semibold">
                                     {events[rightIndex]?.city},{" "}
                                     {events[rightIndex]?.state_id}{" "}
                                 </h1>
                             </div>
                             <div className="flex z-0 justify-center items-center col-start-3 col-span-2 row-start-5 row-span-1">
-                                <h1 className="text-xs font-semibold">
+                                <h1 className="text-xs truncate font-semibold">
                                     {dayjs(events[rightIndex]?.date).format(
                                         "MM-DD-YY"
                                     )}
@@ -103,24 +119,25 @@ function MainPage() {
                         <div className="grid grid-cols-4 grid-rows-5 m-2">
                             <div className="relative shadow-xl shadow-blue-500 border-4 border-blue-500 rounded-3xl overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5">
                                 <img
-                                    alt="event"
-                                    className="absolute top-0 left-0 object-cover opacity-50 w-full h-full"
+                                    onClick={goToEvent}
+                                    className="absolute top-0 left-0 object-cover opacity-50 w-full h-full cursor-pointer"
                                     src={events[currentIndex]?.event_image}
+                                    alt="event"
                                 />
                             </div>
                             <div className="flex z-0 justify-center items-center col-start-1 col-span-4 row-start-1 row-span-1">
-                                <h1 className="text-3xl font-semibold">
+                                <h1 className="text-3xl truncate font-semibold">
                                     {events[currentIndex]?.event_name}
                                 </h1>
                             </div>
                             <div className="flex z-0 justify-center items-center col-start-1 col-span-2 row-start-5 row-span-1">
-                                <h1 className="text-2xl font-semibold">
+                                <h1 className="text-2xl truncate font-semibold">
                                     {events[currentIndex]?.city},{" "}
                                     {events[currentIndex]?.state_id}{" "}
                                 </h1>
                             </div>
                             <div className="flex z-0 justify-center items-center col-start-3 col-span-2 row-start-5 row-span-1">
-                                <h1 className="text-2xl font-semibold">
+                                <h1 className="text-2xl truncate font-semibold">
                                     {dayjs(events[currentIndex]?.date).format(
                                         "MM-DD-YY"
                                     )}
@@ -149,24 +166,24 @@ function MainPage() {
                         <div className="grid grid-cols-4 grid-rows-5 m-2">
                             <div className="relative shadow-xl shadow-blue-500 border-4 border-blue-500 rounded-3xl overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5">
                                 <img
-                                    alt="event"
                                     className="absolute top-0 left-0 object-cover opacity-50 w-full h-full"
                                     src={events[leftIndex]?.event_image}
+                                    alt="event"
                                 />
                             </div>
                             <div className="flex z-0 justify-center items-center col-start-1 col-span-4 row-start-1 row-span-1">
-                                <h1 className="text-xs font-semibold">
+                                <h1 className="text-xs truncate font-semibold">
                                     {events[leftIndex]?.event_name}
                                 </h1>
                             </div>
                             <div className="flex z-0 justify-center items-center col-start-1 col-span-2 row-start-5 row-span-1">
-                                <h1 className="text-xs font-semibold">
+                                <h1 className="text-xs truncate font-semibold">
                                     {events[leftIndex]?.city},{" "}
                                     {events[leftIndex]?.state_id}{" "}
                                 </h1>
                             </div>
                             <div className="flex z-0 justify-center items-center col-start-3 col-span-2 row-start-5 row-span-1">
-                                <h1 className="text-xs font-semibold">
+                                <h1 className="text-xs truncate font-semibold">
                                     {dayjs(events[leftIndex]?.date).format(
                                         "MM-DD-YY"
                                     )}
@@ -174,8 +191,28 @@ function MainPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex border col-start-1 col-span-5 mt-12">
-                        <p>stuff here</p>
+                    <div className="flex justify-evenly col-start-1 col-span-5 mt-12">
+                        <button
+                            className="w-20 h-18 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
+                            onClick={() => goToEventsList("sport")}
+                        >
+                            <p>Sports</p>
+                            <MdSportsBasketball />
+                        </button>
+                        <button
+                            className="w-20 h-18 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
+                            onClick={() => goToEventsList("theater")}
+                        >
+                            <p>Theater</p>
+                            <FaTheaterMasks />
+                        </button>
+                        <button
+                            className="w-20 h-18 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
+                            onClick={() => goToEventsList("concert")}
+                        >
+                            <p>Concerts</p>
+                            <FaMusic />
+                        </button>
                     </div>
                 </div>
             ) : (

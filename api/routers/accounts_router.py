@@ -48,9 +48,8 @@ router = APIRouter()
 def update_account(
     account_id: UUID4,
     account: EditAccountIn,
-    repo: Accountsrepository = Depends(
-        authenticator.try_get_current_account_data
-    ),
+    account1: dict = Depends(authenticator.get_current_account_data),
+    repo: Accountsrepository = Depends(),
 ) -> Union[EditAccountOut, Error]:
     return repo.update_account_info(account_id, account)
 
@@ -97,6 +96,7 @@ async def create_account(
 def get_event_and_sale_from_account(
     account_id: UUID4,
     response: Response,
+    account: dict = Depends(authenticator.get_current_account_data),
     event_repo: EventRepository = Depends(),
     sales_repo: SaleRepository = Depends(),
 ):
@@ -106,22 +106,25 @@ def get_event_and_sale_from_account(
         if sales and events:
             return {"events": events, "sales": sales}
         elif sales:
-            return {"sales": sales}
+            return {"events": [], "sales": sales}
+        elif events:
+            return {"events": events, "sales": []}
         else:
-            return {"events": events}
+            return {"events": [], "sales": []}
     else:
         response.status_code = 400
         return {"Message": "Something went wrong"}
 
 
 @router.get("/api/account/{username}", response_model=Union[AccountOut, Error])
-def get_account_for_login(
+async def get_account_for_login(
     username: str,
     response: Response,
+    account: dict = Depends(authenticator.get_current_account_data),
     repo: Accountsrepository = Depends(),
 ) -> AccountOut:
-    account = repo.get_account_for_login(username)
-    if account is None:
+    accountData = repo.get_account_for_login(username)
+    if accountData is None:
         response.status_code = 404
         return {"message": "account does not exist"}
-    return account
+    return accountData

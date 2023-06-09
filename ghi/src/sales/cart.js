@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
+import TicketQuantity from "./TicketQuantity";
+import { useDispatch } from "react-redux";
+import { deleteCartItem, clearCartList } from "../redux/slices/cartSlice";
+import LoginPopUp from "../nav/LoginPopUp";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
     const eventList = useSelector(
@@ -8,12 +13,14 @@ function Cart() {
     const account = useSelector(
         (state) => state.rootReducer.accountInfo.account
     );
+    const token = account?.token;
+    const navigate = useNavigate();
+    let dispatch = useDispatch();
 
-    const [quantity, setQuantity] = useState(0);
-    const handleQuantityChange = (e) => {
-        const value = e.target.value;
-        setQuantity(value);
-    };
+    let totalPrice = 0;
+    for (let event of eventList) {
+        totalPrice += event.tickets_price * event.quantity;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +29,7 @@ function Cart() {
             const saleData = {};
 
             saleData.event = event.id;
-            saleData.quantity = quantity;
+            saleData.quantity = event.quantity;
             saleData.sold_to = account.id;
 
             const saleUrl = `${process.env.REACT_APP_API_HOST}/api/sales`;
@@ -30,25 +37,69 @@ function Cart() {
                 method: "post",
                 body: JSON.stringify(saleData),
                 headers: {
+                    Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
             };
-            console.log(JSON.stringify(saleData));
-            console.log("saledata", saleData);
             const response = await fetch(saleUrl, fetchConfig);
-            console.log("response", response);
-            if (response.ok) {
-                const newSale = await response.json();
-                console.log("Tickets Purchased!", newSale);
+
+            const updateData = {};
+
+            updateData.event_name = event.event_name;
+            updateData.event_image = event.event_image;
+            updateData.event_type = event.event_type;
+            updateData.date = event.date;
+            updateData.start_time = event.start_time;
+            updateData.end_time = event.end_time;
+            updateData.description = event.description;
+            updateData.tickets_sold = event.tickets_sold + event.quantity;
+            updateData.tickets_max = event.tickets_max;
+            updateData.tickets_price = event.tickets_price;
+            updateData.promoted = event.promoted;
+            updateData.venue = event.venue;
+            updateData.city = event.city;
+            updateData.state_id = event.state_id;
+            updateData.created_by = event.created_by;
+
+            const fetchUpdateConfig = {
+                method: "put",
+                body: JSON.stringify(updateData),
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            };
+            const updateResponse = await fetch(
+                `${process.env.REACT_APP_API_HOST}/api/events/${saleData.event}`,
+                fetchUpdateConfig
+            );
+            if (!response.ok) {
+                console.error(response);
             }
+
+            if (!updateResponse.ok) {
+                console.error(updateResponse);
+            } else {
+                dispatch(clearCartList());
+                navigate("/sales/confirmation");
+            }
+        }
+    };
+
+    const DeleteButtonClick = async (event) => {
+        const confirm = window.confirm(
+            `Are you sure you want to delete ${event.event_name} from the cart?`
+        );
+        if (confirm) {
+            dispatch(deleteCartItem({ eventId: event.id }));
         }
     };
 
     return (
         <>
-            <div className="container mx-auto">
+            <div className="flex flex-col mx-auto">
                 <h1 className="flex justify-center">Cart Checkout</h1>
-                <div className="flex justify-center">
+                <div className="flex-col justify-end">
                     <form onSubmit={handleSubmit} className="grid-cols-2">
                         <table className="min-w-full text-center text-sm font-light">
                             <thead className="border-b font-medium dark:border-neutral-500">
@@ -83,10 +134,16 @@ function Cart() {
                                     >
                                         Ticket Quantity
                                     </th>
+                                    <th
+                                        scope="col"
+                                        className=" px-6 py-4 dark:border-neutral-500"
+                                    >
+                                        Price
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {eventList?.map((event) => {
+                                {eventList?.map((event, index) => {
                                     return (
                                         <tr
                                             key={event.id}
@@ -106,16 +163,34 @@ function Cart() {
                                             </td>
                                             <td className="whitespace-nowrap px-6 py-4">
                                                 <div className="flex flex-col space-y-1">
-                                                    <input
-                                                        onChange={
-                                                            handleQuantityChange
-                                                        }
-                                                        value={quantity}
-                                                        name="quantity"
-                                                        type="number"
-                                                        placeholder="0"
-                                                        className="px-2 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+                                                    <TicketQuantity
+                                                        event={event}
+                                                        index={index}
                                                     />
+                                                </div>
+                                            </td>
+                                            <td className="whitespace-nowrap px-6 py-4">
+                                                <div className="flex flex-col space-y-1">
+                                                    $
+                                                    {parseFloat(
+                                                        event.tickets_price *
+                                                            event.quantity
+                                                    ).toFixed(2)}
+                                                </div>
+                                            </td>
+                                            <td className="whitespace-nowrap px-1 py-4">
+                                                <div className="inline-flex">
+                                                    <button
+                                                        onClick={() =>
+                                                            DeleteButtonClick(
+                                                                event
+                                                            )
+                                                        }
+                                                        className="bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+                                                        type="button"
+                                                    >
+                                                        Delete
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -124,14 +199,24 @@ function Cart() {
                             </tbody>
                         </table>
                         <div className="flex justify-end">
-                            <button
-                                className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
-                                type="submit"
-                            >
-                                Checkout
-                            </button>
+                            <h3>Total: ${parseFloat(totalPrice).toFixed(2)}</h3>
                         </div>
+                        {token ? (
+                            <div className="flex justify-end">
+                                <button
+                                    className="px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                                    type="submit"
+                                >
+                                    Checkout
+                                </button>
+                            </div>
+                        ) : null}
                     </form>
+                    {!token ? (
+                        <div className=" justify-center">
+                            <LoginPopUp />
+                        </div>
+                    ) : null}
                 </div>
             </div>
         </>

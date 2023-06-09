@@ -1,5 +1,5 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import { accountsApi } from "./accountsApi";
+import { accountsApi } from "../apis/accountsApi"
 import rootReducer from "../reducers/rootReducer";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 

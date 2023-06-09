@@ -10,6 +10,7 @@ import Cart from "./sales/cart";
 import MyTickets from "./sales/MyTickets";
 import MyProfile from "./accounts/myProfile";
 import EventsList from "./events/EventsList";
+import TicketsConfirmationPage from "./sales/ConfirmationPage";
 
 function App() {
     const domain = /https:\/\/[^/]+/;
@@ -34,6 +35,10 @@ function App() {
                     <Route path="/sales">
                         <Route path="my-tickets" element={<MyTickets />} />
                         <Route path="cart" element={<Cart />} />
+                        <Route
+                            path="confirmation"
+                            element={<TicketsConfirmationPage />}
+                        />
                     </Route>
                 </Routes>
             </div>

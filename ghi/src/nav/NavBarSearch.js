@@ -58,7 +58,7 @@ function NavBarSearch() {
           openDropdown();
           handleQueryChange(e);
         }}
-        className="relative border w-80"
+        className="relative border rounded-md h-10 w-80"
         id="search-bar"
         name="search-bar"
         placeholder="Enter Event, City, State, or Venue"
@@ -73,7 +73,7 @@ function NavBarSearch() {
             }}
             className="fixed inset-0 h-full w-full cursor-default"
           ></button>
-          <div className="border flex flex-col w-80 absolute top-auto">
+          <div className="border rounded-md flex flex-col w-80 absolute top-auto">
             <h1 className="bg-white text-2xl font-semibold">Events:</h1>
             {filteredEvents?.map((event) => {
               return (

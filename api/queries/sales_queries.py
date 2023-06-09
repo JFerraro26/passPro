@@ -69,7 +69,7 @@ class SaleRepository:
                         result.append(sale)
                     return result
         except Exception:
-            return {"Message": "Could not get sales list"}
+            return {"Message": "Could not get sales"}
 
     def create(self, sale: SalesIn) -> SalesOut:
         try:
@@ -91,7 +91,7 @@ class SaleRepository:
                     return SalesOut(id=id, **old_data)
         except Exception as e:
             print(e)
-            return {"Message": "Could not complete request"}
+            return {"Message": "Could not complete sale"}
 
     def get_sale_from_account(
         self, account_id: UUID

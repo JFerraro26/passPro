@@ -77,3 +77,35 @@ Today, I worked on:
 - Event Manager Agreement
 
 The team worked on redux and individual goals.
+
+## 6/5/23
+
+Today, I worked on:
+
+- A sidebar filter to our event list page
+
+The team worked on deployment and readme
+
+## 6/6/23
+
+Today, I worked on:
+
+- The same sidebar filter
+
+The team worked on frontend goals
+
+## 6/7/23
+
+Today, I worked on:
+
+- the protected endpoints in the backend and front end
+
+The team worked on frontend goals and the protected endpoints
+
+## 6/8/23
+
+Today I worked on:
+
+- Front End Goals
+
+The team worked on frontend goals

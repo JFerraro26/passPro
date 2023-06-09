@@ -1,33 +1,39 @@
-import {
-    useSignUpMutation,
-    useLoginMutation,
-} from "../redux/store/accountsApi";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSignUpMutation, useLoginMutation } from "../redux/apis/accountsApi";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setAccountInfo } from "../redux/slices/accountSlice";
 
-const SignUpForm = () => {
-    const [signUp, result] = useSignUpMutation();
+const SignUpForm = ({ setOpen }) => {
+    const [signUp] = useSignUpMutation();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [login] = useLoginMutation();
-    const navigate = useNavigate();
     const [avatarImg, setAvatarImg] = useState(
         "https://cdn.vox-cdn.com/thumbor/nCVu8PPQ1lSUhv8uCGcmsJbf0-A=/1400x1050/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/9140061/Screen_Shot_2017_08_29_at_4.27.44_PM.png"
     );
     const [email, setEmail] = useState("");
     const [eventManager, setEventManager] = useState(false);
     const [invalidCredentials, setInvalidCredentials] = useState(false);
+    const dispatch = useDispatch();
+
+    const userData = {
+        username,
+        password,
+        avatar_img: avatarImg,
+        email,
+        event_manager: eventManager,
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await signUp({
-                username,
-                password,
-                avatar_img: avatarImg,
-                email,
-                event_manager: eventManager,
-            });
+            await signUp(userData);
+            const { data } = await login({ username, password });
+            if (data) {
+                userData.token = data.access_token;
+                dispatch(setAccountInfo(userData));
+                setOpen(false);
+            }
         } catch (error) {
             console.error("Login error:", error);
         }
@@ -39,17 +45,6 @@ const SignUpForm = () => {
         setEventManager(false);
         e.target.reset();
     };
-    useEffect(() => {
-        if (!result.isLoading) {
-            if (result.isSuccess) {
-                login({ username, password });
-                navigate("/");
-            } else if (result.isError) {
-                console.log("Invalid Information");
-                setInvalidCredentials(true);
-            }
-        }
-    }, [result, login, navigate, username, password]);
 
     return (
         <div className="container mx-auto">

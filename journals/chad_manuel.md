@@ -318,3 +318,45 @@ Deployment
 ## Additional Thoughts/Idea
 
 ---
+
+---
+
+# 6/6/2023
+
+## Topic
+
+Tailwind
+React
+Redux
+
+## What was worked ?
+
+-   Today I mainly worked on the profile page. I refactored the code and made a fetch request to get the events and sales information then passing it down to it's child components.
+
+## To-Do
+
+-   Get started with another part of the readme and hopefully finish the project mvps soon.
+
+## Additional Thoughts/Idea
+
+---
+
+# 6/7/2023
+
+## Topic
+
+Unit tests
+Redux
+
+## What was worked ?
+
+-   Today was quite a tough day. We were able to work through two different big problems. It started off with seeing that something on the cloud front end was actually crashing, got the fix there by adding ternary operators and truthy checks. Then we had to figure out the issue with our auth not protecting things properly. We ended up passing the token into our redux state in order to get access to protected endpoints.
+
+## To-Do
+
+-   Finish strong! Finish confirmation page!
+-   Figure out how to fix my unit test for account creation
+
+## Additional Thoughts/Idea
+
+-

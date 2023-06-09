@@ -1,40 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setEvent } from "../redux/slices/eventSlice";
+import { useSelector } from "react-redux";
 
-function EventManager() {
-  const [events, setEvents] = useState([]);
+function EventManager({ myEvents }) {
+  const [events, setEvents] = useState(myEvents.events);
   const dispatchEvent = useDispatch();
-
-  useEffect(() => {
-    async function fetchEventData() {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_HOST}/api/events`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setEvents(data);
-      } else {
-        console.error(response);
-      }
-    }
-    fetchEventData();
-  }, []);
-
-  //   const AddToCartButtonClick = async (event) => {
-  //   console.log(`Added ${event.event_name} to your cart`);
-  //     const eventID = event.id;
-  //     const custUrl = `http://localhost:8000/api/events/${eventID}`;
-  //     const fetchConfig = { method: "delete" };
-  //     const response = await fetch(custUrl, fetchConfig);
-  //     if (response.ok) {
-  //       const updatedEvents = events.filter((item) => item.id !== eventID);
-  //       setEvents(updatedEvents);
-  //     } else {
-  //       console.error(response);
-  //     }
-  // };
+  const account = useSelector((state) => state.rootReducer.accountInfo.account);
+  const token = account?.token;
 
   const DeleteButtonClick = async (event) => {
     const confirm = window.confirm(
@@ -43,7 +17,12 @@ function EventManager() {
     if (confirm) {
       const eventID = event.id;
       const custUrl = `${process.env.REACT_APP_API_HOST}/api/events/${eventID}`;
-      const fetchConfig = { method: "delete" };
+      const fetchConfig = {
+        method: "delete",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
       const response = await fetch(custUrl, fetchConfig);
       if (response.ok) {
         const updatedEvents = events.filter((item) => item.id !== eventID);
@@ -81,28 +60,22 @@ function EventManager() {
           </tr>
         </thead>
         <tbody>
-          {events?.map((event) => {
-            return (
+          {events.length !== 0 ? (
+            events.map((event) => (
               <tr
                 key={event.id}
                 className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
                 <td className="whitespace-nowrap px-6 py-4">{event.date}</td>
                 <td className="whitespace-nowrap px-6 py-4">
-                  <Link
-                    className="hover:text-blue-400"
-                    onClick={() => dispatchEvent(setEvent(event))}
-                    to="/events/detail"
-                  >
                     {event.event_name}
-                  </Link>
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">{event.venue}</td>
                 <td className="whitespace-nowrap px-6 py-4">{event.city}</td>
                 <td className="whitespace-nowrap px-6 py-4">
                   {event.tickets_sold}/{event.tickets_max}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className="whitespace-nowrap px-1 py-4">
                   <div className="inline-flex">
                     <Link
                       className="bg-transparent hover:bg-yellow-500 text-yellow-500 font-semibold hover:text-white py-2 px-4 border border-yellow-500 hover:border-transparent rounded"
@@ -121,9 +94,31 @@ function EventManager() {
                     </button>
                   </div>
                 </td>
+                <td>
+                  <Link
+                    onClick={() => dispatchEvent(setEvent(event))}
+                    to="/events/detail"
+                    className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    type="button"
+                  >
+                    Details
+                  </Link>
+                </td>
               </tr>
-            );
-          })}
+            ))
+          ) : (
+            <tr>
+              <td colSpan="6" className="text-center py-5">
+                <Link
+                  className="bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded"
+                  type="button"
+                  to="/events/form"
+                >
+                  Create an Event
+                </Link>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </>
