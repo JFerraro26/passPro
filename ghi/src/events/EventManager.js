@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setEvent } from "../redux/slices/eventSlice";
 import { useSelector } from "react-redux";
+import dayjs from "dayjs";
 
 function EventManager({ myEvents }) {
   const [events, setEvents] = useState(myEvents.events);
@@ -54,9 +55,6 @@ function EventManager({ myEvents }) {
             <th scope="col" className=" px-6 py-4 dark:border-neutral-500">
               Tickets
             </th>
-            <th scope="col" className=" px-6 py-4 dark:border-neutral-500">
-              Update/Delete
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -66,9 +64,11 @@ function EventManager({ myEvents }) {
                 key={event.id}
                 className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
               >
-                <td className="whitespace-nowrap px-6 py-4">{event.date}</td>
                 <td className="whitespace-nowrap px-6 py-4">
-                    {event.event_name}
+                  {dayjs(event.date).format("MM/DD/YYYY")}
+                </td>
+                <td className="whitespace-nowrap px-6 py-4">
+                  {event.event_name}
                 </td>
                 <td className="whitespace-nowrap px-6 py-4">{event.venue}</td>
                 <td className="whitespace-nowrap px-6 py-4">{event.city}</td>
@@ -87,18 +87,16 @@ function EventManager({ myEvents }) {
                     </Link>
                     <button
                       onClick={() => DeleteButtonClick(event)}
-                      className="bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+                      className="ml-3 bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
                       type="button"
                     >
                       Delete
                     </button>
                   </div>
-                </td>
-                <td>
                   <Link
                     onClick={() => dispatchEvent(setEvent(event))}
                     to="/events/detail"
-                    className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    className=" ml-3 bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                     type="button"
                   >
                     Details

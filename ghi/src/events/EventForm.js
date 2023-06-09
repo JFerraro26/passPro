@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import StateList from "../state_list/StateList";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setEvent } from "../redux/slices/eventSlice";
 
 function EventForm() {
   const { state } = useLocation();
@@ -19,6 +22,8 @@ function EventForm() {
   const [stateId, setStateId] = useState("");
   const account = useSelector((state) => state.rootReducer.accountInfo.account);
   const token = account.token;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (state == null) {
@@ -80,18 +85,8 @@ function EventForm() {
       };
       const response = await fetch(eventUrl, eventFetchConfig);
       if (response.ok) {
-        setTypeEvent("");
-        setNameEvent("");
-        setImageEvent("");
-        setDate("");
-        setStartTime("");
-        setEndTime("");
-        setDescription("");
-        setTicketsMax("");
-        setTicketsPrice("");
-        setVenue("");
-        setCity("");
-        setStateId("");
+        dispatch(setEvent(formData));
+        navigate("/events/detail");
       } else {
         console.error(response);
       }
@@ -108,18 +103,8 @@ function EventForm() {
       };
       const response = await fetch(eventUrl, eventFetchConfig);
       if (response.ok) {
-        setTypeEvent("");
-        setNameEvent("");
-        setImageEvent("");
-        setDate("");
-        setStartTime("");
-        setEndTime("");
-        setDescription("");
-        setTicketsMax("");
-        setTicketsPrice("");
-        setVenue("");
-        setCity("");
-        setStateId("");
+        dispatch(setEvent(formData));
+        navigate("/events/detail");
       } else {
         console.error(response);
       }
