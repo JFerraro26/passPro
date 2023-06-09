@@ -37,10 +37,10 @@ function EventDetail() {
 
   return (
     <>
-      <div className="grid grid-cols-5 grid-rows-2">
-        <div className="flex flex-col items-center col-start-1 col-span-5 row-start-1 row-span-1">
+      <div className="grid grid-cols-5 grid-rows-5">
+        <div className="flex flex-col items-center col-start-2 col-span-3 row-start-1 row-span-1">
           <img
-            className=" relative overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5"
+            className=" relative overflow-hidden aspect-video"
             src={event.event_image}
             alt={event.event_name}
           />
