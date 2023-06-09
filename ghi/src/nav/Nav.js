@@ -30,7 +30,7 @@ function Nav() {
 
   return (
     <nav>
-      <div className="grid grid-cols-7 bg-blue-500">
+      <div className="h-20  grid grid-cols-7 bg-blue-500">
         <div className="mt-1 col-start-1 col-span-1">
           <NavLink className="" to="/">
             <img

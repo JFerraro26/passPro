@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LoginForm from "../accounts/loginForm";
 import SignUpForm from "../accounts/signUpForm";
+import { AiOutlineCloseSquare } from "react-icons/ai";
 
 function LogInPopUP() {
   const [open, setOpen] = useState(false);
@@ -14,9 +15,10 @@ function LogInPopUP() {
         Login
       </button>
       {open ? (
-        <div className="fixed z-10 top-0 left-0 h-full w-full">
-          <div className="m-16 grid grid-cols-5 grid-rows-5">
-            <div className="bg-orange-100 flex flex-col col-start-2 col-span-3 row-start-1 row-span-3 border-4 border-blue-500 rounded-2xl mt-16">
+        <div className="fixed top-0 left-0 h-full w-full">
+          <button className="h-full w-full bg-black opacity-50 z-10"></button>
+          <div className="grid grid-cols-5 grid-rows-5 mt-20">
+            <div className="z-20 bg-orange-100 flex flex-col col-start-2 col-span-3 row-start-2 row-span-3 border-4 border-blue-500 rounded-2xl">
               <div className="m-8">
                 <button onClick={() => setOpen(false)}>exit</button>
                 {login ? (
