@@ -360,3 +360,24 @@ Redux
 ## Additional Thoughts/Idea
 
 -
+
+# 6/8/2023
+
+## Topic
+
+Unit Test
+Redux
+Deployment
+
+## What was worked ?
+
+-   Today we were able to finish up most of our mvps. We fixed up the navbar alongside fixing up the updating portion of the backend on sales. Confirmation page was also finished. The backend broke all of a sudden after we tried to push a new image.
+
+## To-Do
+
+-   Styling
+-   Get website back up
+
+## Additional Thoughts/Idea
+
+-   Time to present tomorrow!
