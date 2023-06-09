@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { deleteCartItem, clearCartList } from "../redux/slices/cartSlice";
 import LoginPopUp from "../nav/LoginPopUp";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 function Cart() {
     const eventList = useSelector(
@@ -145,55 +146,55 @@ function Cart() {
                             <tbody>
                                 {eventList?.map((event, index) => {
                                     return (
-                                        <tr
-                                            key={event.id}
-                                            className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
-                                        >
-                                            <td className="whitespace-nowrap px-6 py-4">
-                                                {event.date}
-                                            </td>
-                                            <td className="whitespace-nowrap px-6 py-4">
-                                                {event.event_name}
-                                            </td>
-                                            <td className="whitespace-nowrap px-6 py-4">
-                                                {event.venue}
-                                            </td>
-                                            <td className="whitespace-nowrap px-6 py-4">
-                                                {event.city}
-                                            </td>
-                                            <td className="whitespace-nowrap px-6 py-4">
-                                                <div className="flex flex-col space-y-1">
-                                                    <TicketQuantity
-                                                        event={event}
-                                                        index={index}
-                                                    />
-                                                </div>
-                                            </td>
-                                            <td className="whitespace-nowrap px-6 py-4">
-                                                <div className="flex flex-col space-y-1">
-                                                    $
-                                                    {parseFloat(
-                                                        event.tickets_price *
-                                                            event.quantity
-                                                    ).toFixed(2)}
-                                                </div>
-                                            </td>
-                                            <td className="whitespace-nowrap px-1 py-4">
-                                                <div className="inline-flex">
-                                                    <button
-                                                        onClick={() =>
-                                                            DeleteButtonClick(
-                                                                event
-                                                            )
-                                                        }
-                                                        className="bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
-                                                        type="button"
-                                                    >
-                                                        Delete
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                      <tr
+                                        key={event.id}
+                                        className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+                                      >
+                                        <td className="whitespace-nowrap px-6 py-4">
+                                          {dayjs(event.date).format(
+                                            "MM/DD/YYYY"
+                                          )}
+                                        </td>
+                                        <td className="whitespace-nowrap px-6 py-4">
+                                          {event.event_name}
+                                        </td>
+                                        <td className="whitespace-nowrap px-6 py-4">
+                                          {event.venue}
+                                        </td>
+                                        <td className="whitespace-nowrap px-6 py-4">
+                                          {event.city}
+                                        </td>
+                                        <td className="whitespace-nowrap px-6 py-4">
+                                          <div className="flex flex-col space-y-1">
+                                            <TicketQuantity
+                                              event={event}
+                                              index={index}
+                                            />
+                                          </div>
+                                        </td>
+                                        <td className="whitespace-nowrap px-6 py-4">
+                                          <div className="flex flex-col space-y-1">
+                                            $
+                                            {parseFloat(
+                                              event.tickets_price *
+                                                event.quantity
+                                            ).toFixed(2)}
+                                          </div>
+                                        </td>
+                                        <td className="whitespace-nowrap px-1 py-4">
+                                          <div className="inline-flex">
+                                            <button
+                                              onClick={() =>
+                                                DeleteButtonClick(event)
+                                              }
+                                              className="bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+                                              type="button"
+                                            >
+                                              Delete
+                                            </button>
+                                          </div>
+                                        </td>
+                                      </tr>
                                     );
                                 })}
                             </tbody>
