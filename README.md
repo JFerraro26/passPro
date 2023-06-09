@@ -31,7 +31,7 @@ To launch this application on your local machine, please ensure that you meet th
 
 #### Installation
 
-1. Fork Project by clicking Fork on top right of project(Login Required)
+1. Fork Project by clicking Fork on top right of project (Login Required)
 2. Press Clone to grab URL from Forked project page then open up a terminal and run the git clone command.
 
 ```
@@ -44,7 +44,7 @@ To launch this application on your local machine, please ensure that you meet th
     cd passpro/app
 ```
 
-4. While the terminal and run the following commands(Ensure Docker is running)
+4. While the terminal and run the following commands (Ensure Docker is running)
 
 ```
     1. docker-compose build
