@@ -74,7 +74,7 @@ function NavBarSearch() {
             className="fixed inset-0 h-full w-full cursor-default"
           ></button>
           <div className="border rounded-md flex flex-col w-80 absolute top-auto">
-            <h1 className="bg-white text-2xl font-semibold">Events:</h1>
+            <h1 className="z-10 bg-white text-2xl font-semibold">Events:</h1>
             {filteredEvents?.map((event) => {
               return (
                 <Link
