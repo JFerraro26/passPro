@@ -25,7 +25,7 @@ function EventDetail() {
   };
 
   const removeTicket = () => {
-    if (tickets === 0) {
+    if (tickets <= 1) {
       return;
     } else {
       setTickets(tickets - 1);
