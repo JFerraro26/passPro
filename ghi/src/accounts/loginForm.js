@@ -50,7 +50,7 @@ const LoginForm = ({ setOpen }) => {
 
   return (
     <div className="container mx-auto">
-      <h5 className="flex justify-center">Login</h5>
+      <h5 className="text-2xl flex justify-center mb-2">Login</h5>
       {invalidLogin ? (
         <div className="flex items-center justify-center">
           <div
@@ -78,7 +78,7 @@ const LoginForm = ({ setOpen }) => {
         </div>
       ) : null}
       <div className="flex justify-center">
-        <div className="bg-blue-500 px-6 py-4 rounded-md">
+        <div className="bg-blue-500 px-6 py-4 rounded-lg">
           <form className="grid-cols-2" onSubmit={(e) => handleSubmit(e)}>
             <div className="flex flex-col space-y-1">
               <label className="text-sm font-semibold text-white">
@@ -92,7 +92,7 @@ const LoginForm = ({ setOpen }) => {
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
-            <div className="flex flex-col space-y-1">
+            <div className="flex flex-col mt-2 space-y-1">
               <label className="text-sm font-semibold text-white">
                 Password:
               </label>
@@ -106,7 +106,7 @@ const LoginForm = ({ setOpen }) => {
             </div>
             <div className="flex justify-end">
               <button
-                className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-orange-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                className="mt-4 w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-green-500 rounded-md shadow hover:bg-green-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
                 type="submit"
               >
                 Login
