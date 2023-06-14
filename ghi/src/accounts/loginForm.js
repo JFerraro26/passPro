@@ -78,7 +78,7 @@ const LoginForm = ({ setOpen }) => {
         </div>
       ) : null}
       <div className="flex justify-center">
-        <div className="bg-blue-500 px-6 py-4 rounded-lg">
+        <div className="bg-blue-500 px-4 py-4 rounded-lg">
           <form className="grid-cols-2" onSubmit={(e) => handleSubmit(e)}>
             <div className="flex flex-col space-y-1">
               <label className="text-sm font-semibold text-white">

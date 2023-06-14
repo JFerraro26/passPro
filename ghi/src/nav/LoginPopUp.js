@@ -30,7 +30,7 @@ function LogInPopUP() {
               <div className="m-8">
                 <div className="flex justify-end">
                   <button
-                    className="text-xl text-blue-500 hover:text-orange-500"
+                    className="text-xl text-blue-500 hover:text-green-600"
                     onClick={() => setOpen(false)}
                   >
                     <AiOutlineCloseSquare />
@@ -48,45 +48,51 @@ function LogInPopUP() {
                       }}
                       className="grid grid-cols-4"
                     >
-                      <div className="flex flex-col col-start-1 col-span-2">
-                        <div>
-                          <img
-                            src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60"
-                            alt="concert"
-                          />
-                        </div>
+                      <div className="flex flex-col col-start-1 col-span-2 items-center justify-center">
+                        <img
+                          className="w-full rounded-2xl shadow-xl"
+                          src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60"
+                          alt="concert"
+                        />
                         <button
                           onClick={() => setLogin(!login)}
-                          className="mt-4 underline text-blue-500 hover:text-orange-500 transition-all"
+                          className="mt-4 underline text-blue-500 hover:text-green-600 transition-all"
                         >
                           Already have an account? Click Here!
                         </button>
                       </div>
-                      <motion.div className="flex flex-col col-start-3 col-span-2">
+                      <div className="flex flex-col col-start-3 col-span-2 items-center justify-center">
                         <SignUpForm setOpen={setOpen} />
-                      </motion.div>
+                      </div>
                     </motion.div>
                   ) : (
-                    <div className="grid grid-cols-4">
-                      <motion.div
-                        key="LoginForm"
-                        initial={{ y: 200, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{
-                          type: "spring",
-                          duration: 1,
-                        }}
-                        className="flex flex-col col-start-1 col-span-2  mt-10"
-                      >
+                    <motion.div
+                      key="LoginForm"
+                      initial={{ y: 200, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        type: "spring",
+                        duration: 1,
+                      }}
+                      className="flex flex-row justify-center items-center gap-x-5"
+                    >
+                      <div className="flex flex-col row-start-1 row-span-4 col-start-1 col-span-2 items-center justify-center">
                         <LoginForm setOpen={setOpen} />
+                      </div>
+                      <div className="mt-20 flex flex-col col-start-3 col-span-2 items-center justify-center row-start-1 row-span-4">
+                        <img
+                          className="w-full rounded-2xl shadow-xl"
+                          src="https://img.freepik.com/free-photo/excited-audience-watching-confetti-fireworks-having-fun-music-festival-night-copy-space_637285-559.jpg?size=626&ext=jpg"
+                          alt="concert"
+                        />
                         <button
                           onClick={() => setLogin(!login)}
-                          className="mt-4 underline text-blue-500 hover:text-orange-500 transition-all"
+                          className="mt-4 underline text-blue-500 hover:text-green-600 transition-all"
                         >
                           Need an account? Sign Up Here!
                         </button>
-                      </motion.div>
-                    </div>
+                      </div>
+                    </motion.div>
                   )}
                 </AnimatePresence>
               </div>
