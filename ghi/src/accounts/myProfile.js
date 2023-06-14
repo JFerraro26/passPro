@@ -52,7 +52,8 @@ const MyProfile = () => {
                     <img
                         src={profileImage}
                         alt="profilepicture"
-                        className="shadow-lg rounded-full h-auto align-middle border-none max-w-md max-h-md"
+                        className="h-auto max-w-full rounded-full"
+                        style={{ maxWidth: "100%", maxHeight: "300px" }}
                     />
                 </div>
                 <h1
@@ -106,7 +107,10 @@ const MyProfile = () => {
                 </div>
             </div>
             <div className="w-6/12 sm:w-4/12 m-0-auto m-w-sm m-h-sm">
-                <div className="flex flex-col items-start bg-blue-200 p-4 rounded-lg ">
+                <div
+                    className="flex flex-col items-start bg-blue-200 p-4 rounded-lg "
+                    style={{ maxWidth: "100%", maxHeight: "300px" }}
+                >
                     <button
                         href=""
                         className="w-full bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded my-3"
