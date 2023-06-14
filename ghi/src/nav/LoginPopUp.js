@@ -8,7 +8,7 @@ function LogInPopUP() {
   return (
     <div className="flex justify-end">
       <button
-        className="relative block text-2xl font-semibold hover:text-red-500"
+        className="relative block text-2xl font-semibold hover:text-orange-500"
         onClick={() => setOpen(true)}
       >
         Login

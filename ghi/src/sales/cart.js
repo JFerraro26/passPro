@@ -97,130 +97,122 @@ function Cart() {
     };
 
     return (
-        <>
-            <div className="flex flex-col mx-auto">
-                <h1 className="flex justify-center">Cart Checkout</h1>
-                <div className="flex-col justify-end">
-                    <form onSubmit={handleSubmit} className="grid-cols-2">
-                        <table className="min-w-full text-center text-sm font-light">
-                            <thead className="border-b font-medium dark:border-neutral-500">
-                                <tr>
-                                    <th
-                                        scope="col"
-                                        className=" px-6 py-4 dark:border-neutral-500"
-                                    >
-                                        Date
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className=" px-6 py-4 dark:border-neutral-500"
-                                    >
-                                        Event
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className=" px-6 py-4 dark:border-neutral-500"
-                                    >
-                                        Venue
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className=" px-6 py-4 dark:border-neutral-500"
-                                    >
-                                        City
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className=" px-6 py-4 dark:border-neutral-500"
-                                    >
-                                        Ticket Quantity
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className=" px-6 py-4 dark:border-neutral-500"
-                                    >
-                                        Price
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {eventList?.map((event, index) => {
-                                    return (
-                                      <tr
-                                        key={event.id}
-                                        className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
-                                      >
-                                        <td className="whitespace-nowrap px-6 py-4">
-                                          {dayjs(event.date).format(
-                                            "MM/DD/YYYY"
-                                          )}
-                                        </td>
-                                        <td className="whitespace-nowrap px-6 py-4">
-                                          {event.event_name}
-                                        </td>
-                                        <td className="whitespace-nowrap px-6 py-4">
-                                          {event.venue}
-                                        </td>
-                                        <td className="whitespace-nowrap px-6 py-4">
-                                          {event.city}
-                                        </td>
-                                        <td className="whitespace-nowrap px-6 py-4">
-                                          <div className="flex flex-col space-y-1">
-                                            <TicketQuantity
-                                              event={event}
-                                              index={index}
-                                            />
-                                          </div>
-                                        </td>
-                                        <td className="whitespace-nowrap px-6 py-4">
-                                          <div className="flex flex-col space-y-1">
-                                            $
-                                            {parseFloat(
-                                              event.tickets_price *
-                                                event.quantity
-                                            ).toFixed(2)}
-                                          </div>
-                                        </td>
-                                        <td className="whitespace-nowrap px-1 py-4">
-                                          <div className="inline-flex">
-                                            <button
-                                              onClick={() =>
-                                                DeleteButtonClick(event)
-                                              }
-                                              className="bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
-                                              type="button"
-                                            >
-                                              Delete
-                                            </button>
-                                          </div>
-                                        </td>
-                                      </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                        <div className="flex justify-end">
-                            <h3>Total: ${parseFloat(totalPrice).toFixed(2)}</h3>
-                        </div>
-                        {token ? (
-                            <div className="flex justify-end">
-                                <button
-                                    className="px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
-                                    type="submit"
-                                >
-                                    Checkout
-                                </button>
-                            </div>
-                        ) : null}
-                    </form>
-                    {!token ? (
-                        <div className=" justify-center">
-                            <LoginPopUp />
-                        </div>
-                    ) : null}
+      <>
+        <div className="flex flex-col mx-auto bg-green-100">
+          <h1 className="flex justify-center">Cart Checkout</h1>
+          <div className="flex-col justify-end">
+            <form onSubmit={handleSubmit} className="grid-cols-2">
+              <table className="min-w-full text-center text-sm font-light">
+                <thead className="border-b font-medium dark:border-neutral-500">
+                  <tr>
+                    <th
+                      scope="col"
+                      className=" px-6 py-4 dark:border-neutral-500"
+                    >
+                      Date
+                    </th>
+                    <th
+                      scope="col"
+                      className=" px-6 py-4 dark:border-neutral-500"
+                    >
+                      Event
+                    </th>
+                    <th
+                      scope="col"
+                      className=" px-6 py-4 dark:border-neutral-500"
+                    >
+                      Venue
+                    </th>
+                    <th
+                      scope="col"
+                      className=" px-6 py-4 dark:border-neutral-500"
+                    >
+                      City
+                    </th>
+                    <th
+                      scope="col"
+                      className=" px-6 py-4 dark:border-neutral-500"
+                    >
+                      Ticket Quantity
+                    </th>
+                    <th
+                      scope="col"
+                      className=" px-6 py-4 dark:border-neutral-500"
+                    >
+                      Price
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {eventList?.map((event, index) => {
+                    return (
+                      <tr
+                        key={event.id}
+                        className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+                      >
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {dayjs(event.date).format("MM/DD/YYYY")}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {event.event_name}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {event.venue}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {event.city}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          <div className="flex flex-col space-y-1">
+                            <TicketQuantity event={event} index={index} />
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          <div className="flex flex-col space-y-1">
+                            $
+                            {parseFloat(
+                              event.tickets_price * event.quantity
+                            ).toFixed(2)}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-1 py-4">
+                          <div className="inline-flex">
+                            <button
+                              onClick={() => DeleteButtonClick(event)}
+                              className="bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+                              type="button"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+              <div className="flex justify-end">
+                <h3>Total: ${parseFloat(totalPrice).toFixed(2)}</h3>
+              </div>
+              {token ? (
+                <div className="flex justify-end">
+                  <button
+                    className="px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                    type="submit"
+                  >
+                    Checkout
+                  </button>
                 </div>
-            </div>
-        </>
+              ) : null}
+            </form>
+            {!token ? (
+              <div className=" justify-center">
+                <LoginPopUp />
+              </div>
+            ) : null}
+          </div>
+        </div>
+      </>
     );
 }
 

@@ -181,25 +181,31 @@ function MainPage() {
           </div>
           <div className="flex justify-evenly col-start-1 col-span-5 mt-12">
             <button
-              className="w-20 h-18 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
+              className="w-40 h-20 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
               onClick={() => goToEventsList("sport")}
             >
-              <p>Sports</p>
-              <MdSportsBasketball />
+              <p className="text-2xl">Sports</p>
+              <div className="text-2xl">
+                <MdSportsBasketball />
+              </div>
             </button>
             <button
-              className="w-20 h-18 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
+              className="w-40 h-20 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
               onClick={() => goToEventsList("theater")}
             >
-              <p>Theater</p>
-              <FaTheaterMasks />
+              <p className="text-2xl">Theater</p>
+              <div className="text-2xl">
+                <FaTheaterMasks />
+              </div>
             </button>
             <button
-              className="w-20 h-18 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
+              className="w-40 h-20 flex flex-col items-center shadow-md shadow-blue-500 border-4 border-blue-500 rounded-md overflow-hidden p-1 hover:bg-blue-500 hover:text-white"
               onClick={() => goToEventsList("concert")}
             >
-              <p>Concerts</p>
-              <FaMusic />
+              <p className="text-2xl">Concerts</p>
+              <div className="text-2xl">
+                <FaMusic />
+              </div>
             </button>
           </div>
         </div>
