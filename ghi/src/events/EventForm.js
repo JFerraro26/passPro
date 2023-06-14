@@ -334,7 +334,7 @@ function EventForm() {
                                 placeholder="Venue..."
                             />
                         </div>
-                        <button class="relative inline-flex items-center justify-center h-full px-12 py-3 overflow-hidden text-lg font-medium text-green-500 border-2 border-green-300 rounded-full hover:text-white group hover:bg-gray-50">
+                        <button class="relative inline-flex items-center justify-center h-full px-12 py-3 overflow-hidden text-lg font-medium text-green-500 border-2 border-green-400 rounded-full hover:text-white group hover:bg-gray-50">
                             <span class="absolute left-0 block w-full h-0 transition-all bg-green-300 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
                             <span class="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
                                 <svg
@@ -359,6 +359,5 @@ function EventForm() {
         </div>
     );
 }
-
 
 export default EventForm;
