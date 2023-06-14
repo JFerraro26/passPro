@@ -22,7 +22,7 @@ api-unit-tests-job:
     - pip install -r requirements.txt
     - python -m pytest
   variables:
-    DATABASE_URL: https://feb-23-pt-16-fastapi.mod3projects.com
+    DATABASE_URL: postgres://passpro:passpro@srv-captain--passpro-db/passpro
     SIGNING_KEY: PassPro
 
 # # Build the React/JavaScript front-end
