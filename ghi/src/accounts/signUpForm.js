@@ -70,7 +70,11 @@ const SignUpForm = ({ setOpen }) => {
 
   return (
     <div className="container mx-auto">
-      <h5 className="text-2xl flex justify-center mb-2">Sign Up</h5>
+      <h5 className="text-2xl flex justify-center mb-2">
+        <span className="text-white bg-black bg-opacity-5  px-4 py-2 rounded-xl">
+          Sign Up
+        </span>
+      </h5>
       <div className="flex  justify-center">
         <div className="bg-blue-500 px-6 py-4 rounded-xl">
           <form className="grid-cols-2" onSubmit={(e) => handleSubmit(e)}>
