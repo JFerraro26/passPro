@@ -33,7 +33,7 @@ function LogInPopUP() {
                 >
                   <div className="z-30 col-start-5 col-span-1 row-start-1 row-span-1 flex justify-center items-center">
                     <button
-                      className="text-xl text-black hover:text-orange-500"
+                      className="text-xl text-white hover:text-orange-500"
                       onClick={() => setOpen(false)}
                     >
                       <span>
@@ -52,7 +52,7 @@ function LogInPopUP() {
                     <SignUpForm setOpen={setOpen} />
                     <button
                       onClick={() => setLogin(!login)}
-                      className="mt-4 underline rounded-2xl text-white bg-black bg-opacity-5 hover:text-orange-500 transition-all"
+                      className="mt-4 underline rounded-2xl text-white bg-black bg-opacity-25 hover:text-orange-500 transition-all"
                     >
                       Already have an account? Click Here!
                     </button>
