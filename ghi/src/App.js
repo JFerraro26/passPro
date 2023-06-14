@@ -12,7 +12,8 @@ import MyTickets from "./sales/MyTickets";
 import MyProfile from "./accounts/myProfile";
 import EventsList from "./events/EventsList";
 import TicketsConfirmationPage from "./sales/ConfirmationPage";
-import Footer from "./nav/Footer";
+import Footer from "./footer/Footer";
+import ContactPage from "./footer/Contact";
 
 function App() {
     const domain = /https:\/\/[^/]+/;
@@ -44,6 +45,7 @@ function App() {
                   element={<TicketsConfirmationPage />}
                 />
               </Route>
+                        <Route path="/contact" element={<ContactPage />} />
             </Routes>
           </div>
           <Footer />
