@@ -46,35 +46,47 @@ function LogInPopUP() {
                         type: "spring",
                         duration: 1,
                       }}
-                      className="flex flex-col"
+                      className="grid grid-cols-4"
                     >
-                      <SignUpForm setOpen={setOpen} />
-                      <button
-                        onClick={() => setLogin(!login)}
-                        className="mt-4 underline text-blue-500 hover:text-orange-500 transition-all"
-                      >
-                        Already have an account? Click Here!
-                      </button>
+                      <div className="flex flex-col col-start-1 col-span-2">
+                        <div>
+                          <img
+                            src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60"
+                            alt="concert"
+                          />
+                        </div>
+                        <button
+                          onClick={() => setLogin(!login)}
+                          className="mt-4 underline text-blue-500 hover:text-orange-500 transition-all"
+                        >
+                          Already have an account? Click Here!
+                        </button>
+                      </div>
+                      <motion.div className="flex flex-col col-start-3 col-span-2">
+                        <SignUpForm setOpen={setOpen} />
+                      </motion.div>
                     </motion.div>
                   ) : (
-                    <motion.div
-                      key="LoginForm"
-                      initial={{ y: 200, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{
-                        type: "spring",
-                        duration: 1,
-                      }}
-                      className="flex flex-col  mt-10"
-                    >
-                      <LoginForm setOpen={setOpen} />
-                      <button
-                        onClick={() => setLogin(!login)}
-                        className="mt-4 underline text-blue-500 hover:text-orange-500 transition-all"
+                    <div className="grid grid-cols-4">
+                      <motion.div
+                        key="LoginForm"
+                        initial={{ y: 200, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{
+                          type: "spring",
+                          duration: 1,
+                        }}
+                        className="flex flex-col col-start-1 col-span-2  mt-10"
                       >
-                        Need an account? Sign Up Here!
-                      </button>
-                    </motion.div>
+                        <LoginForm setOpen={setOpen} />
+                        <button
+                          onClick={() => setLogin(!login)}
+                          className="mt-4 underline text-blue-500 hover:text-orange-500 transition-all"
+                        >
+                          Need an account? Sign Up Here!
+                        </button>
+                      </motion.div>
+                    </div>
                   )}
                 </AnimatePresence>
               </div>
