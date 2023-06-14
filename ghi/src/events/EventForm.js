@@ -125,7 +125,7 @@ function EventForm() {
                     <iframe
                         src="https://embed.lottiefiles.com/animation/2508"
                         className="h-full"
-                        style={{ "pointer-events": "none" }}
+                        style={{ pointerEvents: "none" }}
                         title="temp"
                     ></iframe>
                 </div>
