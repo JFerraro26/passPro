@@ -24,8 +24,8 @@ function LogInPopUP() {
               className="bg-slate-500 h-full w-full opacity-50 inset-0 absolute z-0 cursor-default"
             ></button>
             <div
-              style={{ height: "500px" }}
-              className="z-10 bg-orange-300 flex-col col-start-2 col-span-3 row-start-1 row-span-3 border-4 border-blue-500 rounded-2xl mt-16"
+              // style={{ height: "500px" }}
+              className="min-h-500 z-10 bg-orange-300 flex-col col-start-2 col-span-3 row-start-1 row-span-3 border-4 border-blue-500 rounded-2xl mt-16"
             >
               <div className="m-8">
                 <div className="flex justify-end">
@@ -46,9 +46,9 @@ function LogInPopUP() {
                         type: "spring",
                         duration: 1,
                       }}
-                      className="grid grid-cols-4"
+                      className="flex flex-col md:flex-row justify-evenly content-center"
                     >
-                      <div className="flex flex-col col-start-1 col-span-2 items-center justify-center">
+                      <div className="flex flex-col items-center justify-center flex-grow">
                         <img
                           className="w-full rounded-2xl shadow-xl"
                           src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60"
@@ -61,7 +61,7 @@ function LogInPopUP() {
                           Already have an account? Click Here!
                         </button>
                       </div>
-                      <div className="flex flex-col col-start-3 col-span-2 items-center justify-center">
+                      <div className="flex flex-col col-start-3 col-span-2 items-center justify-center flex-grow">
                         <SignUpForm setOpen={setOpen} />
                       </div>
                     </motion.div>
@@ -74,12 +74,12 @@ function LogInPopUP() {
                         type: "spring",
                         duration: 1,
                       }}
-                      className="flex flex-row justify-center items-center gap-x-5"
+                      className="flex flex-col md:flex-row justify-evenly content-center"
                     >
-                      <div className="flex flex-col row-start-1 row-span-4 col-start-1 col-span-2 items-center justify-center">
+                      <div className="flex flex-col  items-center justify-center flex-grow">
                         <LoginForm setOpen={setOpen} />
                       </div>
-                      <div className="mt-20 flex flex-col col-start-3 col-span-2 items-center justify-center row-start-1 row-span-4">
+                      <div className="flex flex-col items-center justify-center flex-grow">
                         <img
                           className="w-full rounded-2xl shadow-xl"
                           src="https://img.freepik.com/free-photo/excited-audience-watching-confetti-fireworks-having-fun-music-festival-night-copy-space_637285-559.jpg?size=626&ext=jpg"
