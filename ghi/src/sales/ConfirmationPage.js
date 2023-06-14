@@ -10,6 +10,13 @@ export default function TicketsConfirmationPage() {
     return (
         <div className="flex items-center justify-center h-screen">
             <div className="grid text-center bg-blue-500 rounded-xl p-10 opacity-90 shadow-lg text-white">
+                <div className="flex justify-center">
+                    <iframe
+                        title="tickets"
+                        src="https://embed.lottiefiles.com/animation/103973"
+                        style={{ "pointer-events": "none" }}
+                    ></iframe>
+                </div>
                 <h1 className="mb-4">Congratulations!</h1>
                 <p className="mb-2">Your ticket purchase was successful.</p>
                 <p className="mb-2">Thank you for your purchase.</p>
