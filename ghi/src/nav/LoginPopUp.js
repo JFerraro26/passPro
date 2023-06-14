@@ -41,7 +41,7 @@ function LogInPopUP() {
                       </span>
                     </button>
                   </div>
-                  <div className="z-20 relative border-4 border-blue-500 rounded-3xl overflow-hidden shadow-xl col-start-1 col-span-5 row-start-1 row-span-5 ">
+                  <div className="z-20 relative border-4 border-blue-500 rounded-3xl overflow-hidden shadow-xl shadow-orange-500 col-start-1 col-span-5 row-start-1 row-span-5 ">
                     <img
                       className="object-cover w-full h-full"
                       src="https://indie88.com/wp-content/uploads/2016/03/MoshPit1190.jpg"
@@ -86,7 +86,7 @@ function LogInPopUP() {
                       Need an account? Sign Up Here!
                     </button>
                   </div>
-                  <div className="z-20 relative border-4 border-blue-500 rounded-3xl overflow-hidden shadow-xl col-start-1 col-span-5 row-start-1 row-span-5 ">
+                  <div className="z-20  relative border-4 border-blue-500 rounded-3xl overflow-hidden shadow-xl shadow-orange-500 col-start-1 col-span-5 row-start-1 row-span-5 ">
                     <img
                       className="object-cover w-full h-full"
                       src="https://img.freepik.com/free-photo/excited-audience-watching-confetti-fireworks-having-fun-music-festival-night-copy-space_637285-559.jpg?size=626&ext=jpg"
@@ -98,7 +98,7 @@ function LogInPopUP() {
             </div>
           </AnimatePresence>
           <button
-            onClick={() => setOpen(false)}
+            // onClick={() => setOpen(false)}
             className="bg-black h-full w-full opacity-70 inset-0 absolute z-0 cursor-default"
           ></button>
         </div>
