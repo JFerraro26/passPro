@@ -126,7 +126,7 @@ function EventsList() {
           </p>
           <div className="flex flex-col justify-start content-start">
             <button onClick={() => setEventType(true)}>
-              <p className="font-semibold mt-4 mr-60">Event Type</p>
+              <p className="font-semibold">Event Type </p>
             </button>
             {eventType ? (
               <form onSubmit={handleEventSubmit} className="flex flex-col ml-4">
@@ -176,14 +176,14 @@ function EventsList() {
                   />
                 </div>
                 <div className="flex justify-center items-end mt-2 mb-2">
-                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full ml-52">
+                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full">
                     Submit
                   </button>
                 </div>
               </form>
             ) : null}
             <button
-              className="font-semibold mt-4 mr-60"
+              className="font-semibold"
               onClick={() => setStateButton(true)}
             >
               States({states.length})
@@ -204,14 +204,14 @@ function EventsList() {
                   );
                 })}
                 <div className="flex justify-center items-end mt-2 mb-2">
-                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full ml-56">
+                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full">
                     Submit
                   </button>
                 </div>
               </form>
             ) : null}
             <button
-              className="font-semibold mt-4 mr-60"
+              className="font-semibold"
               onClick={() => setCityButton(true)}
             >
               Cities({cities.length})
@@ -232,14 +232,14 @@ function EventsList() {
                   );
                 })}
                 <div className="flex justify-center items-end mt-2 mb-2">
-                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full ml-56">
+                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full">
                     Submit
                   </button>
                 </div>
               </form>
             ) : null}
             <button
-              className="font-semibold mt-4 mr-60"
+              className="font-semibold"
               onClick={() => setVenueButton(true)}
             >
               Venues({venues.length})
@@ -260,7 +260,7 @@ function EventsList() {
                   );
                 })}
                 <div className="flex justify-center items-end mt-2 mb-2">
-                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full ml-56">
+                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full">
                     Submit
                   </button>
                 </div>
