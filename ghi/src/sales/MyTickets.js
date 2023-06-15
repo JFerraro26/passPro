@@ -5,7 +5,7 @@ import { setEvent } from "../redux/slices/eventSlice";
 import dayjs from "dayjs";
 
 function MyTickets({ myEvents }) {
-    const dispatchEvent = useDispatch();
+  const dispatchEvent = useDispatch();
 
   return (
     <>
