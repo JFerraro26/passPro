@@ -37,19 +37,24 @@ function EventDetail() {
 
   return (
     <>
-      <div className="grid grid-cols-5 grid-rows-5">
-        <div className="flex flex-col items-center col-start-2 col-span-3 row-start-1 row-span-1">
-          <img
-            className=" relative overflow-hidden aspect-video"
-            src={event.event_image}
-            alt={event.event_name}
-          />
-          <h1 className="text-3xl font-bold">{event.event_name}</h1>
+      <div className="grid grid-cols-5 grid-rows-5 bg-green-100">
+        <div className="col-start-1 col-span-5 row-start-1 row-span-1 bg-black shadow-xl"></div>
+        <div className="bg-black text-white max-w-md mx-auto bg-white shadow-md overflow-hidden md:max-w-2xl md:flex flex-col items-center col-start-2 col-span-3 row-start-1 row-span-1">
+          <div className="flex-grow md:shrink-0">
+            <img
+              className="relative  aspect-video h-full w-full object-cover md:h-full shadow-xl"
+              src={event.event_image}
+              alt={event.event_name}
+            />
+          </div>
         </div>
-        <div className="px-10 py-5 flex col-start-1 col-span-3 row-start-2 row-span-2 whitespace-pre-line">
-          <p className="whitespace-pre-line">{event.description}</p>
+        <div className="col-start-3 row-start-2 row-span-1">
+          <h1 className="text-center text-3xl font-bold">{event.event_name}</h1>
         </div>
-        <div className="px-24 py-5 text-center flex flex-col col-start-4 col-span-2 row-start-2 row-span-2">
+        <div className="px-28 py-12 flex col-start-1 col-span-3 row-start-2 row-span-2 whitespace-pre-line">
+          <p className="whitespace-pre-line text-lg">{event.description}</p>
+        </div>
+        <div className="px-24 py-12 text-center flex flex-col col-start-4 col-span-2 row-start-2 row-span-1">
           {!purchased ? (
             <div>
               <div className="flex justify-center">
