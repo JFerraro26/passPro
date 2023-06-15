@@ -22,7 +22,7 @@ function App() {
     return (
         <BrowserRouter basename={basename}>
             <div
-                className="flex flex-col min-h-screen bg-green-200"
+                className="flex flex-col min-h-screen bg-green-100"
                 style={{ fontFamily: "'Kanit', sans-serif" }}
             >
                 <Nav />

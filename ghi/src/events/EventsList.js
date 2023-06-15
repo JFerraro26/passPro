@@ -119,226 +119,223 @@ function EventsList() {
     };
 
     return (
-        <div className="grid grid-cols-5">
-            <div className="rounded-xl mt-4 mx-2 border-2 bg-orange-100 border-blue-500 h-full flex flex-col col-start-1 col-span-1">
-                <p className="text-center">Filter Events</p>
-                <button onClick={resetFilter}>Reset Filter</button>
-                <div className="flex flex-col justify-start content-start">
-                    <button onClick={() => setEventType(true)}>
-                        <p>Event Type </p>
-                    </button>
-                    {eventType ? (
-                        <form
-                            onSubmit={handleEventSubmit}
-                            className="flex flex-col ml-4"
-                        >
-                            <div className="flex gap-x-2">
-                                <label htmlFor="sports-checkbox">Sports</label>
-                                <input
-                                    type="checkbox"
-                                    name="eventType"
-                                    id="sports-checkbox"
-                                    value="sport"
-                                    defaultChecked={
-                                        state !== null &&
-                                        filteredEvents.some(
-                                            (event) =>
-                                                event.event_type === "sport"
-                                        )
-                                    }
-                                />
-                            </div>
-                            <div className="flex gap-x-2">
-                                <label htmlFor="theater-checkbox">
-                                    Theater
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    name="eventType"
-                                    id="theater-checkbox"
-                                    value="theater"
-                                    defaultChecked={
-                                        state !== null &&
-                                        filteredEvents.some(
-                                            (event) =>
-                                                event.event_type === "theater"
-                                        )
-                                    }
-                                />
-                            </div>
-                            <div className="flex gap-x-2">
-                                <label htmlFor="concert-checkbox">
-                                    Concert
-                                </label>
-                                <input
-                                    type="checkbox"
-                                    name="eventType"
-                                    id="concert-checkbox"
-                                    value="concert"
-                                    defaultChecked={
-                                        state !== null &&
-                                        filteredEvents.some(
-                                            (event) =>
-                                                event.event_type === "concert"
-                                        )
-                                    }
-                                />
-                            </div>
-                            <button className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full">
-                                Submit
-                            </button>
-                        </form>
-                    ) : null}
-                    <button onClick={() => setStateButton(true)}>
-                        States({states.length})
-                    </button>
-                    {stateButton ? (
-                        <form onSubmit={handleStateSubmit}>
-                            {states?.map((state) => {
-                                return (
-                                    <div key={state} className="flex gap-x-2">
-                                        <label htmlFor={state}>{state}</label>
-                                        <input
-                                            value={state}
-                                            type="checkbox"
-                                            name="stateType"
-                                            id={state}
-                                        />
-                                    </div>
-                                );
-                            })}
-                            <button className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full">
-                                Submit
-                            </button>
-                        </form>
-                    ) : null}
-                    <button onClick={() => setCityButton(true)}>
-                        Cities({cities.length})
-                    </button>
-                    {cityButton ? (
-                        <form onSubmit={handleCitySubmit}>
-                            {cities?.map((city) => {
-                                return (
-                                    <div key={city} className="flex gap-x-2">
-                                        <label htmlFor={city}>{city}</label>
-                                        <input
-                                            value={city}
-                                            type="checkbox"
-                                            name="cityType"
-                                            id={city}
-                                        />
-                                    </div>
-                                );
-                            })}
-                            <button className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full">
-                                Submit
-                            </button>
-                        </form>
-                    ) : null}
-                    <button onClick={() => setVenueButton(true)}>
-                        Venues({venues.length})
-                    </button>
-                    {venueButton ? (
-                        <form onSubmit={handleVenueSubmit}>
-                            {venues?.map((venue) => {
-                                return (
-                                    <div key={venue} className="flex gap-x-2">
-                                        <label htmlFor={venue}>{venue}</label>
-                                        <input
-                                            value={venue}
-                                            type="checkbox"
-                                            name="venueType"
-                                            id={venue}
-                                        />
-                                    </div>
-                                );
-                            })}
-                            <button className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full">
-                                Submit
-                            </button>
-                        </form>
-                    ) : null}
+      <div className="grid grid-cols-5 grid-rows-3 bg-green-100">
+        <div className="rounded-xl mt-4 mx-2 border-2 bg-orange-100 border-blue-500 h-full flex flex-col col-start-1 col-span-1">
+          <p className="text-center font-bold">
+            <u>Filter Events</u>
+          </p>
+          <div className="flex flex-col justify-start content-start">
+            <button onClick={() => setEventType(true)}>
+              <p className="font-semibold">Event Type </p>
+            </button>
+            {eventType ? (
+              <form onSubmit={handleEventSubmit} className="flex flex-col ml-4">
+                <div className="flex gap-x-2 justify-center">
+                  <label htmlFor="sports-checkbox">Sports</label>
+                  <input
+                    type="checkbox"
+                    name="eventType"
+                    id="sports-checkbox"
+                    value="sport"
+                    defaultChecked={
+                      state !== null &&
+                      filteredEvents.some(
+                        (event) => event.event_type === "sport"
+                      )
+                    }
+                  />
                 </div>
-            </div>
-            <div className="flex flex-col col-start-2 col-span-4">
-                <h1 className="text-center">Events</h1>
-                <table className="min-w-full text-center text-sm font-light">
-                    <thead className="border-b font-medium dark:border-neutral-500">
-                        <tr>
-                            <th
-                                scope="col"
-                                className=" px-6 py-4 dark:border-neutral-500"
-                            >
-                                Date
-                            </th>
-                            <th
-                                scope="col"
-                                className=" px-6 py-4 dark:border-neutral-500"
-                            >
-                                Event
-                            </th>
-                            <th
-                                scope="col"
-                                className=" px-6 py-4 dark:border-neutral-500"
-                            >
-                                Venue
-                            </th>
-                            <th
-                                scope="col"
-                                className=" px-6 py-4 dark:border-neutral-500"
-                            >
-                                City
-                            </th>
-                            <th
-                                scope="col"
-                                className=" px-6 py-4 dark:border-neutral-500"
-                            >
-                                State
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredEvents?.map((event) => {
-                            return (
-                                <tr
-                                    key={event.id}
-                                    className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
-                                >
-                                    <td className="whitespace-nowrap px-6 py-4">
-                                        {dayjs(event.date).format("MM/DD/YYYY")}
-                                    </td>
-                                    <td className="whitespace-nowrap px-6 py-4">
-                                        {event.event_name}
-                                    </td>
-                                    <td className="whitespace-nowrap px-6 py-4">
-                                        {event.venue}
-                                    </td>
-                                    <td className="whitespace-nowrap px-6 py-4">
-                                        {event.city}
-                                    </td>
-                                    <td className="whitespace-nowrap px-6 py-4">
-                                        {event.state_id}
-                                    </td>
-                                    <td>
-                                        <Link
-                                            onClick={() =>
-                                                dispatch(setEvent(event))
-                                            }
-                                            to="/events/detail"
-                                            className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                                            type="button"
-                                        >
-                                            Details
-                                        </Link>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            </div>
+                <div className="flex gap-x-2 justify-center">
+                  <label htmlFor="theater-checkbox">Theater</label>
+                  <input
+                    type="checkbox"
+                    name="eventType"
+                    id="theater-checkbox"
+                    value="theater"
+                    defaultChecked={
+                      state !== null &&
+                      filteredEvents.some(
+                        (event) => event.event_type === "theater"
+                      )
+                    }
+                  />
+                </div>
+                <div className="flex gap-x-2 justify-center">
+                  <label htmlFor="concert-checkbox">Concert</label>
+                  <input
+                    type="checkbox"
+                    name="eventType"
+                    id="concert-checkbox"
+                    value="concert"
+                    defaultChecked={
+                      state !== null &&
+                      filteredEvents.some(
+                        (event) => event.event_type === "concert"
+                      )
+                    }
+                  />
+                </div>
+                <div className="flex justify-center items-end mt-2 mb-2">
+                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            ) : null}
+            <button
+              className="font-semibold"
+              onClick={() => setStateButton(true)}
+            >
+              States({states.length})
+            </button>
+            {stateButton ? (
+              <form onSubmit={handleStateSubmit}>
+                {states?.map((state) => {
+                  return (
+                    <div key={state} className="flex gap-x-2 justify-center">
+                      <label htmlFor={state}>{state}</label>
+                      <input
+                        value={state}
+                        type="checkbox"
+                        name="stateType"
+                        id={state}
+                      />
+                    </div>
+                  );
+                })}
+                <div className="flex justify-center items-end mt-2 mb-2">
+                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            ) : null}
+            <button
+              className="font-semibold"
+              onClick={() => setCityButton(true)}
+            >
+              Cities({cities.length})
+            </button>
+            {cityButton ? (
+              <form onSubmit={handleCitySubmit}>
+                {cities?.map((city) => {
+                  return (
+                    <div key={city} className="flex gap-x-2 justify-center">
+                      <label htmlFor={city}>{city}</label>
+                      <input
+                        value={city}
+                        type="checkbox"
+                        name="cityType"
+                        id={city}
+                      />
+                    </div>
+                  );
+                })}
+                <div className="flex justify-center items-end mt-2 mb-2">
+                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            ) : null}
+            <button
+              className="font-semibold"
+              onClick={() => setVenueButton(true)}
+            >
+              Venues({venues.length})
+            </button>
+            {venueButton ? (
+              <form onSubmit={handleVenueSubmit}>
+                {venues?.map((venue) => {
+                  return (
+                    <div key={venue} className="flex gap-x-2 justify-center">
+                      <label htmlFor={venue}>{venue}</label>
+                      <input
+                        value={venue}
+                        type="checkbox"
+                        name="venueType"
+                        id={venue}
+                      />
+                    </div>
+                  );
+                })}
+                <div className="flex justify-center items-end mt-2 mb-2">
+                  <button className="border w-1/3 border-green-500 text-green-500 hover:bg-green-500 hover:text-white rounded-full">
+                    Submit
+                  </button>
+                </div>
+              </form>
+            ) : null}
+            <button
+              className="border w-1/3 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full mt-2 ml-2"
+              onClick={resetFilter}
+            >
+              Reset Filter
+            </button>
+          </div>
         </div>
+        <div className="flex flex-col col-start-2 col-span-4">
+          <h1 className="text-center text-2xl font-bold">Events</h1>
+          <table className="min-w-full text-center text-sm font-light">
+            <thead className="border-b font-medium dark:border-neutral-500">
+              <tr>
+                <th scope="col" className=" px-6 py-4 dark:border-neutral-500">
+                  Date
+                </th>
+                <th scope="col" className=" px-6 py-4 dark:border-neutral-500">
+                  Event
+                </th>
+                <th scope="col" className=" px-6 py-4 dark:border-neutral-500">
+                  Venue
+                </th>
+                <th scope="col" className=" px-6 py-4 dark:border-neutral-500">
+                  City
+                </th>
+                <th scope="col" className=" px-6 py-4 dark:border-neutral-500">
+                  State
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredEvents?.map((event) => {
+                return (
+                  <tr
+                    key={event.id}
+                    className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+                  >
+                    <td className="whitespace-nowrap px-6 py-4 font-semibold">
+                      {dayjs(event.date).format("MM/DD/YYYY")}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4 font-semibold">
+                      {event.event_name}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4 font-semibold">
+                      {event.venue}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4 font-semibold">
+                      {event.city}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4 font-semibold">
+                      {event.state_id}
+                    </td>
+                    <td>
+                      <Link
+                        onClick={() => dispatch(setEvent(event))}
+                        to="/events/detail"
+                        className="bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                        type="button"
+                      >
+                        Details
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     );
 }
 

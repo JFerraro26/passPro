@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { FaTheaterMasks, FaMusic } from "react-icons/fa";
 
 function MainPage() {
     const navigate = useNavigate();
