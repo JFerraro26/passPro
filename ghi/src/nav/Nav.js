@@ -34,7 +34,7 @@ function Nav() {
                 <div className="mt-1 col-start-1 col-span-1">
                     <NavLink className="" to="/">
                         <img
-                            src={process.env.PUBLIC_URL + `/passpro.png`}
+                            src={process.env.PUBLIC_URL + `/photos/passpro.png`}
                             alt="passpro"
                             className="h-20 bg-blend-color-dodge object-cover"
                         />

@@ -104,8 +104,9 @@ function Cart() {
                 </h1>
                 <iframe
                     title="cart"
-                    src="https://embed.lottiefiles.com/animation/63075"
-                    style={{ "pointer-events": "none" }}
+                    src="https://embed.lottiefiles.com/animation/95321"
+                    style={{ pointerEvents: "none" }}
+                    allowtransparency="true"
                 ></iframe>
                 <div className="flex-col justify-end">
                     <form onSubmit={handleSubmit} className="grid-cols-2">
