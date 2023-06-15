@@ -246,13 +246,15 @@ function Cart() {
                 ) : null}
               </div>
             </form>
-            <div className="flex justify-center font-bold pr-5">
-              <p>Please log in to checkout</p>
-            </div>
             {!token ? (
-              <div className="flex justify-center pr-5">
-                <LoginPopUp />
-              </div>
+              <>
+                <div className="flex justify-center font-bold pr-5">
+                  <p>Please log in to checkout</p>
+                </div>
+                <div className="flex justify-center pr-5">
+                  <LoginPopUp />
+                </div>
+              </>
             ) : null}
           </div>
         </div>
