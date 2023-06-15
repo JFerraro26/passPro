@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setEvent } from "../redux/slices/eventSlice";
+import { setEventList } from "../redux/slices/eventsSlice";
 
 function NavBarSearch() {
   const [open, setOpen] = useState(false);
-  const [events, setEvents] = useState([]);
   const [query, setQuery] = useState("");
-  const dispatchEvent = useDispatch();
+  const dispatch = useDispatch();
+  const events = useSelector((state) => state.rootReducer.eventList.eventList);
 
   useEffect(() => {
     async function fetchEventData() {
@@ -17,13 +18,13 @@ function NavBarSearch() {
       );
       if (response.ok) {
         const data = await response.json();
-        setEvents(data);
+        dispatch(setEventList(data));
       } else {
         console.error(response);
       }
     }
     fetchEventData();
-  }, []);
+  }, [dispatch]);
 
   const openDropdown = () => {
     setOpen(true);
@@ -37,7 +38,7 @@ function NavBarSearch() {
     setOpen(false);
   };
 
-  const filteredEvents = events.filter((e) => {
+  const filteredEvents = events?.filter((e) => {
     const { city, event_name, state_id, venue } = e;
     const lowerCaseQuery = query.toLowerCase();
 
@@ -61,7 +62,7 @@ function NavBarSearch() {
         className="relative border rounded-md h-10 w-80"
         id="search-bar"
         name="search-bar"
-        placeholder="Enter Event, City, State, or Venue"
+        placeholder="  Enter Event, City, State, or Venue"
       />
 
       {open ? (
@@ -74,7 +75,7 @@ function NavBarSearch() {
             className="fixed inset-0 h-full w-full cursor-default"
           ></button>
           <div className="border rounded-md flex flex-col w-80 absolute top-auto">
-            <h1 className="bg-white text-2xl font-semibold">Events:</h1>
+            <h1 className="z-10 bg-white text-2xl font-semibold">Events:</h1>
             {filteredEvents?.map((event) => {
               return (
                 <Link
@@ -84,7 +85,7 @@ function NavBarSearch() {
                   onClick={() => {
                     closeDropdown();
                     setQuery("");
-                    dispatchEvent(setEvent(event));
+                    dispatch(setEvent(event));
                   }}
                 >
                   <div className="grid grid-cols-4 grid-rows-2">
