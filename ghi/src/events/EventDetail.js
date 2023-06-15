@@ -38,8 +38,8 @@ function EventDetail() {
 
   return (
     <>
-      <div className="grid grid-cols-7 bg-green-100">
-        <div className="mt-4 grid grid-cols-5 grid-rows-5 col-start-2 col-span-5">
+      <div className="grid grid-cols-5 bg-green-100">
+        <div className="mt-4 grid grid-cols-5 grid-rows-5 col-start-2 col-span-3">
           <div className="bg-white relative rounded-3xl overflow-hidden aspect-video col-start-1 col-span-5 row-start-1 row-span-5">
             <img
               className="object-cover opacity-70 w-full h-full"
@@ -51,10 +51,10 @@ function EventDetail() {
             <h1 className="text-3xl font-bold">{event.event_name}</h1>
           </div>
         </div>
-        <div className="mx-20 mt-12 flex col-start-1 col-span-5 whitespace-pre-line">
+        <div className="ml-48 mt-12 flex col-start-1 col-span-3 whitespace-pre-line">
           <p className="whitespace-pre-line text-lg">{event.description}</p>
         </div>
-        <div className="mt-12 flex flex-col items-center col-start-6 col-span-1">
+        <div className="mt-12 mr-48 flex flex-col items-center col-start-4 col-span-2">
           <div className="flex flex-col justify-center items-center">
             <h1 className="text-lg font-semibold">Location:</h1>
             <h1 className="text-lg font-semibold">
