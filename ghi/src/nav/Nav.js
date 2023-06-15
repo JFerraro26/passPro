@@ -42,7 +42,7 @@ function Nav() {
                 </div>
                 <div className="flex justify-center items-center col-start-2 col-span-1">
                     <NavLink
-                        className="block text-2xl font-semibold hover:text-orange-500"
+                        className="text-white block text-2xl font-semibold hover:text-orange-500"
                         to="/events/list"
                     >
                         Events List
@@ -52,7 +52,7 @@ function Nav() {
                     <NavBarSearch />
                 </div>
                 {accountData?.event_manager ? (
-                    <div className="flex justify-center items-center col-start-6 col-span-1">
+                    <div className="flex justify-center items-center col-start-6 col-span-1 text-white">
                         <NavLink
                             className="block text-2xl font-semibold hover:text-orange-500"
                             to="/events/form"
@@ -62,7 +62,7 @@ function Nav() {
                         </NavLink>
                     </div>
                 ) : null}
-                <div className="gap-x-6 flex flex-row justify-center items-center col-start-7 col-span-1">
+                <div className="gap-x-6 flex flex-row justify-center items-center col-start-7 col-span-1 text-white">
                     {cartData < 1 ? (
                         <NavLink
                             className="text-2xl font-semibold hover:text-orange-500"
@@ -80,7 +80,7 @@ function Nav() {
                                 {totalTickets > 0 && (
                                     <div className="absolute bottom-[-15px] right-[-15px]">
                                         <div className="bg-orange-500 rounded-full w-6 h-6 flex items-center justify-center">
-                                            <p className="text-black text-xs font-bold">
+                                            <p className="text-white text-xs font-bold">
                                                 {totalTickets}
                                             </p>
                                         </div>

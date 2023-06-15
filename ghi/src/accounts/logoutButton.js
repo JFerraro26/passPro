@@ -20,7 +20,7 @@ const LogoutButton = ({ handleOpen }) => {
 
     return (
         <button
-            className="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white hover:rounded-lg w-full"
+            className="block px-4 py-2 text-gray-800 hover:bg-orange-500 hover:text-white hover:rounded-lg w-full"
             onClick={() => {
                 handleLogout();
                 handleOpen();
