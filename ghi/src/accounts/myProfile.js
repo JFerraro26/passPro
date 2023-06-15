@@ -65,7 +65,7 @@ const MyProfile = () => {
             </div>
             <div className="w-6/12 sm:w-8/12 mx-auto mt-10 px-4">
                 <h2 className="text-xl text-center">Next Event</h2>
-                <div className="flex flex-col bg-blue-200 rounded-xl w-96 h-60 mx-auto ease-in-out duration-500 hover:scale-110">
+                <div className="flex flex-col bg-blue-200 rounded-xl w-96 h-60 mx-auto ease-in-out duration-500 m-3 hover:scale-110">
                     <div>
                         {myEvents &&
                             (myEvents.length === 0 ||
