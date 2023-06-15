@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setEvent } from "../redux/slices/eventSlice";
 import dayjs from "dayjs";
@@ -322,7 +322,7 @@ function EventsList() {
                   onClick={() => {
                     goToEvent(event);
                   }}
-                  className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
+                  className="cursor-pointer border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600"
                 >
                   <td className="whitespace-nowrap px-6 py-4 font-semibold">
                     {event.event_type.charAt(0).toUpperCase() +
