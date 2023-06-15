@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { setCartList } from "../redux/slices/cartSlice";
 import dayjs from "dayjs";
-import { array } from "prop-types";
 
 function EventDetail() {
   const event = useSelector((state) => state.rootReducer.eventGrab.globalEvent);
@@ -39,24 +38,41 @@ function EventDetail() {
 
   return (
     <>
-      <div className="grid grid-cols-5 grid-rows-5 bg-green-100">
-        <div className="col-start-1 col-span-5 row-start-1 row-span-1 bg-black shadow-xl"></div>
-        <div className="bg-black text-white max-w-md mx-auto bg-white shadow-md overflow-hidden md:max-w-2xl md:flex flex-col items-center col-start-2 col-span-3 row-start-1 row-span-1">
-          <div className="flex-grow md:shrink-0">
+      <div className="grid grid-cols-7 bg-green-100">
+        <div className="mt-4 grid grid-cols-5 grid-rows-5 col-start-2 col-span-5">
+          <div className="bg-white relative rounded-3xl overflow-hidden aspect-video col-start-1 col-span-5 row-start-1 row-span-5">
             <img
-              className="relative  aspect-video h-full w-full object-cover md:h-full shadow-xl"
+              className="object-cover opacity-70 w-full h-full"
               src={event.event_image}
               alt={event.event_name}
             />
           </div>
+          <div className="z-10 flex items-center justify-center col-start-2 col-span-3 row-start-1 row-span-1">
+            <h1 className="text-3xl font-bold">{event.event_name}</h1>
+          </div>
         </div>
-        <div className="col-start-3 row-start-2 row-span-1">
-          <h1 className="text-center text-3xl font-bold">{event.event_name}</h1>
-        </div>
-        <div className="px-28 py-12 flex col-start-1 col-span-3 row-start-2 row-span-2 whitespace-pre-line">
+        <div className="mx-20 mt-12 flex col-start-1 col-span-5 whitespace-pre-line">
           <p className="whitespace-pre-line text-lg">{event.description}</p>
         </div>
-        <div className="px-24 py-12 text-center flex flex-col col-start-4 col-span-2 row-start-2 row-span-1">
+        <div className="mt-12 flex flex-col items-center col-start-6 col-span-1">
+          <div className="flex flex-col justify-center items-center">
+            <h1 className="text-lg font-semibold">Location:</h1>
+            <h1 className="text-lg font-semibold">
+              {event.city}, {event.state_id}
+            </h1>
+          </div>
+          <p className="mt-3 text-lg font-semibold">Event Date:</p>
+          <div className="text-lg font-semibold">
+            {dayjs(event.date).format("MM/DD/YYYY")}
+          </div>
+          <p className="mt-3 text-lg font-semibold">Event Time:</p>
+          <div className="text-lg font-semibold">
+            {dayjs(event.date + event.start_time).format("h:mm A")} -{" "}
+            {dayjs(event.date + event.end_time).format("h:mm A")}
+          </div>
+          <div className="text-lg font-semibold">
+            Price: ${parseFloat(event.tickets_price * tickets).toFixed(2)}
+          </div>
           {eventInCart ? (
             <div className="border border-blue-500 bg-orange-300 rounded-xl">
               <p className="text-2xl">Ticket added to Cart</p>
@@ -87,18 +103,6 @@ function EventDetail() {
               </button>
             </div>
           )}
-          <div className="text-lg font-semibold">
-            Price: ${parseFloat(event.tickets_price * tickets).toFixed(2)}
-          </div>
-          <p className="mt-3 text-lg font-semibold">Event Date:</p>
-          <div className="text-lg font-semibold">
-            {dayjs(event.date).format("MM/DD/YYYY")}
-          </div>
-          <p className="mt-3 text-lg font-semibold">Event Time:</p>
-          <div className="text-lg font-semibold">
-            {dayjs(event.date + event.start_time).format("h:mm A")} -{" "}
-            {dayjs(event.date + event.end_time).format("h:mm A")}
-          </div>
         </div>
       </div>
     </>
