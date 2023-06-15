@@ -80,7 +80,7 @@ function Nav() {
                                 {totalTickets > 0 && (
                                     <div className="absolute bottom-[-15px] right-[-15px]">
                                         <div className="bg-orange-500 rounded-full w-6 h-6 flex items-center justify-center">
-                                            <p className="text-black text-xs">
+                                            <p className="text-black text-xs font-bold">
                                                 {totalTickets}
                                             </p>
                                         </div>

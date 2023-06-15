@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { GrLinkedin } from "react-icons/gr";
-import { SiGitlab } from "react-icons/si";
+import {
+    SiGitlab,
+    SiTailwindcss,
+    SiJavascript,
+    SiPython,
+    SiFastapi,
+    SiRedux,
+    SiDocker,
+} from "react-icons/si";
 import { AiOutlineMail } from "react-icons/ai";
 
 export default function ContactPage() {
@@ -24,7 +32,7 @@ export default function ContactPage() {
             <div className="flex justify-center items-center mt-28 mb-20 mx-auto">
                 <div className="flex space-x-36">
                     <div className="flex-grow w-72 h-full">
-                        <div className="w-72 bg-green-300 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-12 ease-in duration-200 hover:scale-110 hover:bg-green-400">
+                        <div className="w-72 bg-green-300 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 drop-shadow-lg hover:drop-shadow-2xl p-12 ease-in duration-200 hover:scale-110 hover:bg-green-400">
                             <div
                                 className={`flex flex-col items-center pb-10 ${
                                     hoveredIndex === 0 || hoveredIndex === -1
@@ -48,11 +56,21 @@ export default function ContactPage() {
                                 <span className="text-sm text-gray-500 dark:text-gray-400 font-bold underline">
                                     Full Stack Developer
                                 </span>
-                                <span className="text-sm text-gray-500 dark:text-gray-400">
-                                    <AiOutlineMail className="inline-block text-gray-500 dark:text-gray-400 mr-1" />
-                                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                                        mgiano02@gmail.com
-                                    </span>
+                                <span className="text-md text-gray-500 dark:text-gray-400">
+                                    <div className=" text-md text-center pt-3">
+                                        <AiOutlineMail className="inline-block text-gray-500 dark:text-gray-400 mr-1" />
+                                        <span className="text-md text-gray-500 dark:text-gray-400">
+                                            mgiano02@gmail.com
+                                        </span>
+                                    </div>
+                                    <div className="flex flex-row space-x-5 pt-6">
+                                        <SiPython className="w-6 h-6" />
+                                        <SiJavascript className="w-6 h-6" />
+                                        <SiTailwindcss className="w-6 h-6" />
+                                        <SiFastapi className="w-6 h-6" />
+                                        <SiRedux className="w-6 h-6" />
+                                        <SiDocker className="w-6 h-6" />
+                                    </div>
                                 </span>
                                 <div className="flex mt-4 space-x-3 md:mt-6">
                                     <a
@@ -86,7 +104,7 @@ export default function ContactPage() {
                         </div>
                     </div>
                     <div className="flex-grow">
-                        <div className="w-72 bg-green-300 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-12 ease-in duration-200 hover:scale-110 hover:bg-green-400">
+                        <div className="w-72 bg-green-300 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-12 ease-in duration-200 hover:scale-110 hover:bg-green-400 drop-shadow-lg hover:drop-shadow-2xl">
                             <div
                                 className={`flex flex-col items-center pb-10 ${
                                     hoveredIndex === 1 || hoveredIndex === -1
@@ -107,14 +125,24 @@ export default function ContactPage() {
                                 <h5 className="mb-1 text-2xl font-medium text-gray-900 dark:text-white m-w-full truncate">
                                     Joseph Ferraro
                                 </h5>
-                                <span className="text-sm text-gray-500 dark:text-gray-400 font-bold underline">
+                                <span className="text-md text-gray-500 dark:text-gray-400 font-bold underline">
                                     Full Stack Developer
                                 </span>
-                                <span className="text-sm text-gray-500 dark:text-gray-400">
-                                    <AiOutlineMail className="inline-block text-gray-500 dark:text-gray-400 mr-1" />
-                                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                                        jferraro2626@gmail.com
-                                    </span>
+                                <span className="text-md text-gray-500 dark:text-gray-400">
+                                    <div className=" text-md text-center pt-3">
+                                        <AiOutlineMail className="inline-block text-gray-500 dark:text-gray-400 mr-1" />
+                                        <span className="text-md text-gray-500 dark:text-gray-400">
+                                            jferraro2626@gmail.com
+                                        </span>
+                                    </div>
+                                    <div className="flex flex-row space-x-5 pt-6">
+                                        <SiPython className="w-6 h-6" />
+                                        <SiJavascript className="w-6 h-6" />
+                                        <SiTailwindcss className="w-6 h-6" />
+                                        <SiFastapi className="w-6 h-6" />
+                                        <SiRedux className="w-6 h-6" />
+                                        <SiDocker className="w-6 h-6" />
+                                    </div>
                                 </span>
                                 <div className="flex mt-4 space-x-3 md:mt-6">
                                     <a
@@ -148,7 +176,7 @@ export default function ContactPage() {
                         </div>
                     </div>
                     <div className="flex-grow">
-                        <div className="w-72 bg-green-300 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-12 ease-in duration-200 hover:scale-110 hover:bg-green-400">
+                        <div className="w-72 bg-green-300 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 p-12 ease-in duration-200 hover:scale-110 hover:bg-green-400 drop-shadow-lg hover:drop-shadow-2xl">
                             <div
                                 className={`flex flex-col items-center pb-10 ${
                                     hoveredIndex === 2 || hoveredIndex === -1
@@ -172,11 +200,21 @@ export default function ContactPage() {
                                 <span className="text-sm text-gray-500 dark:text-gray-400 font-bold underline">
                                     Full Stack Developer
                                 </span>
-                                <span className="text-sm text-gray-500 dark:text-gray-400">
-                                    <AiOutlineMail className="inline-block text-gray-500 dark:text-gray-400 mr-1" />
-                                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                                        chadc_manuel@gmail.com
-                                    </span>
+                                <span className="text-md text-gray-500 dark:text-gray-400">
+                                    <div className="text-md text-center pt-3">
+                                        <AiOutlineMail className="inline-block text-gray-500 dark:text-gray-400 mr-1" />
+                                        <span className="text-md text-gray-500 dark:text-gray-400">
+                                            chadc_manuel@yahoo.com
+                                        </span>
+                                    </div>
+                                    <div className="flex flex-row space-x-5 pt-6">
+                                        <SiPython className="w-6 h-6" />
+                                        <SiJavascript className="w-6 h-6" />
+                                        <SiTailwindcss className="w-6 h-6" />
+                                        <SiFastapi className="w-6 h-6" />
+                                        <SiRedux className="w-6 h-6" />
+                                        <SiDocker className="w-6 h-6" />
+                                    </div>
                                 </span>
                                 <div className="flex mt-4 space-x-3 md:mt-6">
                                     <a
