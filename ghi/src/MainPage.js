@@ -82,7 +82,7 @@ function MainPage() {
                 }}
                 className="grid grid-cols-4 grid-rows-5 m-2"
               >
-                <div className="relative shadow-xl shadow-blue-500 border-4 border-blue-500 rounded-3xl overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5">
+                <div className="relative bg-white shadow-xl shadow-blue-500 border-4 border-blue-500 rounded-3xl overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5">
                   <img
                     className="absolute top-0 left-0 object-cover opacity-50 w-full h-full"
                     src={events[rightIndex]?.event_image}
@@ -120,7 +120,7 @@ function MainPage() {
                 }}
                 className="grid grid-cols-4 grid-rows-5 m-2"
               >
-                <div className="relative shadow-xl shadow-blue-500 border-4 border-blue-500 rounded-3xl overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5">
+                <div className="relative bg-white shadow-xl shadow-blue-500 border-4 border-blue-500 rounded-3xl overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5">
                   <img
                     onClick={goToEvent}
                     className="absolute top-0 left-0 object-cover opacity-50 w-full h-full cursor-pointer ease-in duration-200"
@@ -175,7 +175,7 @@ function MainPage() {
                 }}
                 className="grid grid-cols-4 grid-rows-5 m-2"
               >
-                <div className="relative shadow-xl shadow-blue-500 border-4 border-blue-500 rounded-3xl overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5">
+                <div className="relative bg-white shadow-xl shadow-blue-500 border-4 border-blue-500 rounded-3xl overflow-hidden aspect-video col-start-1 col-span-4 row-start-1 row-span-5">
                   <img
                     className="absolute top-0 left-0 object-cover opacity-50 w-full h-full"
                     src={events[leftIndex]?.event_image}
