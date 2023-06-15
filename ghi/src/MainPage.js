@@ -204,7 +204,7 @@ function MainPage() {
                                 </div>
                             </div>
                         </button>
-                        <button onClick={() => goToEventsList("sport")}>
+                        <button onClick={() => goToEventsList("theater")}>
                             <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative ease-in-out duration-200 hover:scale-110">
                                 <img
                                     className="rounded-t-lg h-64 opacity-25 hover:opacity-50"

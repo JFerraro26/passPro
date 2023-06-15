@@ -118,7 +118,7 @@ function EventForm() {
                 <div className="flex flex-col col-start-1 col-span-2">
                     <h1 className="text-5xl">New Event Form</h1>
                     <img
-                        src={process.env.PUBLIC_URL + `/passpro.png`}
+                        src={process.env.PUBLIC_URL + `/photos/passpro.png`}
                         alt="passpro"
                         className="h-full bg-blend-color-dodge object-contain"
                     />

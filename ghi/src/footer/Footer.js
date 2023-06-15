@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="max-w-full px-4 md:px-6 lg:px-8 py-3 md:py-1 flex justify-between">
                 <div className="flex items-center mb-2 sm:mb-0">
                     <img
-                        src={process.env.PUBLIC_URL + "/passpro.png"}
+                        src={process.env.PUBLIC_URL + "/photos/passpro.png"}
                         className="h-20 mr-3"
                         alt="PassPro Logo"
                     />
