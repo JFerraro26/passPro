@@ -2,18 +2,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { setCartList } from "../redux/slices/cartSlice";
 import dayjs from "dayjs";
+import { array } from "prop-types";
 
 function EventDetail() {
   const event = useSelector((state) => state.rootReducer.eventGrab.globalEvent);
+  const cart = useSelector((state) => state.rootReducer.cart.globalCartList);
   const dispatch = useDispatch();
   const [tickets, setTickets] = useState(1);
-  const [purchased, setPurchased] = useState(false);
 
   const AddToCartClick = (event) => {
     const updatedEvent = { ...event };
     updatedEvent.quantity = tickets;
     dispatch(setCartList(updatedEvent));
-    setPurchased(true);
   };
   if (event == null) {
     return (
@@ -35,6 +35,8 @@ function EventDetail() {
     }
   };
 
+  const eventInCart = cart.some((item) => item.id === event.id);
+
   return (
     <>
       <div className="grid grid-cols-5 grid-rows-5 bg-green-100">
@@ -55,7 +57,11 @@ function EventDetail() {
           <p className="whitespace-pre-line text-lg">{event.description}</p>
         </div>
         <div className="px-24 py-12 text-center flex flex-col col-start-4 col-span-2 row-start-2 row-span-1">
-          {!purchased ? (
+          {eventInCart ? (
+            <div className="border border-blue-500 bg-orange-300 rounded-xl">
+              <p className="text-2xl">Ticket added to Cart</p>
+            </div>
+          ) : (
             <div>
               <div className="flex justify-center">
                 <div
@@ -79,10 +85,6 @@ function EventDetail() {
               >
                 Add to Cart
               </button>
-            </div>
-          ) : (
-            <div className="border border-blue-500 bg-orange-300 rounded-xl">
-              <p className="text-2xl">Ticket added to Cart</p>
             </div>
           )}
           <div className="text-lg font-semibold">
