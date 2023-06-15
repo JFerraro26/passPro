@@ -92,7 +92,7 @@ const LoginForm = ({ setOpen }) => {
                 name="username"
                 required
                 type="text"
-                className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+                className="text-black px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
@@ -104,7 +104,7 @@ const LoginForm = ({ setOpen }) => {
                 name="password"
                 required
                 type="password"
-                className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
+                className="text-black px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
