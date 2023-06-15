@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setEvent } from "../redux/slices/eventSlice";
+import { setEventList } from "../redux/slices/eventsSlice";
 
 function NavBarSearch() {
   const [open, setOpen] = useState(false);
-  const [events, setEvents] = useState([]);
   const [query, setQuery] = useState("");
-  const dispatchEvent = useDispatch();
+  const dispatch = useDispatch();
+  const events = useSelector((state) => state.rootReducer.eventList.eventList);
 
   useEffect(() => {
     async function fetchEventData() {
@@ -17,7 +18,7 @@ function NavBarSearch() {
       );
       if (response.ok) {
         const data = await response.json();
-        setEvents(data);
+        dispatch(setEventList(data));
       } else {
         console.error(response);
       }
@@ -37,7 +38,7 @@ function NavBarSearch() {
     setOpen(false);
   };
 
-  const filteredEvents = events.filter((e) => {
+  const filteredEvents = events?.filter((e) => {
     const { city, event_name, state_id, venue } = e;
     const lowerCaseQuery = query.toLowerCase();
 
@@ -84,7 +85,7 @@ function NavBarSearch() {
                   onClick={() => {
                     closeDropdown();
                     setQuery("");
-                    dispatchEvent(setEvent(event));
+                    dispatch(setEvent(event));
                   }}
                 >
                   <div className="grid grid-cols-4 grid-rows-2">

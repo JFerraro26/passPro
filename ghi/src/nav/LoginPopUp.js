@@ -17,87 +17,90 @@ function LogInPopUP() {
         Login
       </button>
       {open ? (
-        <div className="fixed z-10 top-0 left-0 h-full w-full">
-          <div className="m-16 grid grid-cols-5 grid-rows-5">
-            <button
-              onClick={() => setOpen(false)}
-              className="bg-slate-500 h-full w-full opacity-50 inset-0 absolute z-0 cursor-default"
-            ></button>
-            <div
-              // style={{ height: "500px" }}
-              className="min-h-500 z-10 bg-orange-300 flex-col col-start-2 col-span-3 row-start-1 row-span-3 border-4 border-blue-500 rounded-2xl mt-16"
-            >
-              <div className="m-8">
-                <div className="flex justify-end">
-                  <button
-                    className="text-xl text-blue-500 hover:text-green-600"
-                    onClick={() => setOpen(false)}
-                  >
-                    <AiOutlineCloseSquare />
-                  </button>
-                </div>
-                <AnimatePresence>
-                  {login ? (
-                    <motion.div
-                      key="SignUpForm"
-                      initial={{ y: -200, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{
-                        type: "spring",
-                        duration: 1,
-                      }}
-                      className="flex flex-col md:flex-row justify-evenly content-center"
+        <div className="fixed z-10 inset-0 grid grid-cols-7 grid-rows-7">
+          <AnimatePresence>
+            <div className="col-start-3 col-span-3 row-start-3 row-span-3">
+              {login ? (
+                <motion.div
+                  key="SignUpForm"
+                  initial={{ y: -200, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    type: "spring",
+                    duration: 1,
+                  }}
+                  className="grid grid-cols-5 grid-rows-5"
+                >
+                  <div className="z-30 col-start-5 col-span-1 row-start-1 row-span-1 flex justify-center items-center">
+                    <button
+                      className="text-xl text-white hover:text-orange-500"
+                      onClick={() => setOpen(false)}
                     >
-                      <div className="flex flex-col items-center justify-center flex-grow">
-                        <img
-                          className="w-full rounded-2xl shadow-xl"
-                          src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uY2VydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=400&q=60"
-                          alt="concert"
-                        />
-                        <button
-                          onClick={() => setLogin(!login)}
-                          className="mt-4 underline text-blue-500 hover:text-green-600 transition-all"
-                        >
-                          Already have an account? Click Here!
-                        </button>
-                      </div>
-                      <div className="flex flex-col col-start-3 col-span-2 items-center justify-center flex-grow">
-                        <SignUpForm setOpen={setOpen} />
-                      </div>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="LoginForm"
-                      initial={{ y: 200, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{
-                        type: "spring",
-                        duration: 1,
-                      }}
-                      className="flex flex-col md:flex-row justify-evenly content-center"
+                      <span>
+                        <AiOutlineCloseSquare />
+                      </span>
+                    </button>
+                  </div>
+                  <div className="z-20 relative border-4 border-blue-500 rounded-3xl overflow-hidden shadow-xl shadow-orange-500 col-start-1 col-span-5 row-start-1 row-span-5 ">
+                    <img
+                      className="object-cover w-full h-full"
+                      src="https://indie88.com/wp-content/uploads/2016/03/MoshPit1190.jpg"
+                      alt="concert"
+                    />
+                  </div>
+                  <div className="z-30 flex flex-col col-start-2 col-span-3 row-start-2 row-span-3 items-center justify-center">
+                    <SignUpForm setOpen={setOpen} />
+                    <button
+                      onClick={() => setLogin(!login)}
+                      className="mt-4 underline rounded-2xl text-white bg-black bg-opacity-25 hover:text-orange-500 transition-all"
                     >
-                      <div className="flex flex-col  items-center justify-center flex-grow">
-                        <LoginForm setOpen={setOpen} />
-                      </div>
-                      <div className="flex flex-col items-center justify-center flex-grow">
-                        <img
-                          className="w-full rounded-2xl shadow-xl"
-                          src="https://img.freepik.com/free-photo/excited-audience-watching-confetti-fireworks-having-fun-music-festival-night-copy-space_637285-559.jpg?size=626&ext=jpg"
-                          alt="concert"
-                        />
-                        <button
-                          onClick={() => setLogin(!login)}
-                          className="mt-4 underline text-blue-500 hover:text-green-600 transition-all"
-                        >
-                          Need an account? Sign Up Here!
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                      Already have an account? Click Here!
+                    </button>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="LoginForm"
+                  initial={{ y: 200, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    type: "spring",
+                    duration: 1,
+                  }}
+                  className="grid grid-cols-5 grid-rows-5"
+                >
+                  <div className="z-30 col-start-5 col-span-1 row-start-1 row-span-1 flex justify-center items-center">
+                    <button
+                      className="text-xl text-white hover:text-green-600 bg-black bg-opacity-10"
+                      onClick={() => setOpen(false)}
+                    >
+                      <AiOutlineCloseSquare />
+                    </button>
+                  </div>
+                  <div className="z-30 flex flex-col col-start-2 col-span-3 row-start-2 row-span-3 items-center justify-center">
+                    <LoginForm setOpen={setOpen} />
+                    <button
+                      onClick={() => setLogin(!login)}
+                      className="mt-4 underline bg-black bg-opacity-50 text-white hover:text-green-600 transition-all"
+                    >
+                      Need an account? Sign Up Here!
+                    </button>
+                  </div>
+                  <div className="z-20  relative border-4 border-blue-500 rounded-3xl overflow-hidden shadow-xl shadow-orange-500 col-start-1 col-span-5 row-start-1 row-span-5 ">
+                    <img
+                      className="object-cover w-full h-full"
+                      src="https://img.freepik.com/free-photo/excited-audience-watching-confetti-fireworks-having-fun-music-festival-night-copy-space_637285-559.jpg?size=626&ext=jpg"
+                      alt="concert"
+                    />
+                  </div>
+                </motion.div>
+              )}
             </div>
-          </div>
+          </AnimatePresence>
+          <button
+            // onClick={() => setOpen(false)}
+            className="bg-black h-full w-full opacity-70 inset-0 absolute z-0 cursor-default"
+          ></button>
         </div>
       ) : null}
     </div>

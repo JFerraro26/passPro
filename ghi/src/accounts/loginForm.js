@@ -50,7 +50,11 @@ const LoginForm = ({ setOpen }) => {
 
   return (
     <div className="container mx-auto">
-      <h5 className="text-2xl flex justify-center mb-2">Login</h5>
+      <h5 className="text-2xl flex justify-center mb-2">
+        <span className="text-white bg-black bg-opacity-5 px-4 py-2 rounded">
+          Login
+        </span>
+      </h5>
       {invalidLogin ? (
         <div className="flex items-center justify-center">
           <div
