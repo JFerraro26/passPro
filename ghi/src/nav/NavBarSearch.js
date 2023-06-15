@@ -24,7 +24,7 @@ function NavBarSearch() {
       }
     }
     fetchEventData();
-  }, []);
+  }, [dispatch]);
 
   const openDropdown = () => {
     setOpen(true);
