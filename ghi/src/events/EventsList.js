@@ -120,7 +120,7 @@ function EventsList() {
 
     return (
       <div className="grid grid-cols-5 grid-rows-3 bg-green-100">
-        <div className="rounded-xl mt-4 mx-2 border-2 bg-orange-100 border-blue-500 h-full flex flex-col col-start-1 col-span-1">
+        <div className="rounded-xl mt-4 mx-2 border-2 bg-orange-200 border-blue-500 h-full flex flex-col col-start-1 col-span-1">
           <p className="text-center font-bold">
             <u>Filter Events</u>
           </p>
