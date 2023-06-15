@@ -4,10 +4,11 @@ import { useDispatch } from "react-redux";
 import { setEvent } from "../redux/slices/eventSlice";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
+import { removeEventFromList } from "../redux/slices/eventsSlice";
 
 function EventManager({ myEvents }) {
   const [events, setEvents] = useState(myEvents.events);
-  const dispatchEvent = useDispatch();
+  const dispatch = useDispatch();
   const account = useSelector((state) => state.rootReducer.accountInfo.account);
   const token = account?.token;
 
@@ -28,6 +29,7 @@ function EventManager({ myEvents }) {
       if (response.ok) {
         const updatedEvents = events.filter((item) => item.id !== eventID);
         setEvents(updatedEvents);
+        dispatch(removeEventFromList({ eventId: eventID }));
       } else {
         console.error(response);
       }
@@ -94,7 +96,7 @@ function EventManager({ myEvents }) {
                     </button>
                   </div>
                   <Link
-                    onClick={() => dispatchEvent(setEvent(event))}
+                    onClick={() => dispatch(setEvent(event))}
                     to="/events/detail"
                     className=" ml-3 bg-transparent hover:bg-blue-500 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
                     type="button"
