@@ -52,7 +52,7 @@ const MyProfile = () => {
                     <img
                         src={profileImage}
                         alt="profilepicture"
-                        className="h-auto max-w-full rounded-full"
+                        className="h-auto max-w-full rounded-full drop-shadow-xl"
                         style={{ maxWidth: "100%", maxHeight: "300px" }}
                     />
                 </div>
