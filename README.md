@@ -48,11 +48,11 @@ To launch this application on your local machine, please ensure that you meet th
 
 ```
     1. docker volume create postgres-data
-    1. docker-compose build
-    2. docker-compose up
+    2. docker-compose build
+    3. docker-compose up
 ```
 
-5. There should be 3 containers that are running(The containers should be green)
+5. There should be 3 containers that are running
 6. Wait until the terminal shows `You can now view app in the browser.`
 7. Open up Chrome(Browser) and type in `http://localhost:3000/` in the address bar.
 
