@@ -47,6 +47,7 @@ To launch this application on your local machine, please ensure that you meet th
 4. While the terminal and run the following commands (Ensure Docker is running)
 
 ```
+    1. docker volume create postgres-data
     1. docker-compose build
     2. docker-compose up
 ```
